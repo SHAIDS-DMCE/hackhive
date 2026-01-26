@@ -160,7 +160,7 @@ const PrizePool = () => {
         style={{ opacity: activeTheme.watermarkOpacity }}
       >
          <img 
-            src="/dali-mask.png" 
+            src="/dali-mask.svg" // UPDATED TO SVG
             alt="Watermark" 
             className={`w-[80%] max-w-[350px] md:w-auto md:max-w-none md:h-[85vh] md:max-h-[1200px] object-contain grayscale ${activeTheme.watermarkBlend}`}
          />
