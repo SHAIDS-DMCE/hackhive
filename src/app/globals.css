@@ -1,26 +1,138 @@
 @import "tailwindcss";
 
+/* Light Theme (Default) */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Primary Colors */
+  --background: #FCEDED;
+  --foreground: #586068;
+  --primary: #DA2F35;
+  --primary-foreground: #FCEDED;
+
+  /* Secondary/Muted */
+  --muted: #F0F0F0;
+  --muted-foreground: #586068;
+
+  /* Accent */
+  --accent: #F5F5F5;
+  --accent-foreground: #586068;
+
+  /* Card/Surface */
+  --card: #FFFFFF;
+  --card-foreground: #586068;
+
+  /* Border/Ring */
+  --border: rgba(88, 96, 104, 0.2);
+  --ring: #DA2F35;
+
+  /* Destructive */
+  --destructive: #DA2F35;
+  --destructive-foreground: #FCEDED;
+
+  /* Radius */
+  --radius: 0.5rem;
 }
 
+/* Dark Theme */
+.dark {
+  --background: #1B1718;
+  --foreground: #F2F3F4;
+  --primary: #C4161C;
+  --primary-foreground: #F2F3F4;
+
+  --muted: #3A3535;
+  --muted-foreground: rgba(242, 243, 244, 0.7);
+
+  --accent: #3A3535;
+  --accent-foreground: #F2F3F4;
+
+  --card: #252020;
+  --card-foreground: #F2F3F4;
+
+  --border: rgba(242, 243, 244, 0.1);
+  --ring: #C4161C;
+
+  --destructive: #C4161C;
+  --destructive-foreground: #F2F3F4;
+}
+
+/* Tailwind theme configuration */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 4px);
+  --radius-xl: calc(var(--radius) + 8px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Base Styles */
+* {
+  border-color: var(--border);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom scrollbar for Money Heist theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* Selection styling */
+::selection {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+/* Focus visible styling */
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* About section scroll code animation */
+@keyframes scroll-code {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.animate-scroll-code {
+  animation: scroll-code 60s linear infinite;
 }
