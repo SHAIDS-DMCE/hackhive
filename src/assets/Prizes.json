@@ -1,0 +1,48 @@
+[
+  {
+    "id": "winner",
+    "title": "GRAND PRIZE",
+    "icon": "🏆",
+    "amount": "₹12,000",
+    "subtitle": "The Ultimate Loot",
+    "stats": [
+      { "label": "POSITIONS", "value": "1 Winner" },
+      { "label": "PERKS", "value": "Certificate" },
+      { "label": "CASH PRIZE", "value": "₹12,000" }
+    ],
+    "description": "The ultimate reward for the team that cracks the toughest code.",
+    "rewards": ["Direct Internship", "Winner Trophy", "Merch Kit", "VIP Access"]
+  },
+  {
+    "id": "runnerup",
+    "title": "RUNNER UP",
+    "icon": "🥈",
+    "amount": "₹8,000",
+    "subtitle": "Second Command",
+    "stats": [
+      { "label": "POSITIONS", "value": "1 Runner Up" },
+      { "label": "PERKS", "value": "Certificate" },
+      { "label": "CASH PRIZE", "value": "₹8,000" }
+    ],
+    "description": "For the team that was just one step away from the vault.",
+    "rewards": ["Mentorship Sessions", "Runner Up Certs", "Premium Swag"]
+  },
+  {
+    "id": "participation",
+    "title": "PARTICIPANTS",
+    "icon": "📜",
+    "amount": "Certificate",
+    "subtitle": "For Every Hacker",
+    "stats": [
+      { "label": "ELIGIBILITY", "value": "All Teams" },
+      { "label": "REQUIREMENT", "value": "Submission" },
+      { "label": "REWARD", "value": "Certificate" }
+    ],
+    "description": "Every participant who submits a valid project will be recognized. Your effort counts.",
+    "rewards": [
+      "Official Certificate of Participation",
+      "Access to Community",
+      "Learning Resources"
+    ]
+  }
+]

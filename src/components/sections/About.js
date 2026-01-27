@@ -45,7 +45,7 @@ function AnimatedSection({ children, className = "", delay = 0 }) {
           start: "top 85%",
           toggleActions: "play none none none",
         },
-      }
+      },
     );
 
     return () => {
@@ -107,15 +107,23 @@ function StepCard({ num, title, description, delay }) {
           trigger: card,
           start: "top 85%",
         },
-      }
+      },
     );
 
     // Hover effect
     const handleEnter = () => {
-      gsap.to(card, { scale: 1.02, borderColor: "rgba(218, 47, 53, 0.5)", duration: 0.3 });
+      gsap.to(card, {
+        scale: 1.02,
+        borderColor: "rgba(218, 47, 53, 0.5)",
+        duration: 0.3,
+      });
     };
     const handleLeave = () => {
-      gsap.to(card, { scale: 1, borderColor: "rgba(255, 255, 255, 0.1)", duration: 0.3 });
+      gsap.to(card, {
+        scale: 1,
+        borderColor: "rgba(255, 255, 255, 0.1)",
+        duration: 0.3,
+      });
     };
 
     card.addEventListener("mouseenter", handleEnter);
@@ -135,7 +143,9 @@ function StepCard({ num, title, description, delay }) {
       <div className="text-2xl font-bold text-primary font-mono">{num}</div>
       <div>
         <h3 className="text-lg font-bold mb-1">{title}</h3>
-        <p className="text-foreground/70 text-sm leading-relaxed">{description}</p>
+        <p className="text-foreground/70 text-sm leading-relaxed">
+          {description}
+        </p>
       </div>
     </div>
   );
@@ -163,7 +173,7 @@ function FeatureCard({ icon, title, description, delay }) {
           trigger: card,
           start: "top 85%",
         },
-      }
+      },
     );
   }, [delay]);
 
@@ -174,9 +184,13 @@ function FeatureCard({ icon, title, description, delay }) {
     >
       <div className="flex items-center gap-3 mb-3">
         <div className="w-6 h-6 border-2 border-primary rounded" />
-        <span className="text-xs font-mono tracking-wider opacity-60">{title}</span>
+        <span className="text-xs font-mono tracking-wider opacity-60">
+          {title}
+        </span>
       </div>
-      <p className="text-foreground/70 text-sm leading-relaxed">{description}</p>
+      <p className="text-foreground/70 text-sm leading-relaxed">
+        {description}
+      </p>
     </div>
   );
 }
@@ -197,7 +211,13 @@ function CountdownTimer({ targetDate }) {
     gsap.fromTo(
       timerRef.current,
       { scale: 1 },
-      { scale: 1.02, duration: 0.5, yoyo: true, repeat: 1, ease: "power1.inOut" }
+      {
+        scale: 1.02,
+        duration: 0.5,
+        yoyo: true,
+        repeat: 1,
+        ease: "power1.inOut",
+      },
     );
   }, [now]);
 
@@ -205,7 +225,10 @@ function CountdownTimer({ targetDate }) {
   const t = getTimeParts(remainingMs);
 
   return (
-    <div ref={timerRef} className="font-mono text-4xl font-bold tracking-wide flex items-center gap-1">
+    <div
+      ref={timerRef}
+      className="font-mono text-4xl font-bold tracking-wide flex items-center gap-1"
+    >
       <span>{pad2(t.hours)}</span>
       <span className="animate-pulse">:</span>
       <span>{pad2(t.minutes)}</span>
@@ -260,8 +283,8 @@ export default function About() {
 
   // Register with loading context
   useEffect(() => {
-    registerComponent('about');
-    markComponentReady('about');
+    registerComponent("about");
+    markComponentReady("about");
   }, [registerComponent, markComponentReady]);
 
   // GSAP Hero animation on mount
@@ -271,25 +294,25 @@ export default function About() {
       gsap.fromTo(
         ".hero-title",
         { opacity: 0, y: 80 },
-        { opacity: 1, y: 0, duration: 1.2, ease: "power3.out", delay: 0.2 }
+        { opacity: 1, y: 0, duration: 1.2, ease: "power3.out", delay: 0.2 },
       );
 
       gsap.fromTo(
         ".hero-subtitle",
         { opacity: 0, y: 40 },
-        { opacity: 1, y: 0, duration: 1, ease: "power3.out", delay: 0.5 }
+        { opacity: 1, y: 0, duration: 1, ease: "power3.out", delay: 0.5 },
       );
 
       gsap.fromTo(
         ".hero-cta",
         { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out", delay: 0.8 }
+        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out", delay: 0.8 },
       );
 
       gsap.fromTo(
         ".hero-card",
         { opacity: 0, x: 60 },
-        { opacity: 1, x: 0, duration: 1, ease: "power3.out", delay: 0.6 }
+        { opacity: 1, x: 0, duration: 1, ease: "power3.out", delay: 0.6 },
       );
 
       // Laser line animation
@@ -324,11 +347,16 @@ export default function About() {
       <div className="relative mx-auto max-w-6xl px-6 sm:px-8">
         {/* Top bar */}
         <div className="flex justify-between items-center mb-12">
-          <span className="text-[10px] font-mono tracking-[0.2em] text-primary/70">TOP SECRET</span>
+          <span className="text-[10px] font-mono tracking-[0.2em] text-primary/70">
+            TOP SECRET
+          </span>
         </div>
 
         {/* Hero Section */}
-        <div ref={heroRef} className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
+        <div
+          ref={heroRef}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20"
+        >
           <div>
             <div className="text-xs font-mono tracking-[0.2em] text-primary mb-3">
               MISSION BRIEF // ABOUT
@@ -339,9 +367,20 @@ export default function About() {
             </h1>
 
             <p className="hero-subtitle text-lg text-foreground/70 mb-8 max-w-xl leading-relaxed">
-              HackHive is a college hackathon reimagined as a high-stakes operation.
-              You'll assemble a crew, breach real-world problems, and extract a
-              prototype—fast, clean, and unforgettable.
+              HackHive is a 12-hour hackathon organized by the{" "}
+              <a
+                href="https://shaidsdmce.app/"
+                className=" text-red-500 font-bold underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                SHAIDS
+              </a>{" "}
+              (Students’ Hive Of Artificial Intelligence And Data Science )
+              Committee of Datta Meghe College of Engineering (DMCE), Airoli,
+              aimed at providing undergraduate students with a platform to
+              innovate, collaborate, and build impactful technology-driven
+              solutions.
             </p>
 
             <div className="hero-cta space-y-4">
@@ -362,10 +401,10 @@ export default function About() {
 
               <div className="flex flex-wrap gap-3">
                 <span className="px-3 py-1.5 bg-primary/10 border border-primary/20 rounded text-xs font-mono">
-                  👥 TEAM MODE: 2–4 OPERATORS
+                  👥 TEAM MODE: 3–4 OPERATORS
                 </span>
                 <span className="px-3 py-1.5 bg-primary/10 border border-primary/20 rounded text-xs font-mono">
-                  ⏳ 24–36 HR WINDOW
+                  ⏳ 12 HR
                 </span>
               </div>
             </div>
@@ -384,13 +423,19 @@ export default function About() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <div className="text-[10px] font-mono tracking-wider opacity-60">DIFFICULTY</div>
+                  <div className="text-[10px] font-mono tracking-wider opacity-60">
+                    DIFFICULTY
+                  </div>
                   <div className="text-2xl font-bold mt-1">HIGH</div>
                 </div>
                 <div>
-                  <div className="text-[10px] font-mono tracking-wider opacity-60 mb-2">RISK LEVEL</div>
+                  <div className="text-[10px] font-mono tracking-wider opacity-60 mb-2">
+                    RISK LEVEL
+                  </div>
                   <RiskBars level={4} max={5} />
-                  <div className="text-xs font-mono text-primary font-semibold mt-1">EXTREME</div>
+                  <div className="text-xs font-mono text-primary font-semibold mt-1">
+                    EXTREME
+                  </div>
                 </div>
               </div>
             </div>
@@ -401,8 +446,12 @@ export default function About() {
         <div id="brief" className="mb-20">
           <AnimatedSection>
             <div className="mb-8">
-              <div className="text-xs font-mono tracking-[0.2em] text-primary mb-2">THE FILE</div>
-              <h2 className="text-2xl sm:text-3xl font-bold mb-3">ABOUT HACKHIVE</h2>
+              <div className="text-xs font-mono tracking-[0.2em] text-primary mb-2">
+                THE FILE
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-bold mb-3">
+                ABOUT HACKHIVE
+              </h2>
               <div className="h-0.5 w-16 bg-primary" />
             </div>
           </AnimatedSection>
@@ -410,19 +459,26 @@ export default function About() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <AnimatedSection className="lg:col-span-2" delay={0.1}>
               <div className="bg-white/[0.02] border border-foreground/10 rounded-lg p-6 h-full">
-                <div className="text-[10px] font-mono tracking-wider opacity-60 mb-3">OVERVIEW</div>
+                <div className="text-[10px] font-mono tracking-wider opacity-60 mb-3">
+                  OVERVIEW
+                </div>
                 <p className="text-foreground/80 leading-7 mb-6">
-                  HackHive brings builders, designers, and problem-solvers together for
-                  a cinematic sprint of innovation. You'll ideate, prototype, and pitch
-                  solutions that matter—guided by mentors, judged by experts, and driven
-                  by pure execution.
+                  The event is structured to simulate real-world problem-solving
+                  environments where participants ideate, design, and develop
+                  solutions under time constraints while being evaluated by
+                  industry experts and experienced professionals. HackHive
+                  encourages students to explore emerging technologies, enhance
+                  practical skills, and gain exposure to project-based
+                  development and competitive innovation.
                 </p>
 
-                <div className="text-[10px] font-mono tracking-wider opacity-60 mb-3">RULES // PROTOCOL</div>
+                <div className="text-[10px] font-mono tracking-wider opacity-60 mb-3">
+                  RULES // PROTOCOL
+                </div>
                 <ul className="space-y-2 text-foreground/70 text-sm">
                   <li className="flex items-start gap-2">
                     <span className="text-primary">▸</span>
-                    Teams of 2–4. Solo is not this mission.
+                    Teams of 3–4. Solo is not this mission.
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-primary">▸</span>
@@ -442,15 +498,22 @@ export default function About() {
 
             <AnimatedSection delay={0.2}>
               <div className="bg-white/[0.02] border border-foreground/10 rounded-lg p-6 h-full">
-                <div className="text-[10px] font-mono tracking-wider opacity-60 mb-4">MISSION STATUS</div>
+                <div className="text-[10px] font-mono tracking-wider opacity-60 mb-4">
+                  MISSION STATUS
+                </div>
                 <div className="space-y-4">
                   {[
-                    { label: "CREW", value: "2–4" },
+                    { label: "CREW", value: "3–4" },
                     { label: "TOOLS", value: "ANY" },
                     { label: "TARGET", value: "IMPACT" },
                   ].map((stat) => (
-                    <div key={stat.label} className="flex justify-between items-center py-2 border-b border-foreground/5">
-                      <span className="text-xs font-mono opacity-60">{stat.label}</span>
+                    <div
+                      key={stat.label}
+                      className="flex justify-between items-center py-2 border-b border-foreground/5"
+                    >
+                      <span className="text-xs font-mono opacity-60">
+                        {stat.label}
+                      </span>
                       <span className="text-lg font-bold">{stat.value}</span>
                     </div>
                   ))}
@@ -464,8 +527,12 @@ export default function About() {
         <div className="mb-20">
           <AnimatedSection>
             <div className="mb-8">
-              <div className="text-xs font-mono tracking-[0.2em] text-primary mb-2">THE PLAN</div>
-              <h2 className="text-2xl sm:text-3xl font-bold mb-3">MISSION & VISION</h2>
+              <div className="text-xs font-mono tracking-[0.2em] text-primary mb-2">
+                THE PLAN
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-bold mb-3">
+                MISSION & VISION
+              </h2>
               <div className="h-0.5 w-16 bg-primary" />
             </div>
           </AnimatedSection>
@@ -473,20 +540,26 @@ export default function About() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <AnimatedSection delay={0.1}>
               <div className="bg-white/[0.02] border border-foreground/10 rounded-lg p-6 h-full">
-                <div className="text-[10px] font-mono tracking-wider opacity-60 mb-3">MISSION</div>
+                <div className="text-[10px] font-mono tracking-wider opacity-60 mb-3">
+                  MISSION
+                </div>
                 <p className="text-foreground/80 leading-7">
-                  Convert ideas into real prototypes under pressure—building skill,
-                  confidence, and a portfolio that proves you can execute.
+                  To simulate real-world problem-solving by having participants
+                  innovate, collaborate, and build impactful technology-driven
+                  solutions in a time-constrained environment.
                 </p>
               </div>
             </AnimatedSection>
 
             <AnimatedSection delay={0.15}>
               <div className="bg-white/[0.02] border border-foreground/10 rounded-lg p-6 h-full">
-                <div className="text-[10px] font-mono tracking-wider opacity-60 mb-3">VISION</div>
+                <div className="text-[10px] font-mono tracking-wider opacity-60 mb-3">
+                  VISION
+                </div>
                 <p className="text-foreground/80 leading-7">
-                  Create a campus culture where innovation is fearless—where students
-                  ship, collaborate, and solve problems with style and substance.
+                  To foster creativity, technical excellence, and teamwork,
+                  offering a competitive platform to showcase skills and connect
+                  with industry professionals.
                 </p>
               </div>
             </AnimatedSection>
@@ -497,8 +570,12 @@ export default function About() {
         <div id="plan" className="mb-20">
           <AnimatedSection>
             <div className="mb-8">
-              <div className="text-xs font-mono tracking-[0.2em] text-primary mb-2">THE ROUTE</div>
-              <h2 className="text-2xl sm:text-3xl font-bold mb-3">HEIST PLAN</h2>
+              <div className="text-xs font-mono tracking-[0.2em] text-primary mb-2">
+                THE ROUTE
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-bold mb-3">
+                HEIST PLAN
+              </h2>
               <div className="h-0.5 w-16 bg-primary" />
             </div>
           </AnimatedSection>
@@ -506,26 +583,26 @@ export default function About() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <StepCard
               num="01"
-              title="RECON"
-              description="Pick a problem, scope a winnable build, and map roles like a real crew."
+              title="Recruit"
+              description="Form your crew (3-4 members) and gather the vital intelligence (Problem Statements & Domains)."
               delay={0.1}
             />
             <StepCard
               num="02"
-              title="BREACH"
-              description="Prototype fast. Cut fluff. Build the core loop that proves the idea."
+              title="Blueprint"
+              description="Submit the detailed project proposal (PPT) to gain access for the main operation."
               delay={0.15}
             />
             <StepCard
               num="03"
-              title="EXTRACT"
-              description="Polish the demo path. Make the first 30 seconds undeniable."
+              title="Infiltrate"
+              description='Execute the 12-hour operation inside the "vault" (DMCE) to develop the functional solution.'
               delay={0.2}
             />
             <StepCard
               num="04"
-              title="ESCAPE"
-              description="Pitch with clarity, network with intent, and leave with momentum."
+              title="Loot"
+              description='Face the "experts" for evaluation and claim the total prize pool of ₹30,000.'
               delay={0.25}
             />
           </div>
@@ -535,26 +612,30 @@ export default function About() {
         <div id="why" className="mb-12">
           <AnimatedSection>
             <div className="mb-8">
-              <div className="text-xs font-mono tracking-[0.2em] text-primary mb-2">WHY JOIN</div>
-              <h2 className="text-2xl sm:text-3xl font-bold mb-3">WHY PARTICIPATE</h2>
+              <div className="text-xs font-mono tracking-[0.2em] text-primary mb-2">
+                WHY JOIN
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-bold mb-3">
+                WHY PARTICIPATE
+              </h2>
               <div className="h-0.5 w-16 bg-primary" />
             </div>
           </AnimatedSection>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <FeatureCard
-              title="INNOVATION"
-              description="Build something bold—fast. Learn how to scope, ship, and iterate."
+              title="BUILD"
+              description="Enhance your practical skills and explore emerging tech by developing a functional solution in 12 hours."
               delay={0.1}
             />
             <FeatureCard
-              title="TEAMWORK"
-              description="Operate like a crew—roles, communication, and execution under pressure."
+              title="CONNECT"
+              description="Gain mentorship and exposure by having your project evaluated by top industry experts and professionals."
               delay={0.15}
             />
             <FeatureCard
-              title="IMPACT"
-              description="Solve real problems, present confidently, and stand out to judges."
+              title="WIN"
+              description="	Compete for a share of the ₹30,000 prize pool and earn domain-wise recognition for your technical excellence."
               delay={0.2}
             />
           </div>
@@ -562,7 +643,9 @@ export default function About() {
 
         {/* Footer */}
         <div className="flex justify-end">
-          <span className="text-[10px] font-mono tracking-[0.2em] text-primary/70">CLASSIFIED</span>
+          <span className="text-[10px] font-mono tracking-[0.2em] text-primary/70">
+            CLASSIFIED
+          </span>
         </div>
       </div>
     </section>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import faqData from "@/assets/FAQ.json";
 
 function useRevealOnScroll() {
   const ref = useRef(null);
@@ -100,33 +101,6 @@ function ThemeToggle() {
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState(null);
 
-  const faqs = [
-    {
-      q: "What is HackHive?",
-      a: "HackHive is a college hackathon reimagined as a high-stakes operation. Teams of 2–4 build and pitch prototypes under pressure, mentored by experts and judged for impact.",
-    },
-    {
-      q: "Who can participate?",
-      a: "Any enrolled student can join. Whether you’re a coder, designer, or problem-solver—if you want to build, you’re in.",
-    },
-    {
-      q: "What is the team size?",
-      a: "Teams of 2–4. No solo operators. Collaboration is part of the mission.",
-    },
-    {
-      q: "Is prior experience required?",
-      a: "No. We welcome all skill levels. Mentors will be on-site to guide you from idea to prototype.",
-    },
-    {
-      q: "What tools can we use?",
-      a: "Anything you want. Languages, frameworks, hardware—your choice. Just build something that works.",
-    },
-    {
-      q: "How are projects judged?",
-      a: "Judges look for problem clarity, execution, polish, and impact. A clean demo and confident pitch matter.",
-    },
-  ];
-
   const toggleFAQ = (idx) => {
     setOpenIndex((prev) => (prev === idx ? null : idx));
   };
@@ -170,7 +144,7 @@ export default function FAQ() {
         </div>
 
         <Reveal>
-          <div className="hhv-sectionHead">
+          <div className="hhv-sectionHead mb-6">
             <div className="hhv-kicker hhv-font-mono">INTEL</div>
             <h2 className="hhv-font-title hhv-sectionHead__title">
               FAQ – FREQUENTLY ASKED QUESTIONS
@@ -179,7 +153,7 @@ export default function FAQ() {
           </div>
         </Reveal>
 
-        <Reveal delayMs={120}>
+        {/* <Reveal delayMs={120}>
           <div className="hhv-panel mt-6">
             <div className="hhv-label hhv-font-mono">MISSION BRIEFING</div>
             <p className="hhv-font-body mt-3 leading-7">
@@ -197,10 +171,10 @@ export default function FAQ() {
               </div>
             </div>
           </div>
-        </Reveal>
+        </Reveal> */}
 
         <div className="hhv-faq mt-6 space-y-3">
-          {faqs.map((item, idx) => (
+          {faqData.map((item, idx) => (
             <Reveal key={idx} delayMs={idx * 60 + 240}>
               <div
                 className={`hhv-faqItem ${openIndex === idx ? "is-open" : ""}`}

@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { useTheme } from "@/context/ThemeContext";
+import sponsorsData from "@/assets/sponsors.json";
 
 // --- SPONSORS SPECIFIC THEME CONFIG ---
 const SPONSOR_THEMES = {
@@ -39,67 +40,6 @@ const Sponsors = () => {
   const [expandedTier, setExpandedTier] = useState(null);
   const { mode, theme } = useTheme();
   const activeTheme = SPONSOR_THEMES[theme] || SPONSOR_THEMES.dark;
-
-  // Updated Data: Direct Company Names instead of "Gold/Silver"
-  const sponsorTiers = [
-    {
-      id: "techcorp",
-      title: "TECHCORP GLOBAL",
-      icon: "💎",
-      role: "Title Sponsor",
-      size: "large", // Controls grid span
-      description:
-        "Leading the way in global tech innovation and software solutions.",
-      rewards: ["Keynote Session", "Exclusive Booth", "Merch Branding"],
-    },
-    {
-      id: "innovation",
-      title: "INNOVATION LABS",
-      icon: "🚀",
-      role: "Title Sponsor",
-      size: "large",
-      description:
-        "Pioneering research and development for the next generation of startups.",
-      rewards: ["Workshop Host", "Premium Stall", "Database Access"],
-    },
-    {
-      id: "digital",
-      title: "DIGITAL SOLUTIONS",
-      icon: "☁️",
-      role: "Associate Sponsor",
-      size: "small",
-      description:
-        "Providing cloud infrastructure and digital transformation services.",
-      rewards: ["Tech Talk", "Standard Booth"],
-    },
-    {
-      id: "cloud",
-      title: "CLOUD SYSTEMS",
-      icon: "🌐",
-      role: "Associate Sponsor",
-      size: "small",
-      description: "Scalable cloud architecture for modern applications.",
-      rewards: ["Mentorship", "Logo on Website"],
-    },
-    {
-      id: "data",
-      title: "DATA DYNAMICS",
-      icon: "📊",
-      role: "Partner",
-      size: "small",
-      description: "Big data analytics and AI-driven insights.",
-      rewards: ["Networking Access", "Swag Distribution"],
-    },
-    {
-      id: "web",
-      title: "WEB INNOVATIONS",
-      icon: "💻",
-      role: "Partner",
-      size: "small",
-      description: "Building the future of the web, one pixel at a time.",
-      rewards: ["Recruiting Access", "Social Media Shoutout"],
-    },
-  ];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -189,7 +129,7 @@ const Sponsors = () => {
             animate="visible"
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto"
           >
-            {sponsorTiers.map((sponsor) => (
+            {sponsorsData.map((sponsor) => (
               <motion.div
                 key={sponsor.id}
                 layoutId={`card-${sponsor.id}`}

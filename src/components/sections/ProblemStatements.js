@@ -1,231 +1,68 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { useTheme } from "@/context/ThemeContext";
 import DomainCard from "@/components/ui/DomainCard";
 import ProblemStatementCard from "@/components/ui/ProblmeStatementCard";
 import ProblemStatementDetail from "@/components/ui/ProblemStatementDetail";
+import problemsData from "@/assets/Domains.json";
 
 const ProblemStatements = () => {
   const { colors } = useTheme();
   const [selectedProblem, setSelectedProblem] = useState(null);
   const [expandedDomainId, setExpandedDomainId] = useState(null);
 
-  const domains = [
-    {
-      id: "fintech",
-      title: "FinTech Revolution",
-      icon: "💰",
-      description: "Disrupting financial systems",
-      problems: [
-        {
-          id: "fintech-1",
-          title: "Decentralized Banking",
-          description: "Create a blockchain-based banking system",
-          difficulty: "Hard",
-          timeEstimate: "48h",
-          technologies: ["Blockchain", "Smart Contracts", "Web3"],
-          fullDescription:
-            "Design and implement a decentralized banking platform that eliminates traditional intermediaries. The system should support peer-to-peer lending, automated interest calculations, and transparent transaction history using blockchain technology.",
-          requirements: [
-            "Smart contract development",
-            "Security audit",
-            "User interface",
-            "Transaction validation",
-          ],
-          prizes: [
-            "First Prize: $10,000",
-            "Second Prize: $5,000",
-            "Third Prize: $2,500",
-          ],
-        },
-        {
-          id: "fintech-2",
-          title: "AI Trading Bot",
-          description: "Machine learning powered trading algorithm",
-          difficulty: "Medium",
-          timeEstimate: "36h",
-          technologies: ["Python", "TensorFlow", "Trading APIs"],
-          fullDescription:
-            "Develop an AI-powered trading bot that can analyze market trends and execute trades automatically. The system should include risk management, portfolio optimization, and real-time market analysis.",
-          requirements: [
-            "ML model training",
-            "API integration",
-            "Risk assessment",
-            "Backtesting",
-          ],
-          prizes: [
-            "First Prize: $8,000",
-            "Second Prize: $4,000",
-            "Third Prize: $2,000",
-          ],
-        },
-        {
-          id: "fintech-3",
-          title: "Microfinance Platform",
-          description: "Financial inclusion for underserved communities",
-          difficulty: "Medium",
-          timeEstimate: "24h",
-          technologies: ["React", "Node.js", "Mobile SDK"],
-          fullDescription:
-            "Build a microfinance platform that provides small loans to underserved communities. Include credit scoring, loan management, and financial education features.",
-          requirements: [
-            "Credit scoring algorithm",
-            "Payment processing",
-            "User verification",
-            "Educational content",
-          ],
-          prizes: [
-            "First Prize: $6,000",
-            "Second Prize: $3,000",
-            "Third Prize: $1,500",
-          ],
-        },
-      ],
-    },
-    {
-      id: "healthcare",
-      title: "Healthcare Innovation",
+  // Domain icons and descriptions mapping
+  const domainMetadata = {
+    Healthcare: {
       icon: "🏥",
       description: "Transforming medical technology",
-      problems: [
-        {
-          id: "health-1",
-          title: "AI Diagnosis Assistant",
-          description: "Machine learning for medical diagnosis",
-          difficulty: "Hard",
-          timeEstimate: "48h",
-          technologies: ["Python", "Computer Vision", "NLP"],
-          fullDescription:
-            "Create an AI-powered diagnosis assistant that can analyze medical images and patient data to suggest potential diagnoses. The system should prioritize accuracy and explainability.",
-          requirements: [
-            "Image processing",
-            "NLP integration",
-            "Doctor validation interface",
-            "HIPAA compliance",
-          ],
-          prizes: [
-            "First Prize: $12,000",
-            "Second Prize: $6,000",
-            "Third Prize: $3,000",
-          ],
-        },
-        {
-          id: "health-2",
-          title: "Telemedicine Platform",
-          description: "Remote healthcare consultation system",
-          difficulty: "Medium",
-          timeEstimate: "36h",
-          technologies: ["WebRTC", "React", "HIPAA compliance"],
-          fullDescription:
-            "Develop a comprehensive telemedicine platform that connects patients with healthcare providers remotely. Include video consultations, prescription management, and health record sharing.",
-          requirements: [
-            "Video streaming",
-            "Appointment scheduling",
-            "Prescription management",
-            "Secure messaging",
-          ],
-          prizes: [
-            "First Prize: $8,000",
-            "Second Prize: $4,000",
-            "Third Prize: $2,000",
-          ],
-        },
-        {
-          id: "health-3",
-          title: "Mental Health Tracker",
-          description: "Digital wellness and mood tracking",
-          difficulty: "Easy",
-          timeEstimate: "24h",
-          technologies: ["React Native", "Analytics", "ML"],
-          fullDescription:
-            "Build a mental health tracking application that helps users monitor their mood, stress levels, and overall wellness. Include personalized recommendations and crisis intervention features.",
-          requirements: [
-            "Mood tracking",
-            "Analytics dashboard",
-            "Recommendation engine",
-            "Crisis support",
-          ],
-          prizes: [
-            "First Prize: $4,000",
-            "Second Prize: $2,000",
-            "Third Prize: $1,000",
-          ],
-        },
-      ],
     },
-    {
-      id: "sustainability",
-      title: "Sustainability Tech",
-      icon: "🌱",
-      description: "Environmental impact solutions",
-      problems: [
-        {
-          id: "sustain-1",
-          title: "Carbon Footprint Tracker",
-          description: "Personal and business carbon monitoring",
-          difficulty: "Medium",
-          timeEstimate: "36h",
-          technologies: ["IoT", "Data Analytics", "Mobile"],
-          fullDescription:
-            "Develop a comprehensive carbon footprint tracking system that helps individuals and businesses monitor, reduce, and offset their environmental impact. Include real-time monitoring and actionable insights.",
-          requirements: [
-            "Data collection",
-            "Analytics engine",
-            "Offset marketplace",
-            "Progress tracking",
-          ],
-          prizes: [
-            "First Prize: $7,000",
-            "Second Prize: $3,500",
-            "Third Prize: $1,750",
-          ],
-        },
-        {
-          id: "sustain-2",
-          title: "Smart Grid Optimizer",
-          description: "AI-powered energy distribution",
-          difficulty: "Hard",
-          timeEstimate: "48h",
-          technologies: ["IoT", "AI", "Energy Systems"],
-          fullDescription:
-            "Create an AI-powered smart grid optimization system that balances energy distribution, predicts demand, and integrates renewable energy sources efficiently.",
-          requirements: [
-            "Grid simulation",
-            "Demand forecasting",
-            "Renewable integration",
-            "Real-time optimization",
-          ],
-          prizes: [
-            "First Prize: $15,000",
-            "Second Prize: $7,500",
-            "Third Prize: $3,750",
-          ],
-        },
-        {
-          id: "sustain-3",
-          title: "Waste Management System",
-          description: "Smart recycling and waste reduction",
-          difficulty: "Medium",
-          timeEstimate: "24h",
-          technologies: ["Computer Vision", "IoT", "Mobile"],
-          fullDescription:
-            "Build a smart waste management system that uses computer vision to sort waste, tracks recycling rates, and provides incentives for proper waste disposal.",
-          requirements: [
-            "Image recognition",
-            "Sorting mechanism",
-            "Reward system",
-            "Analytics dashboard",
-          ],
-          prizes: [
-            "First Prize: $5,000",
-            "Second Prize: $2,500",
-            "Third Prize: $1,250",
-          ],
-        },
-      ],
+    Cybersecurity: {
+      icon: "🔐",
+      description: "Securing digital systems",
     },
-  ];
+    "Smart Living & Consumer Tech": {
+      icon: "💡",
+      description: "Empowering everyday innovation",
+    },
+  };
+
+  // Transform flat problems array into grouped domains
+  const domains = useMemo(() => {
+    const grouped = {};
+
+    problemsData.forEach((problem) => {
+      const domainName = problem.domain;
+      if (!grouped[domainName]) {
+        grouped[domainName] = {
+          id: domainName
+            .toLowerCase()
+            .replace(/\s+&\s+/g, "-")
+            .replace(/\s+/g, "-"),
+          title: domainName,
+          icon: domainMetadata[domainName]?.icon || "🎯",
+          description:
+            domainMetadata[domainName]?.description || "Problem statements",
+          problems: [],
+        };
+      }
+
+      grouped[domainName].problems.push({
+        id: problem.id,
+        title: problem.name,
+        description: problem.description,
+        fullDescription: problem.expectedSolution,
+        difficulty: "Medium",
+        timeEstimate: "24-48h",
+        technologies: [],
+        requirements: [],
+        prizes: ["$5,000", "$2,500", "$1,250"],
+      });
+    });
+
+    return Object.values(grouped);
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },

@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { useTheme } from "@/context/ThemeContext";
+import prizeTiers from "@/assets/Prizes.json";
 
 // --- PRIZE POOL SPECIFIC THEME CONFIG ---
 const POOL_THEMES = {
@@ -45,77 +46,6 @@ const PrizePool = () => {
   const [expandedTier, setExpandedTier] = useState(null);
   const { mode, theme, toggleTheme } = useTheme();
   const activeTheme = POOL_THEMES[theme] || POOL_THEMES.dark;
-
-  const prizeTiers = [
-    {
-      id: "winner",
-      title: "GRAND PRIZE",
-      icon: "🏆",
-      amount: "₹12,000",
-      subtitle: "The Ultimate Loot",
-      stats: [
-        { label: "POSITIONS", value: "1 Winner" },
-        { label: "PERKS", value: "Internship" },
-        { label: "CASH PRIZE", value: "₹12,000" },
-      ],
-      description:
-        "The ultimate reward for the team that cracks the toughest code.",
-      rewards: [
-        "Direct Internship",
-        "Winner Trophy",
-        "Merch Kit",
-        "VIP Access",
-      ],
-    },
-    {
-      id: "runnerup",
-      title: "RUNNER UP",
-      icon: "🥈",
-      amount: "₹8,000",
-      subtitle: "Second Command",
-      stats: [
-        { label: "POSITIONS", value: "1 Runner Up" },
-        { label: "PERKS", value: "Mentorship" },
-        { label: "CASH PRIZE", value: "₹8,000" },
-      ],
-      description: "For the team that was just one step away from the vault.",
-      rewards: ["Mentorship Sessions", "Runner Up Certs", "Premium Swag"],
-    },
-    {
-      id: "special",
-      title: "SPECIAL TRACK",
-      icon: "🎖️",
-      amount: "₹5,000",
-      subtitle: "Domain Experts",
-      stats: [
-        { label: "POSITIONS", value: "3 Tracks" },
-        { label: "PERKS", value: "Goodies" },
-        { label: "TOTAL POOL", value: "₹5,000" },
-      ],
-      description:
-        "Rewards for the most innovative solutions in specific domains.",
-      rewards: ["Excellence Cert", "Sponsor Goodies", "Tech Gadgets"],
-    },
-    {
-      id: "participation",
-      title: "PARTICIPANTS",
-      icon: "📜",
-      amount: "Certificate",
-      subtitle: "For Every Hacker",
-      stats: [
-        { label: "ELIGIBILITY", value: "All Teams" },
-        { label: "REQUIREMENT", value: "Submission" },
-        { label: "REWARD", value: "Certificate" },
-      ],
-      description:
-        "Every participant who submits a valid project will be recognized. Your effort counts.",
-      rewards: [
-        "Official Certificate of Participation",
-        "Access to Community",
-        "Learning Resources",
-      ],
-    },
-  ];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -271,7 +201,7 @@ const PrizePool = () => {
             className="text-2xl md:text-3xl font-serif italic mb-4 font-medium"
             style={{ color: activeTheme.accent }}
           >
-            "The most important thing is not the money. It is the message."
+            "Note that the Prizes are domain wise not Problem Statement wise."
           </motion.blockquote>
 
           <p

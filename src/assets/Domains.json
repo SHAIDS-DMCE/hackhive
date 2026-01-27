@@ -1,0 +1,65 @@
+[
+  {
+    "domain": "Healthcare",
+    "id": "healthcare-1",
+    "name": "Offline-First First-Aid Guide",
+    "description": "In emergency situations, people often do not have reliable internet access or the presence of medical professionals. Panic and lack of clear guidance can worsen injuries. Existing first-aid resources are mostly text-heavy and online-dependent. Rural and disaster-prone areas are especially affected. A simple and accessible offline solution is required for immediate assistance.",
+    "expectedSolution": "Develop an offline-first Progressive Web App that provides step-by-step visual first-aid instructions for common emergencies. The app should work without internet and focus on clarity, simplicity, and quick access."
+  },
+  {
+    "domain": "Healthcare",
+    "id": "healthcare-2",
+    "name": "Digital Vaccine Card",
+    "description": "Physical vaccination cards are easily lost, damaged, or forgotten. Parents often struggle to understand complex vaccination schedules and medical terminology. Missed vaccinations can lead to serious health risks. There is no simple digital system to track vaccine history and reminders. A centralized solution can improve compliance and awareness.",
+    "expectedSolution": "Create a digital vaccination record system that securely stores vaccine details and provides reminders for upcoming doses. The system should simplify schedules and be easy for parents to use."
+  },
+  {
+    "domain": "Healthcare",
+    "id": "healthcare-3",
+    "name": "ASHA Worker Visit Scheduler",
+    "description": "Community health workers like ASHA workers manage multiple household visits manually. Paper-based scheduling leads to inefficiency and data loss. Important health information may be missed or inaccurately recorded. Field conditions often lack reliable connectivity. A simple digital planning tool is needed.",
+    "expectedSolution": "Build a lightweight application that allows health workers to schedule visits and log key health information. The tool should support offline usage with periodic data synchronization."
+  },
+  {
+    "domain": "Cybersecurity",
+    "id": "cyber-1",
+    "name": "Phishing Email and URL Detector",
+    "description": "Phishing attacks are increasingly common and difficult for users to identify. Fake domains, urgent language, and malicious links deceive many people. This results in financial loss and data breaches. Existing solutions are often too complex for common users. A simple detection tool is required.",
+    "expectedSolution": "Develop a tool that scans emails and URLs to detect phishing indicators. The system should assign a risk score and clearly highlight suspicious patterns for users."
+  },
+  {
+    "domain": "Cybersecurity",
+    "id": "cyber-2",
+    "name": "Metadata Scrubber",
+    "description": "When users share files, they unknowingly expose hidden metadata. This data can include personal details, device information, and GPS locations. Such leaks pose serious privacy risks. Most users are unaware of metadata existence. A simple privacy-focused solution is needed.",
+    "expectedSolution": "Create a tool that scans files for metadata and removes sensitive information before sharing. The system should clearly inform users about the data that was found and removed."
+  },
+  {
+    "domain": "Cybersecurity",
+    "id": "cyber-3",
+    "name": "AI Content and Deepfake Detector",
+    "description": "AI-generated content and deepfakes are becoming increasingly realistic. Users struggle to differentiate real content from manipulated media. This accelerates misinformation, scams, and loss of trust. Detection tools are not easily accessible to the public. Awareness and verification support are essential.",
+    "expectedSolution": "Build a detection system that analyzes content and provides a confidence score indicating AI generation. The tool should explain indicators in simple, understandable terms."
+  },
+  {
+    "domain": "Smart Living & Consumer Tech",
+    "id": "smart-1",
+    "name": "Smart Warranty Tracker",
+    "description": "Consumers frequently lose track of warranty details for purchased products. Paper receipts and warranty cards are easily misplaced. This leads to missed warranty claims and frustration. There is no centralized way to manage warranties. A digital tracker can simplify this process.",
+    "expectedSolution": "Develop an application that allows users to log products and warranty details. The system should send expiry notifications and provide quick access to service information."
+  },
+  {
+    "domain": "Smart Living & Consumer Tech",
+    "id": "smart-2",
+    "name": "Am I Eligible? Scheme Finder",
+    "description": "Many citizens are unaware of government welfare schemes they qualify for. Eligibility criteria are complex and information is scattered. People often miss benefits due to lack of clarity. A simplified discovery mechanism is required. Minimal user effort should be needed.",
+    "expectedSolution": "Create a quiz-based tool that asks basic user details and lists eligible government schemes. The system should present results in a clear and easy-to-understand manner."
+  },
+  {
+    "domain": "Smart Living & Consumer Tech",
+    "id": "smart-3",
+    "name": "Volunteer Event Coordinator",
+    "description": "NGOs face challenges in organizing volunteer events and managing participation. Communication is often fragmented across platforms. Tracking attendance and engagement is difficult. A centralized coordination system is missing. Such a tool can improve operational efficiency.",
+    "expectedSolution": "Build an application that allows NGOs to post events, collect volunteer registrations, and track attendance. The platform should be simple and accessible for non-technical users."
+  }
+]

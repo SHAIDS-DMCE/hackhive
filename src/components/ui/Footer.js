@@ -41,7 +41,7 @@ export default function Footer() {
             {/* Social Icons */}
             <div className="flex items-center gap-3 mb-4">
               <a
-                href="https://instagram.com"
+                href="https://instagram.com/shaidsdmce"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-xl border border-border flex items-center justify-center hover:bg-primary hover:border-primary hover:text-primary-foreground transition-all duration-200"
@@ -50,13 +50,22 @@ export default function Footer() {
                 <InstagramIcon className="w-5 h-5" />
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/company/shaids-dmce/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-xl border border-border flex items-center justify-center hover:bg-primary hover:border-primary hover:text-primary-foreground transition-all duration-200"
                 aria-label="LinkedIn"
               >
                 <LinkedInIcon className="w-5 h-5" />
+              </a>
+              <a
+                href="https://shaidsdmce.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-xl border border-border flex items-center justify-center hover:bg-primary hover:border-primary hover:text-primary-foreground transition-all duration-200"
+                aria-label="website"
+              >
+                <WebIcon className="w-5 h-5" />
               </a>
             </div>
             <p className="text-foreground/50 text-sm">Follow us for updates</p>
@@ -99,7 +108,7 @@ export default function Footer() {
                     >
                       {link.label}
                     </Link>
-                  )
+                  ),
                 )}
               </div>
             </div>
@@ -107,7 +116,9 @@ export default function Footer() {
 
           {/* Reach Out */}
           <div className="lg:col-span-1">
-            <h3 className="text-lg font-semibold text-foreground mb-6">Reach Out</h3>
+            <h3 className="text-lg font-semibold text-foreground mb-6">
+              Reach Out
+            </h3>
             <p className="text-foreground/70 text-sm leading-relaxed mb-6">
               Feel free to reach out for queries related to registration,
               participation or event rules.
@@ -123,6 +134,8 @@ export default function Footer() {
                 href="tel:+919876543210"
                 className="text-foreground/70 hover:text-primary transition-colors text-sm"
               >
+                Divesh: +91 98765 43210
+                <br />
                 Phone: +91 98765 43210
               </a>
             </div>
@@ -149,6 +162,14 @@ function InstagramIcon({ className }) {
     </svg>
   );
 }
+function WebIcon({ className }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm7.93 9h-3.06a15.5 15.5 0 00-1.2-5.05A8.02 8.02 0 0119.93 11zM12 4.07c.97 1.33 1.7 3.2 2.05 5.93H9.95c.35-2.73 1.08-4.6 2.05-5.93zM4.07 11a8.02 8.02 0 014.26-5.05A15.5 15.5 0 007.13 11H4.07zm0 2h3.06c.28 1.9.77 3.6 1.46 5.05A8.02 8.02 0 014.07 13zm7.93 6.93c-.97-1.33-1.7-3.2-2.05-5.93h4.1c-.35 2.73-1.08 4.6-2.05 5.93zM15.67 18.05c.69-1.45 1.18-3.15 1.46-5.05h3.06a8.02 8.02 0 01-4.52 5.05z" />
+    </svg>
+  );
+}
+
 
 function LinkedInIcon({ className }) {
   return (
