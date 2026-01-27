@@ -1,0 +1,35 @@
+[33mcommit 9f95905bd8eaa4038deb970b551bcb29c7fc93ec[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mstaging/main[m[33m)[m
+Author: Divesh Dalvi <dalvidivesh1@gmail.com>
+Date:   Tue Jan 27 23:02:08 2026 +0530
+
+    Ps section merged
+
+[33mcommit 50d19cabe91f214ae0dde4543e64ccc913ca336e[m
+Author: Bhargav S. Gajare <doodle@Bhargavs-MacBook-Air.local>
+Date:   Mon Jan 26 12:06:37 2026 +0530
+
+    Integrate Hero section
+
+[33mcommit 01e85318d0ec424695ebe8c789d8af55c3f60a9c[m
+Author: Bhargav S. Gajare <doodle@Bhargavs-MacBook-Air.local>
+Date:   Mon Jan 26 12:05:35 2026 +0530
+
+    Integrate About section
+
+[33mcommit dfebd45c3ae70bb9df3dde18e706fc3a022d5923[m
+Author: Bhargav S. Gajare <doodle@Bhargavs-MacBook-Air.local>
+Date:   Mon Jan 26 12:04:39 2026 +0530
+
+    Setup basic structure
+
+[33mcommit ae6a74d1aecf40501b18b6cb26f107ac8da2b2e4[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: Bhargav S. Gajare <doodle@Bhargavs-MacBook-Air.local>
+Date:   Thu Jan 15 23:39:49 2026 +0530
+
+    Initialise HackHive 2026
+
+[33mcommit 9809a1ba469c621aa8b9698247a7ef037ab18a98[m
+Author: Bhargav S. Gajare <doodle@Bhargavs-MacBook-Air.local>
+Date:   Thu Jan 15 23:26:16 2026 +0530
+
+    Initial commit from Create Next App
