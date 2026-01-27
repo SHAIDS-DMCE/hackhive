@@ -22,7 +22,7 @@ export default function Home() {
       <section id="timeline">
         <Timeline />
       </section>
-
+    
       {/* Problem Statements Section */}
       <section id="problem-statements">
         <ProblemStatements />
