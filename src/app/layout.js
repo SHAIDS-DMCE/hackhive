@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
-import { ThemeProvider } from "next-themes";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
+import { ThemeProvider } from "@/context/ThemeContext";
 import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/Footer";
 import SmoothScroll from "@/components/providers/SmoothScroll";
@@ -27,19 +28,21 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange={false}
-        >
-          <AppLoadingProvider>
-            <SmoothScroll>
-              <Navbar />
-              <main>{children}</main>
-              <Footer />
-            </SmoothScroll>
-          </AppLoadingProvider>
+        <ThemeProvider>
+          <NextThemesProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange={false}
+          >
+            <AppLoadingProvider>
+              <SmoothScroll>
+                <Navbar />
+                <main>{children}</main>
+                <Footer />
+              </SmoothScroll>
+            </AppLoadingProvider>
+          </NextThemesProvider>
         </ThemeProvider>
       </body>
     </html>
