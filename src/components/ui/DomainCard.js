@@ -9,24 +9,30 @@ const DomainCard = ({ domain, onClick, layoutId, index }) => {
   const cardVariants = {
     hidden: {
       opacity: 0,
-      y: 50,
-      scale: 0.9,
+      y: 60,
+      scale: 0.85,
     },
     visible: {
       opacity: 1,
       y: 0,
       scale: 1,
       transition: {
-        duration: 0.75,
-        delay: index * 0.2,
-        ease: "easeOut",
+        type: "spring",
+        stiffness: 100,
+        damping: 20,
+        mass: 1,
+        delay: index * 0.15,
+        duration: 0.8,
       },
     },
     hover: {
-      scale: 1.01,
+      scale: 1.02,
+      y: -4,
       transition: {
-        duration: 0.4,
-        ease: "easeInOut",
+        type: "spring",
+        stiffness: 400,
+        damping: 25,
+        mass: 0.8,
       },
     },
   };
@@ -40,11 +46,11 @@ const DomainCard = ({ domain, onClick, layoutId, index }) => {
       transition={{
         layout: { type: "spring", stiffness: 110, damping: 24, mass: 1 },
       }}
-      className="relative group"
+      className="relative group h-full min-h-[320px] md:min-h-[360px]"
     >
       {/* Main Domain Card */}
       <div
-        className="rounded-xl border-2 overflow-hidden transition-all duration-300"
+        className="rounded-xl border-2 overflow-hidden transition-all duration-300 h-full flex flex-col"
         style={{
           backgroundColor: colors.primary,
           borderColor: colors.accent,
@@ -59,14 +65,14 @@ const DomainCard = ({ domain, onClick, layoutId, index }) => {
       >
         {/* Header Section */}
         <div
-          className="p-8 border-b"
+          className="p-4 border-b"
           style={{ borderColor: `${colors.accent}30` }}
         >
           {/* Icon and Title */}
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center space-x-3">
               <div
-                className="text-5xl p-4 rounded-xl"
+                className="text-2xl p-2 rounded-lg"
                 style={{
                   backgroundColor: `${colors.accent}20`,
                   color: colors.accent,
@@ -76,7 +82,7 @@ const DomainCard = ({ domain, onClick, layoutId, index }) => {
               </div>
               <div>
                 <h3
-                  className="text-3xl font-bold"
+                  className="text-lg font-bold"
                   style={{
                     color: colors.accent,
                     fontFamily: "var(--font-heading)",
@@ -85,7 +91,7 @@ const DomainCard = ({ domain, onClick, layoutId, index }) => {
                   {domain.title}
                 </h3>
                 <p
-                  className="text-base opacity-80"
+                  className="text-xs opacity-80"
                   style={{
                     color: colors.text,
                     fontFamily: "var(--font-mono)",
@@ -98,7 +104,7 @@ const DomainCard = ({ domain, onClick, layoutId, index }) => {
 
             {/* Mission Status Indicator */}
             <div
-              className="px-4 py-2 rounded-full text-sm font-bold"
+              className="px-2 py-1 rounded-full text-xs font-bold"
               style={{
                 backgroundColor: colors.accent,
                 color: colors.primary,
@@ -110,26 +116,26 @@ const DomainCard = ({ domain, onClick, layoutId, index }) => {
 
           {/* Vault-style decorative line */}
           <div
-            className="h-1 w-full mb-6"
+            className="h-0.5 w-full mb-3"
             style={{ backgroundColor: colors.accent }}
           />
 
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-6 text-center">
+          <div className="grid grid-cols-3 gap-3 text-center">
             <div>
               <div
-                className="text-2xl font-bold"
+                className="text-base font-bold"
                 style={{ color: colors.accent }}
               >
                 {domain.problems.length}
               </div>
-              <div className="text-sm" style={{ color: colors.text }}>
+              <div className="text-xs" style={{ color: colors.text }}>
                 MISSIONS
               </div>
             </div>
             <div>
               <div
-                className="text-2xl font-bold"
+                className="text-base font-bold"
                 style={{ color: colors.accent }}
               >
                 {domain.problems.reduce(
@@ -138,13 +144,13 @@ const DomainCard = ({ domain, onClick, layoutId, index }) => {
                 )}
                 h
               </div>
-              <div className="text-sm" style={{ color: colors.text }}>
+              <div className="text-xs" style={{ color: colors.text }}>
                 TOTAL TIME
               </div>
             </div>
             <div>
               <div
-                className="text-2xl font-bold"
+                className="text-base font-bold"
                 style={{ color: colors.accent }}
               >
                 $
@@ -157,7 +163,7 @@ const DomainCard = ({ domain, onClick, layoutId, index }) => {
                   )
                   .toLocaleString()}
               </div>
-              <div className="text-sm" style={{ color: colors.text }}>
+              <div className="text-xs" style={{ color: colors.text }}>
                 TOP PRIZE
               </div>
             </div>
@@ -165,6 +171,29 @@ const DomainCard = ({ domain, onClick, layoutId, index }) => {
         </div>
 
         {/* Problem Statement Cards */}
+        <div className="flex-grow p-3">
+          <div className="text-center">
+            <p
+              className="text-xs opacity-70 mb-2"
+              style={{
+                color: colors.text,
+                fontFamily: "var(--font-mono)",
+              }}
+            >
+              Click to explore {domain.problems.length} missions
+            </p>
+            <div
+              className="inline-block px-2 py-1 rounded-lg text-xs"
+              style={{
+                backgroundColor: `${colors.accent}15`,
+                color: colors.accent,
+                fontFamily: "var(--font-mono)",
+              }}
+            >
+              EXPLORE MISSIONS →
+            </div>
+          </div>
+        </div>
 
         {/* Money Heist-inspired mask pattern overlay */}
         <div className="absolute inset-0 pointer-events-none opacity-5">

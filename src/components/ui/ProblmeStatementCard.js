@@ -10,31 +10,40 @@ const ProblemStatementCard = ({ problem, onClick, index, layoutId }) => {
   const cardVariants = {
     hidden: {
       opacity: 0,
-      x: -20,
-      scale: 0.95,
+      x: -30,
+      scale: 0.9,
     },
     visible: {
       opacity: 1,
       x: 0,
       scale: 1,
       transition: {
-        duration: 0.55,
+        type: "spring",
+        stiffness: 120,
+        damping: 18,
+        mass: 1,
         delay: index * 0.1,
-        ease: "easeOut",
+        duration: 0.6,
       },
     },
     hover: {
-      scale: 1.01,
-      x: 2,
+      scale: 1.02,
+      x: 4,
+      y: -2,
       transition: {
-        duration: 0.35,
-        ease: "easeInOut",
+        type: "spring",
+        stiffness: 500,
+        damping: 28,
+        mass: 0.6,
       },
     },
     tap: {
-      scale: 0.995,
+      scale: 0.98,
       transition: {
-        duration: 0.14,
+        type: "spring",
+        stiffness: 600,
+        damping: 30,
+        mass: 0.5,
       },
     },
   };
@@ -48,7 +57,7 @@ const ProblemStatementCard = ({ problem, onClick, index, layoutId }) => {
       whileTap="tap"
       onClick={onClick}
       transition={{
-        layout: { type: "spring", stiffness: 110, damping: 26, mass: 1 },
+        layout: { type: "spring", stiffness: 100, damping: 20, mass: 1 },
       }}
       className="cursor-pointer relative group h-full"
     >

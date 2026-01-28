@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "../../context/ThemeContext";
 import {
@@ -15,6 +15,28 @@ import {
 
 const ProblemStatementDetail = ({ problem, onClose, layoutId }) => {
   const { colors } = useTheme();
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    // Save current scroll position
+    const scrollY = window.scrollY;
+    
+    // Lock scroll
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = '100%';
+    document.body.style.overflow = 'hidden';
+    
+    return () => {
+      // Restore scroll position
+      const scrollY = document.body.style.top;
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+      window.scrollTo(0, parseInt(scrollY || '0') * -1);
+    };
+  }, []);
 
   const modalVariants = {
     hidden: {
@@ -252,70 +274,74 @@ const ProblemStatementDetail = ({ problem, onClose, layoutId }) => {
             </div>
 
             {/* Requirements */}
-            <div>
-              <h3
-                className="text-xl font-bold mb-4 flex items-center space-x-2"
-                style={{
-                  color: colors.accent,
-                  fontFamily: "var(--font-heading)",
-                }}
-              >
-                <AlertCircle size={24} />
-                <span>Requirements</span>
-              </h3>
-              <ul className="space-y-2">
-                {problem.requirements.map((requirement, index) => (
-                  <li
-                    key={index}
-                    className="flex items-start space-x-3"
-                    style={{ color: colors.text }}
-                  >
-                    <span
-                      className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold"
-                      style={{
-                        backgroundColor: colors.accent,
-                        color: colors.primary,
-                      }}
+            {problem.requirements && problem.requirements.length > 0 && (
+              <div>
+                <h3
+                  className="text-xl font-bold mb-4 flex items-center space-x-2"
+                  style={{
+                    color: colors.accent,
+                    fontFamily: "var(--font-heading)",
+                  }}
+                >
+                  <AlertCircle size={24} />
+                  <span>Requirements</span>
+                </h3>
+                <ul className="space-y-2">
+                  {problem.requirements.map((requirement, index) => (
+                    <li
+                      key={index}
+                      className="flex items-start space-x-3"
+                      style={{ color: colors.text }}
                     >
-                      {index + 1}
-                    </span>
-                    <span style={{ fontFamily: "var(--font-body)" }}>
-                      {requirement}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+                      <span
+                        className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold"
+                        style={{
+                          backgroundColor: colors.accent,
+                          color: colors.primary,
+                        }}
+                      >
+                        {index + 1}
+                      </span>
+                      <span style={{ fontFamily: "var(--font-body)" }}>
+                        {requirement}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             {/* Technologies */}
-            <div>
-              <h3
-                className="text-xl font-bold mb-4 flex items-center space-x-2"
-                style={{
-                  color: colors.accent,
-                  fontFamily: "var(--font-heading)",
-                }}
-              >
-                <Code size={24} />
-                <span>Technology Stack</span>
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {problem.technologies.map((tech, index) => (
-                  <span
-                    key={index}
-                    className="px-4 py-2 rounded-lg font-medium"
-                    style={{
-                      backgroundColor: `${colors.accent}20`,
-                      color: colors.accent,
-                      border: `1px solid ${colors.accent}40`,
-                      fontFamily: "var(--font-mono)",
-                    }}
-                  >
-                    {tech}
-                  </span>
-                ))}
+            {problem.technologies && problem.technologies.length > 0 && (
+              <div>
+                <h3
+                  className="text-xl font-bold mb-4 flex items-center space-x-2"
+                  style={{
+                    color: colors.accent,
+                    fontFamily: "var(--font-heading)",
+                  }}
+                >
+                  <Code size={24} />
+                  <span>Technology Stack</span>
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {problem.technologies.map((tech, index) => (
+                    <span
+                      key={index}
+                      className="px-4 py-2 rounded-lg font-medium"
+                      style={{
+                        backgroundColor: `${colors.accent}20`,
+                        color: colors.accent,
+                        border: `1px solid ${colors.accent}40`,
+                        fontFamily: "var(--font-mono)",
+                      }}
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Prizes */}
             <div>
