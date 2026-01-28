@@ -81,9 +81,9 @@ export default function Navbar() {
             {/* Logo */}
             <Link
               href="/"
-              className="text-xl sm:text-2xl font-bold text-primary hover:opacity-80 transition-opacity"
+              className="text-xl sm:text-2xl font-bold text-primary hover:opacity-80 transition-opacity font-heading"
             >
-              HackHive
+              HACKHIVE
             </Link>
 
             {/* Right Section - All items grouped together */}

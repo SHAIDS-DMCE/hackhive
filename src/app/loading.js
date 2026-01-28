@@ -41,9 +41,15 @@ export default function Loading() {
 
   const [displayProgress, setDisplayProgress] = useState(0);
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
   const quoteRef = useRef(null);
   const containerRef = useRef(null);
   const progressRef = useRef(null);
+
+  // Set mounted state to avoid hydration mismatch with randomized quotes
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Smoothly animate progress display
   useEffect(() => {
@@ -161,11 +167,8 @@ export default function Loading() {
 
         {/* Quote display */}
         <div className="max-w-md text-center min-h-[80px] flex items-center">
-          <p
-            ref={quoteRef}
-            className="text-base md:text-lg font-medium text-foreground/80 leading-relaxed tracking-wide italic"
-          >
-            {randomizedQuotes[currentQuoteIndex]}
+          <p ref={quoteRef} className={"text-base md:text-lg font-medium text-foreground/80 leading-relaxed tracking-wide italic"}>
+            {isMounted ? randomizedQuotes[currentQuoteIndex] : ""}
           </p>
         </div>
 
