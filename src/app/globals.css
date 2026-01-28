@@ -71,8 +71,12 @@
   --color-ring: var(--ring);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  /* Custom Fonts */
+  --font-heading: var(--font-nord), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-caskaydia), ui-monospace, monospace;
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: var(--radius);
   --radius-lg: calc(var(--radius) + 4px);
@@ -87,14 +91,107 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family:
-    var(--font-sans),
-    system-ui,
-    -apple-system,
-    sans-serif;
+  font-family: var(--font-satoshi), ui-sans-serif, system-ui, -apple-system, sans-serif !important;
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
+}
+
+/* Font Utility Classes */
+.font-heading {
+  font-family: var(--font-nord), ui-sans-serif, system-ui, sans-serif !important;
+}
+
+.font-body {
+  font-family: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif !important;
+}
+
+.font-code {
+  font-family: var(--font-caskaydia), ui-monospace, monospace !important;
+}
+
+/* Headings - Nord font */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-family: var(--font-nord), ui-sans-serif, system-ui, sans-serif !important;
+}
+
+/* Body text elements - Satoshi font */
+p,
+span,
+div,
+li,
+a,
+label,
+input,
+textarea,
+select,
+button {
+  font-family: inherit;
+}
+
+/* Code elements - CaskaydiaMono font */
+code,
+pre,
+kbd,
+samp,
+.font-mono {
+  font-family: var(--font-caskaydia), ui-monospace, monospace !important;
+}
+
+/* Glow Effects - Animated */
+@keyframes glowPulseWhite {
+
+  0%,
+  100% {
+    text-shadow:
+      0 0 10px rgba(255, 255, 255, 0.6),
+      0 0 30px rgba(255, 255, 255, 0.3),
+      0 0 60px rgba(255, 255, 255, 0.15);
+  }
+
+  50% {
+    text-shadow:
+      0 0 15px rgba(255, 255, 255, 0.9),
+      0 0 40px rgba(255, 255, 255, 0.5),
+      0 0 80px rgba(255, 255, 255, 0.3);
+  }
+}
+
+@keyframes glowPulseRed {
+
+  0%,
+  100% {
+    text-shadow:
+      0 0 10px rgba(218, 47, 53, 0.6),
+      0 0 30px rgba(218, 47, 53, 0.3),
+      0 0 60px rgba(218, 47, 53, 0.15);
+  }
+
+  50% {
+    text-shadow:
+      0 0 15px rgba(218, 47, 53, 0.9),
+      0 0 40px rgba(218, 47, 53, 0.5),
+      0 0 80px rgba(218, 47, 53, 0.3);
+  }
+}
+
+.glow-white {
+  animation: glowPulseWhite 3s ease-in-out infinite;
+}
+
+.glow-red {
+  animation: glowPulseRed 3s ease-in-out infinite;
 }
 
 /* Custom scrollbar for Money Heist theme */
@@ -342,12 +439,10 @@ body {
 .hhv-heroCard__divider {
   height: 1px;
   margin-top: 14px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    color-mix(in srgb, var(--hhv-accent) 88%, transparent),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      color-mix(in srgb, var(--hhv-accent) 88%, transparent),
+      transparent);
   opacity: 0.8;
 }
 
@@ -377,17 +472,13 @@ body {
   position: absolute;
   inset: -40% -20% -20% -20%;
   background:
-    radial-gradient(
-      500px 360px at 60% 45%,
+    radial-gradient(500px 360px at 60% 45%,
       color-mix(in srgb, var(--hhv-accent) 18%, transparent),
-      transparent 64%
-    ),
-    repeating-linear-gradient(
-      90deg,
+      transparent 64%),
+    repeating-linear-gradient(90deg,
       transparent,
       transparent 36px,
-      rgba(255, 255, 255, 0.04) 37px
-    );
+      rgba(255, 255, 255, 0.04) 37px);
   mix-blend-mode: overlay;
   opacity: 0.22;
 }
@@ -401,16 +492,12 @@ body {
   border-radius: 999px;
   border: 1px solid color-mix(in srgb, var(--hhv-accent) 40%, transparent);
   background:
-    radial-gradient(
-      circle at 30% 30%,
+    radial-gradient(circle at 30% 30%,
       color-mix(in srgb, var(--hhv-accent) 20%, transparent),
-      transparent 55%
-    ),
-    radial-gradient(
-      circle at 60% 65%,
+      transparent 55%),
+    radial-gradient(circle at 60% 65%,
       rgba(255, 255, 255, 0.05),
-      transparent 60%
-    );
+      transparent 60%);
   filter: blur(0);
   transform: rotate(-10deg);
 }
@@ -421,12 +508,10 @@ body {
   top: 26%;
   width: 140%;
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    color-mix(in srgb, var(--hhv-accent) 90%, transparent),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      color-mix(in srgb, var(--hhv-accent) 90%, transparent),
+      transparent);
   opacity: 0.35;
   animation: hhvSectionLaserA 10.5s linear infinite;
 }
@@ -486,11 +571,9 @@ body {
   content: "";
   position: absolute;
   inset: -40% -20% -40% -20%;
-  background: radial-gradient(
-    600px 260px at 35% 35%,
-    color-mix(in srgb, var(--hhv-accent) 14%, transparent),
-    transparent 62%
-  );
+  background: radial-gradient(600px 260px at 35% 35%,
+      color-mix(in srgb, var(--hhv-accent) 14%, transparent),
+      transparent 62%);
   opacity: 0.9;
   pointer-events: none;
 }
@@ -604,32 +687,24 @@ body {
 
 .hhv-about__bg {
   background:
-    radial-gradient(
-      900px 480px at 15% 20%,
+    radial-gradient(900px 480px at 15% 20%,
       color-mix(in srgb, var(--hhv-accent) 18%, transparent),
-      transparent 60%
-    ),
-    radial-gradient(
-      900px 520px at 85% 20%,
+      transparent 60%),
+    radial-gradient(900px 520px at 85% 20%,
       rgba(0, 0, 0, 0.18),
-      transparent 60%
-    ),
-    radial-gradient(
-      700px 520px at 65% 85%,
+      transparent 60%),
+    radial-gradient(700px 520px at 65% 85%,
       color-mix(in srgb, var(--hhv-accent) 12%, transparent),
-      transparent 60%
-    );
+      transparent 60%);
 }
 
 .hhv-about__grain {
   pointer-events: none;
-  background-image: repeating-linear-gradient(
-    0deg,
-    rgba(255, 255, 255, 0.02),
-    rgba(255, 255, 255, 0.02) 1px,
-    rgba(0, 0, 0, 0.02) 2px,
-    rgba(0, 0, 0, 0.02) 3px
-  );
+  background-image: repeating-linear-gradient(0deg,
+      rgba(255, 255, 255, 0.02),
+      rgba(255, 255, 255, 0.02) 1px,
+      rgba(0, 0, 0, 0.02) 2px,
+      rgba(0, 0, 0, 0.02) 3px);
   mix-blend-mode: overlay;
   opacity: 0.2;
 }
@@ -664,16 +739,12 @@ body {
   left: -15%;
   width: 130%;
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    color-mix(in srgb, var(--hhv-accent) 92%, transparent),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      color-mix(in srgb, var(--hhv-accent) 92%, transparent),
+      transparent);
   opacity: 0.35;
-  filter: drop-shadow(
-    0 0 12px color-mix(in srgb, var(--hhv-accent) 30%, transparent)
-  );
+  filter: drop-shadow(0 0 12px color-mix(in srgb, var(--hhv-accent) 30%, transparent));
 }
 
 .hhv-about__laserline--a {
@@ -707,15 +778,11 @@ body {
 .hhv-divider {
   height: 1px;
   width: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    color-mix(in srgb, var(--hhv-accent) 90%, transparent),
-    transparent
-  );
-  filter: drop-shadow(
-    0 0 10px color-mix(in srgb, var(--hhv-accent) 35%, transparent)
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      color-mix(in srgb, var(--hhv-accent) 90%, transparent),
+      transparent);
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--hhv-accent) 35%, transparent));
   animation: hhvPulse 2.8s ease-in-out infinite;
 }
 
@@ -751,9 +818,7 @@ body {
   align-items: baseline;
   gap: 8px;
   color: var(--hhv-text);
-  filter: drop-shadow(
-    0 0 14px color-mix(in srgb, var(--hhv-accent) 28%, transparent)
-  );
+  filter: drop-shadow(0 0 14px color-mix(in srgb, var(--hhv-accent) 28%, transparent));
   animation: hhvTick 1s steps(1) infinite;
 }
 
@@ -886,16 +951,12 @@ body {
   min-height: 520px;
   border: 1px solid var(--hhv-border);
   background:
-    radial-gradient(
-      900px 520px at 50% 30%,
+    radial-gradient(900px 520px at 50% 30%,
       rgba(0, 0, 0, 0.3),
-      transparent 70%
-    ),
-    linear-gradient(
-      180deg,
+      transparent 70%),
+    linear-gradient(180deg,
       color-mix(in srgb, var(--hhv-accent) 10%, transparent),
-      transparent 55%
-    ),
+      transparent 55%),
     color-mix(in srgb, var(--hhv-bg) 70%, #000);
   overflow: hidden;
   box-shadow:
@@ -933,21 +994,15 @@ body {
   position: absolute;
   inset: -30% -20% -20% -20%;
   background:
-    radial-gradient(
-      400px 300px at 35% 55%,
+    radial-gradient(400px 300px at 35% 55%,
       color-mix(in srgb, var(--hhv-accent) 30%, transparent),
-      transparent 60%
-    ),
-    radial-gradient(
-      520px 420px at 65% 45%,
+      transparent 60%),
+    radial-gradient(520px 420px at 65% 45%,
       color-mix(in srgb, var(--hhv-accent) 16%, transparent),
-      transparent 62%
-    ),
-    radial-gradient(
-      540px 520px at 50% 85%,
+      transparent 62%),
+    radial-gradient(540px 520px at 50% 85%,
       rgba(255, 255, 255, 0.08),
-      transparent 60%
-    );
+      transparent 60%);
   filter: blur(18px);
   opacity: 0.9;
   animation: hhvBreathe 6.6s ease-in-out infinite;
@@ -957,20 +1012,16 @@ body {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(
-      90deg,
+    linear-gradient(90deg,
       transparent 0%,
       rgba(255, 255, 255, 0.06) 22%,
       transparent 35%,
       rgba(255, 255, 255, 0.05) 52%,
-      transparent 70%
-    ),
-    repeating-linear-gradient(
-      0deg,
+      transparent 70%),
+    repeating-linear-gradient(0deg,
       transparent,
       transparent 24px,
-      rgba(255, 255, 255, 0.03) 25px
-    );
+      rgba(255, 255, 255, 0.03) 25px);
   mix-blend-mode: overlay;
   opacity: 0.28;
 }
@@ -986,9 +1037,7 @@ body {
 .hhv-mask__svg {
   width: min(340px, 72%);
   height: auto;
-  filter: drop-shadow(
-    0 0 26px color-mix(in srgb, var(--hhv-accent) 22%, transparent)
-  );
+  filter: drop-shadow(0 0 26px color-mix(in srgb, var(--hhv-accent) 22%, transparent));
 }
 
 .hhv-mask__stroke {
@@ -1030,16 +1079,12 @@ body {
   left: -20%;
   width: 140%;
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    color-mix(in srgb, var(--hhv-accent) 92%, transparent),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      color-mix(in srgb, var(--hhv-accent) 92%, transparent),
+      transparent);
   opacity: 0.65;
-  filter: drop-shadow(
-    0 0 14px color-mix(in srgb, var(--hhv-accent) 35%, transparent)
-  );
+  filter: drop-shadow(0 0 14px color-mix(in srgb, var(--hhv-accent) 35%, transparent));
 }
 
 .hhv-laser--a {
@@ -1053,10 +1098,12 @@ body {
 }
 
 @keyframes hhvBlink {
+
   0%,
   49% {
     opacity: 1;
   }
+
   50%,
   100% {
     opacity: 0.15;
@@ -1064,44 +1111,53 @@ body {
 }
 
 @keyframes hhvTick {
+
   0%,
   100% {
     transform: translateZ(0);
   }
+
   50% {
     transform: translateY(-1px);
   }
 }
 
 @keyframes hhvPulse {
+
   0%,
   100% {
     opacity: 0.7;
   }
+
   50% {
     opacity: 1;
   }
 }
 
 @keyframes hhvGlitch {
+
   0%,
   92%,
   100% {
     transform: translate(0, 0);
     opacity: 0.35;
   }
+
   93% {
     transform: translate(1px, -1px);
     opacity: 0.55;
   }
+
   94% {
     transform: translate(-2px, 1px);
     opacity: 0.4;
   }
+
   95% {
     transform: translate(2px, 0);
     opacity: 0.5;
   }
+
   96% {
     transform: translate(-1px, 0);
     opacity: 0.3;
@@ -1112,6 +1168,7 @@ body {
   0% {
     transform: translateY(0);
   }
+
   100% {
     transform: translateY(-40%);
   }
@@ -1121,17 +1178,20 @@ body {
   0% {
     transform: translateY(0);
   }
+
   100% {
     transform: translateY(-45%);
   }
 }
 
 @keyframes hhvBreathe {
+
   0%,
   100% {
     transform: translate3d(0, 0, 0) scale(1);
     opacity: 0.85;
   }
+
   50% {
     transform: translate3d(0, -10px, 0) scale(1.04);
     opacity: 1;
@@ -1139,10 +1199,12 @@ body {
 }
 
 @keyframes hhvFloat {
+
   0%,
   100% {
     transform: translate3d(0, 0, 0);
   }
+
   50% {
     transform: translate3d(0, -8px, 0);
   }
@@ -1153,13 +1215,16 @@ body {
     transform: translateX(-8%) translateY(0);
     opacity: 0.25;
   }
+
   15% {
     opacity: 0.75;
   }
+
   50% {
     transform: translateX(8%) translateY(0);
     opacity: 0.45;
   }
+
   100% {
     transform: translateX(-8%) translateY(0);
     opacity: 0.25;
@@ -1171,13 +1236,16 @@ body {
     transform: translateX(8%) translateY(0);
     opacity: 0.25;
   }
+
   20% {
     opacity: 0.7;
   }
+
   55% {
     transform: translateX(-8%) translateY(0);
     opacity: 0.4;
   }
+
   100% {
     transform: translateX(8%) translateY(0);
     opacity: 0.25;
@@ -1189,13 +1257,16 @@ body {
     transform: translateX(-10%);
     opacity: 0.2;
   }
+
   18% {
     opacity: 0.55;
   }
+
   60% {
     transform: translateX(10%);
     opacity: 0.32;
   }
+
   100% {
     transform: translateX(-10%);
     opacity: 0.2;
@@ -1207,13 +1278,16 @@ body {
     transform: translateX(10%);
     opacity: 0.18;
   }
+
   22% {
     opacity: 0.5;
   }
+
   65% {
     transform: translateX(-10%);
     opacity: 0.3;
   }
+
   100% {
     transform: translateX(10%);
     opacity: 0.18;
@@ -1327,22 +1401,27 @@ body {
     transform: translate(0, 0);
     filter: brightness(1);
   }
+
   20% {
     transform: translate(-1px, 1px);
     filter: brightness(1.2) hue-rotate(10deg);
   }
+
   40% {
     transform: translate(1px, -1px);
     filter: brightness(0.9) hue-rotate(-10deg);
   }
+
   60% {
     transform: translate(-1px, 0);
     filter: brightness(1.1);
   }
+
   80% {
     transform: translate(1px, 0);
     filter: brightness(1);
   }
+
   100% {
     transform: translate(0, 0);
     filter: brightness(1);

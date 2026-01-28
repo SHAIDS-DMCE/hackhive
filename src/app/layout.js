@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { ThemeProvider } from "@/context/ThemeContext";
 import Navbar from "@/components/ui/Navbar";
@@ -7,14 +7,41 @@ import SmoothScroll from "@/components/providers/SmoothScroll";
 import AppLoadingProvider from "@/components/providers/AppLoadingProvider";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+// Nord font - for headings
+const nord = localFont({
+  src: [
+    { path: "../../public/fonts/nord/Nord-Regular.otf", weight: "400", style: "normal" },
+    { path: "../../public/fonts/nord/Nord-Medium.otf", weight: "500", style: "normal" },
+    { path: "../../public/fonts/nord/Nord-Bold.otf", weight: "700", style: "normal" },
+    { path: "../../public/fonts/nord/Nord-Black.otf", weight: "900", style: "normal" },
+  ],
+  variable: "--font-nord",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+// Satoshi font - for body text
+const satoshi = localFont({
+  src: [
+    { path: "../../public/fonts/satoshi/Satoshi-Light.otf", weight: "300", style: "normal" },
+    { path: "../../public/fonts/satoshi/Satoshi-Regular.otf", weight: "400", style: "normal" },
+    { path: "../../public/fonts/satoshi/Satoshi-Medium.otf", weight: "500", style: "normal" },
+    { path: "../../public/fonts/satoshi/Satoshi-Bold.otf", weight: "700", style: "normal" },
+    { path: "../../public/fonts/satoshi/Satoshi-Black.otf", weight: "900", style: "normal" },
+  ],
+  variable: "--font-satoshi",
+  display: "swap",
+});
+
+// CaskaydiaMono Nerd Font - for code and timer
+const caskaydia = localFont({
+  src: [
+    { path: "../../public/fonts/caskaydiamono-nerdfont/CaskaydiaMonoNerdFont-Regular.ttf", weight: "400", style: "normal" },
+    { path: "../../public/fonts/caskaydiamono-nerdfont/CaskaydiaMonoNerdFont-Light.ttf", weight: "300", style: "normal" },
+    { path: "../../public/fonts/caskaydiamono-nerdfont/CaskaydiaMonoNerdFont-SemiBold.ttf", weight: "600", style: "normal" },
+    { path: "../../public/fonts/caskaydiamono-nerdfont/CaskaydiaMonoNerdFont-Bold.ttf", weight: "700", style: "normal" },
+  ],
+  variable: "--font-caskaydia",
+  display: "swap",
 });
 
 export const metadata = {
@@ -26,7 +53,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
+        className={`${nord.variable} ${satoshi.variable} ${caskaydia.variable} antialiased bg-background text-foreground font-body`}
       >
         <ThemeProvider>
           <NextThemesProvider
