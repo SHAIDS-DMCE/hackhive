@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect, useRef } from "react";
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { useTheme } from "@/context/ThemeContext";
 import DomainCard from "@/components/ui/DomainCard";
@@ -11,6 +11,33 @@ const ProblemStatements = () => {
   const { colors } = useTheme();
   const [selectedProblem, setSelectedProblem] = useState(null);
   const [expandedDomainId, setExpandedDomainId] = useState(null);
+  const sectionRef = useRef(null);
+
+  // Lock body scroll when any modal is open
+  useEffect(() => {
+    const isModalOpen = selectedProblem !== null || expandedDomainId !== null;
+    
+    if (isModalOpen) {
+      // Save current scroll position
+      const scrollY = window.scrollY;
+      
+      // Lock scroll
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+      
+      return () => {
+        // Restore scroll position
+        const scrollY = document.body.style.top;
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.body.style.overflow = '';
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      };
+    }
+  }, [selectedProblem, expandedDomainId]);
 
   // Domain icons and descriptions mapping
   const domainMetadata = {
@@ -55,8 +82,13 @@ const ProblemStatements = () => {
         fullDescription: problem.expectedSolution,
         difficulty: "Medium",
         timeEstimate: "24-48h",
-        technologies: [],
-        requirements: [],
+        technologies: ["React", "Node.js", "MongoDB", "TypeScript"],
+        requirements: [
+          "Build a scalable web application",
+          "Implement real-time features",
+          "Ensure responsive design",
+          "Write comprehensive tests"
+        ],
         prizes: ["$5,000", "$2,500", "$1,250"],
       });
     });
@@ -65,24 +97,33 @@ const ProblemStatements = () => {
   }, []);
 
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: 0, y: 40 },
     visible: {
       opacity: 1,
+      y: 0,
       transition: {
-        staggerChildren: 0.3,
-        delayChildren: 0.2,
+        type: "spring",
+        stiffness: 80,
+        damping: 20,
+        mass: 1,
+        staggerChildren: 0.2,
+        delayChildren: 0.3,
       },
     },
   };
 
   const titleVariants = {
-    hidden: { opacity: 0, y: -50 },
+    hidden: { opacity: 0, y: -60, scale: 0.9 },
     visible: {
       opacity: 1,
       y: 0,
+      scale: 1,
       transition: {
+        type: "spring",
+        stiffness: 120,
+        damping: 18,
+        mass: 1,
         duration: 0.8,
-        ease: "easeOut",
       },
     },
   };
@@ -93,6 +134,7 @@ const ProblemStatements = () => {
 
   return (
     <div
+      ref={sectionRef}
       className="min-h-screen relative overflow-hidden"
       style={{ backgroundColor: colors.primary }}
     >
