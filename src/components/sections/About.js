@@ -403,73 +403,52 @@ export default function About() {
             </div>
           </div> */}
           <div className="flex justify-center lg:justify-end">
-            <div className="bg-white/[0.02] dark:bg-white/[0.03] border border-foreground/10 rounded-xl p-6 min-w-[300px]">
+            <div className="bg-white/[0.02] dark:bg-white/[0.03] border border-foreground/10 rounded-xl p-6 min-w-[300px] min-h-[400px] flex flex-col">
               <div className="text-[10px] font-mono tracking-wider opacity-60 mb-4">
                 ⚡ MISSION TIMELINE
               </div>
               
-              <div className="space-y-3">
-                <div className="relative pl-4">
-                  <div className="absolute left-0 top-0 w-2 h-2 bg-primary rounded-full"></div>
-                  <div className="text-xs font-mono text-primary font-bold">08:00 AM</div>
-                  <div className="text-sm font-bold mb-1">INFILTRATION BEGINS</div>
-                  <div className="text-xs text-foreground/70 leading-relaxed">
-                    Reporting time. All operators arrive, credentials verified, mission access granted.
-                  </div>
+              <div className="space-y-4 flex-1 flex flex-col justify-between">
+                <div className="relative pl-3">
+                  <div className="absolute left-0 top-2 w-1 h-1 bg-primary/60"></div>
+                  <div className="text-xs font-mono text-foreground">08:00 AM</div>
+                  <div className="text-sm font-bold uppercase tracking-wide leading-relaxed text-primary">INFILTRATION BEGINS</div>
                 </div>
                 
-                <div className="relative pl-4">
-                  <div className="absolute left-0 top-0 w-2 h-2 bg-primary rounded-full"></div>
-                  <div className="text-xs font-mono text-primary font-bold">08:30 AM – 12:00 PM</div>
-                  <div className="text-sm font-bold mb-1">CODE BREACH PHASE I</div>
-                  <div className="text-xs text-foreground/70 leading-relaxed">
-                    Initial system penetration. Teams begin coding, ideation, and rapid prototyping.
-                  </div>
+                <div className="relative pl-3">
+                  <div className="absolute left-0 top-2 w-1 h-1 bg-primary/60"></div>
+                  <div className="text-xs font-mono text-foreground">08:30 AM – 12:00 PM</div>
+                  <div className="text-sm font-bold uppercase tracking-wide leading-relaxed text-primary">CODE BREACH PHASE I</div>
                 </div>
                 
-                <div className="relative pl-4">
-                  <div className="absolute left-0 top-0 w-2 h-2 bg-primary rounded-full"></div>
-                  <div className="text-xs font-mono text-primary font-bold">12:00 PM – 01:00 PM</div>
-                  <div className="text-sm font-bold mb-1">THE PROFESSOR'S BRIEFING</div>
-                  <div className="text-xs text-foreground/70 leading-relaxed">
-                    Mentor session. Strategic guidance, flaw detection, and optimization under supervision.
-                  </div>
+                <div className="relative pl-3">
+                  <div className="absolute left-0 top-2 w-1 h-1 bg-primary/60"></div>
+                  <div className="text-xs font-mono text-foreground">12:00 PM – 01:00 PM</div>
+                  <div className="text-sm font-bold uppercase tracking-wide leading-relaxed text-primary">THE PROFESSOR'S BRIEFING</div>
                 </div>
                 
-                <div className="relative pl-4">
-                  <div className="absolute left-0 top-0 w-2 h-2 bg-primary rounded-full"></div>
-                  <div className="text-xs font-mono text-primary font-bold">01:00 PM – 02:00 PM</div>
-                  <div className="text-sm font-bold mb-1">SUPPLY DROP</div>
-                  <div className="text-xs text-foreground/70 leading-relaxed">
-                    Lunch break. Operatives refuel before final execution phase.
-                  </div>
+                <div className="relative pl-3">
+                  <div className="absolute left-0 top-2 w-1 h-1 bg-primary/60"></div>
+                  <div className="text-xs font-mono text-foreground">01:00 PM – 02:00 PM</div>
+                  <div className="text-sm font-bold uppercase tracking-wide leading-relaxed text-primary">SUPPLY DROP</div>
                 </div>
                 
-                <div className="relative pl-4">
-                  <div className="absolute left-0 top-0 w-2 h-2 bg-primary rounded-full"></div>
-                  <div className="text-xs font-mono text-primary font-bold">02:00 PM – 06:30 PM</div>
-                  <div className="text-sm font-bold mb-1">CODE BREACH PHASE II</div>
-                  <div className="text-xs text-foreground/70 leading-relaxed">
-                    Continuous development. Feature completion, debugging, and final system lockdown.
-                  </div>
+                <div className="relative pl-3">
+                  <div className="absolute left-0 top-2 w-1 h-1 bg-primary/60"></div>
+                  <div className="text-xs font-mono text-foreground">02:00 PM – 06:30 PM</div>
+                  <div className="text-sm font-bold uppercase tracking-wide leading-relaxed text-primary">CODE BREACH PHASE II</div>
                 </div>
                 
-                <div className="relative pl-4">
-                  <div className="absolute left-0 top-0 w-2 h-2 bg-primary rounded-full"></div>
-                  <div className="text-xs font-mono text-primary font-bold">06:30 PM – 07:30 PM</div>
-                  <div className="text-sm font-bold mb-1">EXTRACTION PROTOCOL</div>
-                  <div className="text-xs text-foreground/70 leading-relaxed">
-                    PPT round. Teams present their solution, execution strategy, and impact to the jury.
-                  </div>
+                <div className="relative pl-3">
+                  <div className="absolute left-0 top-2 w-1 h-1 bg-primary/60"></div>
+                  <div className="text-xs font-mono text-foreground">06:30 PM – 07:30 PM</div>
+                  <div className="text-sm font-bold uppercase tracking-wide leading-relaxed text-primary">EXTRACTION PROTOCOL</div>
                 </div>
                 
-                <div className="relative pl-4">
-                  <div className="absolute left-0 top-0 w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                  <div className="text-xs font-mono text-green-500 font-bold">07:30 PM – 08:00 PM</div>
-                  <div className="text-sm font-bold mb-1 text-green-500">VAULT UNLOCKED</div>
-                  <div className="text-xs text-foreground/70 leading-relaxed">
-                    Winner announcement and prize distribution. Successful crews escape with rewards.
-                  </div>
+                <div className="relative pl-3">
+                  <div className="absolute left-0 top-2 w-1 h-1 bg-green-500"></div>
+                  <div className="text-xs font-mono text-foreground">07:30 PM – 08:00 PM</div>
+                  <div className="text-sm font-bold uppercase tracking-wide leading-relaxed text-green-500">VAULT UNLOCKED</div>
                 </div>
               </div>
               
