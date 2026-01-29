@@ -279,7 +279,7 @@ export default function About() {
   const heroRef = useRef(null);
   const { registerComponent, markComponentReady } = useLoading();
 
-  const missionTarget = useMemo(() => new Date("2026-03-01T00:00:00Z"), []);
+  const missionTarget = useMemo(() => new Date("2026-03-06T00:00:00Z"), []);
 
   // Register with loading context
   useEffect(() => {
