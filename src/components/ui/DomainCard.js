@@ -6,6 +6,50 @@ import { useTheme } from "../../context/ThemeContext";
 const DomainCard = ({ domain, onClick, layoutId, index }) => {
   const { colors } = useTheme();
 
+  const handleDownloadPDF = (domain) => {
+    // Create PDF content for the domain's problem statements
+    const pdfContent = generatePDFContent(domain);
+    
+    // Create a blob and download
+    const blob = new Blob([pdfContent], { type: 'text/plain' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${domain.title.replace(/\s+/g, '_')}_Problem_Statements.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+  };
+
+  const generatePDFContent = (domain) => {
+    let content = `${domain.title.toUpperCase()} - PROBLEM STATEMENTS\n`;
+    content += `${domain.description}\n`;
+    content += `${'='.repeat(80)}\n\n`;
+    
+    domain.problems.forEach((problem, index) => {
+      content += `PROBLEM ${index + 1}: ${problem.title}\n`;
+      content += `${'-'.repeat(40)}\n`;
+      content += `Description: ${problem.description}\n\n`;
+      content += `Expected Solution: ${problem.fullDescription}\n\n`;
+      content += `Difficulty: ${problem.difficulty}\n`;
+      content += `Time Estimate: ${problem.timeEstimate}\n`;
+      content += `Technologies: ${problem.technologies.join(', ')}\n`;
+      content += `Prizes: ${problem.prizes.join(', ')}\n\n`;
+      
+      if (problem.requirements && problem.requirements.length > 0) {
+        content += `Requirements:\n`;
+        problem.requirements.forEach((req, reqIndex) => {
+          content += `${reqIndex + 1}. ${req}\n`;
+        });
+        content += '\n';
+      }
+      content += `${'='.repeat(80)}\n\n`;
+    });
+    
+    return content;
+  };
+
   const cardVariants = {
     hidden: {
       opacity: 0,
@@ -47,6 +91,7 @@ const DomainCard = ({ domain, onClick, layoutId, index }) => {
         layout: { type: "spring", stiffness: 110, damping: 24, mass: 1 },
       }}
       className="relative group h-full min-h-[320px] md:min-h-[360px]"
+      id = "domain_card"
     >
       {/* Main Domain Card */}
       <div
@@ -138,10 +183,7 @@ const DomainCard = ({ domain, onClick, layoutId, index }) => {
                 className="text-base font-bold"
                 style={{ color: colors.accent }}
               >
-                {domain.problems.reduce(
-                  (sum, p) => sum + parseInt(p.timeEstimate),
-                  0,
-                )}
+                12
                 h
               </div>
               <div className="text-xs" style={{ color: colors.text }}>
@@ -193,6 +235,42 @@ const DomainCard = ({ domain, onClick, layoutId, index }) => {
               EXPLORE MISSIONS →
             </div>
           </div>
+        </div>
+
+        {/* Download PDF Button */}
+        <div className="p-3 border-t" style={{ borderColor: `${colors.accent}30` }}>
+          <button
+            className="w-full py-2 px-3 rounded-lg text-xs font-medium transition-all hover:scale-105 flex items-center justify-center space-x-2"
+            style={{
+              backgroundColor: colors.accent,
+              color: colors.primary,
+              border: `2px solid ${colors.accent}`,
+              fontFamily: "var(--font-mono)",
+              fontWeight: "bold",
+              boxShadow: `0 4px 12px ${colors.accent}40`,
+            }}
+            onClick={(e) => {
+              e.stopPropagation(); // Prevent card click
+              // Download PDF functionality
+              handleDownloadPDF(domain);
+            }}
+            title={`Download PDF for ${domain.title} problem statements`}
+          >
+            <svg
+              className="w-3 h-3"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+              />
+            </svg>
+            <span>DOWNLOAD PDF</span>
+          </button>
         </div>
 
         {/* Money Heist-inspired mask pattern overlay */}

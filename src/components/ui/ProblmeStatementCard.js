@@ -62,7 +62,7 @@ const ProblemStatementCard = ({ problem, onClick, index, layoutId }) => {
       className="cursor-pointer relative group h-full"
     >
       <div
-        className="rounded-2xl border p-8 transition-all duration-300 h-[420px] md:h-[460px] flex flex-col"
+        className="rounded-2xl border p-8 transition-all duration-300 h-[420px] md:h-[360px] flex flex-col"
         style={{
           backgroundColor: `${colors.accent}10`,
           borderColor: `${colors.accent}40`,
@@ -91,33 +91,7 @@ const ProblemStatementCard = ({ problem, onClick, index, layoutId }) => {
         </div>
 
         {/* Tech Stack */}
-        <div className="flex flex-wrap gap-3 mb-7 min-h-[56px]">
-          {problem.technologies.slice(0, 3).map((tech, techIndex) => (
-            <span
-              key={techIndex}
-              className="px-4 py-3 rounded-lg text-base"
-              style={{
-                backgroundColor: `${colors.accent}20`,
-                color: colors.accent,
-                fontFamily: "var(--font-mono)",
-              }}
-            >
-              {tech}
-            </span>
-          ))}
-          {problem.technologies.length > 3 && (
-            <span
-              className="px-4 py-3 rounded-lg text-base"
-              style={{
-                backgroundColor: `${colors.text}20`,
-                color: colors.text,
-                fontFamily: "var(--font-mono)",
-              }}
-            >
-              +{problem.technologies.length - 3}
-            </span>
-          )}
-        </div>
+        
 
         {/* Footer Stats */}
         <div className="flex items-center justify-between mt-auto">
@@ -129,7 +103,7 @@ const ProblemStatementCard = ({ problem, onClick, index, layoutId }) => {
             >
               <Clock size={20} />
               <span style={{ fontFamily: "var(--font-mono)" }}>
-                {problem.timeEstimate}
+                12 h
               </span>
             </div>
 

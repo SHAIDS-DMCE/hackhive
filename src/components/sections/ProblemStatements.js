@@ -2,6 +2,7 @@
 import React, { useState, useMemo, useEffect, useRef } from "react";
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { useTheme } from "@/context/ThemeContext";
+import { useSimpleScrollLock } from "@/hooks/useSimpleScrollLock";
 import DomainCard from "@/components/ui/DomainCard";
 import ProblemStatementCard from "@/components/ui/ProblmeStatementCard";
 import ProblemStatementDetail from "@/components/ui/ProblemStatementDetail";
@@ -13,31 +14,10 @@ const ProblemStatements = () => {
   const [expandedDomainId, setExpandedDomainId] = useState(null);
   const sectionRef = useRef(null);
 
-  // Lock body scroll when any modal is open
-  useEffect(() => {
-    const isModalOpen = selectedProblem !== null || expandedDomainId !== null;
-    
-    if (isModalOpen) {
-      // Save current scroll position
-      const scrollY = window.scrollY;
-      
-      // Lock scroll
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = '100%';
-      document.body.style.overflow = 'hidden';
-      
-      return () => {
-        // Restore scroll position
-        const scrollY = document.body.style.top;
-        document.body.style.position = '';
-        document.body.style.top = '';
-        document.body.style.width = '';
-        document.body.style.overflow = '';
-        window.scrollTo(0, parseInt(scrollY || '0') * -1);
-      };
-    }
-  }, [selectedProblem, expandedDomainId]);
+  // Disable main page scroll when interacting with any PS elements
+  // Enable scroll only when back at domain cards (both states are null)
+  const shouldLockScroll = selectedProblem !== null || expandedDomainId !== null;
+  useSimpleScrollLock(shouldLockScroll);
 
   // Domain icons and descriptions mapping
   const domainMetadata = {
@@ -274,7 +254,7 @@ const ProblemStatements = () => {
                           backgroundColor: `${colors.accent}15`,
                           fontFamily: "var(--font-mono)",
                         }}
-                        onClick={() => setExpandedDomainId(null)}
+                        onClick={() => setExpandedDomainId("#problem-statements")}
                       >
                         CLOSE
                       </button>

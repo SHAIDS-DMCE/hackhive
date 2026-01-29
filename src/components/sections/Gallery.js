@@ -118,7 +118,7 @@ export default function Gallery() {
                   fontFamily: "var(--font-heading)",
                 }}
               >
-                HACKHIVE 2.0
+                HACKHIVE 2025
               </h1>
               <p
                 className="mt-4 text-lg md:text-xl leading-relaxed"

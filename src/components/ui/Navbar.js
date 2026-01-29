@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { useTheme } from "next-themes";
+import { useState, useEffect } from "react";
+import { useTheme } from "@/context/ThemeContext";
 import Link from "next/link";
 import { Button, ButtonLink } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
@@ -18,10 +18,8 @@ const NAV_LINKS = [
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isThemeDropdownOpen, setIsThemeDropdownOpen] = useState(false);
-  const { theme, setTheme, resolvedTheme } = useTheme();
+  const { isDark, toggleTheme, colors } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const themeDropdownRef = useRef(null);
 
   // Prevent hydration mismatch
   useEffect(() => {
@@ -35,17 +33,6 @@ export default function Navbar() {
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (themeDropdownRef.current && !themeDropdownRef.current.contains(event.target)) {
-        setIsThemeDropdownOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   // Close mobile menu on resize
@@ -62,7 +49,7 @@ export default function Navbar() {
   // Always show the resolved theme icon (light or dark), never system icon
   const getResolvedThemeIcon = () => {
     if (!mounted) return <LightModeIcon />;
-    return resolvedTheme === "dark" ? <DarkModeIcon /> : <LightModeIcon />;
+    return isDark ? <DarkModeIcon /> : <LightModeIcon />;
   };
 
   return (
@@ -126,66 +113,14 @@ export default function Navbar() {
               </ButtonLink>
 
               {/* Theme Toggle Button */}
-              <div ref={themeDropdownRef} className="relative">
-                <Button
-                  onClick={() => setIsThemeDropdownOpen(!isThemeDropdownOpen)}
-                  variant="outline"
-                  size="icon"
-                  aria-label="Toggle theme"
-                >
-                  {getResolvedThemeIcon()}
-                </Button>
-
-                {/* Dropdown Menu - Clean minimal design */}
-                {isThemeDropdownOpen && mounted && (
-                  <div className="absolute right-0 mt-2 min-w-[140px] rounded-xl bg-card border shadow-lg overflow-hidden">
-                    <div className="p-1.5">
-                      <button
-                        onClick={() => {
-                          setTheme("light");
-                          setIsThemeDropdownOpen(false);
-                        }}
-                        className={cn(
-                          "w-full text-left px-3 py-2 text-base font-medium rounded-md transition-colors",
-                          theme === "light"
-                            ? "bg-muted"
-                            : "hover:bg-muted/50"
-                        )}
-                      >
-                        Light
-                      </button>
-                      <button
-                        onClick={() => {
-                          setTheme("dark");
-                          setIsThemeDropdownOpen(false);
-                        }}
-                        className={cn(
-                          "w-full text-left px-3 py-2 text-base font-medium rounded-md transition-colors",
-                          theme === "dark"
-                            ? "bg-muted"
-                            : "hover:bg-muted/50"
-                        )}
-                      >
-                        Dark
-                      </button>
-                      <button
-                        onClick={() => {
-                          setTheme("system");
-                          setIsThemeDropdownOpen(false);
-                        }}
-                        className={cn(
-                          "w-full text-left px-3 py-2 text-base font-medium rounded-md transition-colors",
-                          theme === "system"
-                            ? "bg-muted/100"
-                            : "hover:bg-muted/50"
-                        )}
-                      >
-                        System
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </div>
+              <Button
+                onClick={toggleTheme}
+                variant="outline"
+                size="icon"
+                aria-label="Toggle theme"
+              >
+                {getResolvedThemeIcon()}
+              </Button>
 
               {/* Mobile Menu Button */}
               <Button
