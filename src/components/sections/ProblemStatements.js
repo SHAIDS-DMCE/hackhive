@@ -1,7 +1,8 @@
 "use client";
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect, useRef } from "react";
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { useTheme } from "@/context/ThemeContext";
+import { useSimpleScrollLock } from "@/hooks/useSimpleScrollLock";
 import DomainCard from "@/components/ui/DomainCard";
 import ProblemStatementCard from "@/components/ui/ProblmeStatementCard";
 import ProblemStatementDetail from "@/components/ui/ProblemStatementDetail";
@@ -11,6 +12,12 @@ const ProblemStatements = () => {
   const { colors } = useTheme();
   const [selectedProblem, setSelectedProblem] = useState(null);
   const [expandedDomainId, setExpandedDomainId] = useState(null);
+  const sectionRef = useRef(null);
+
+  // Disable main page scroll when interacting with any PS elements
+  // Enable scroll only when back at domain cards (both states are null)
+  const shouldLockScroll = selectedProblem !== null || expandedDomainId !== null;
+  useSimpleScrollLock(shouldLockScroll);
 
   // Domain icons and descriptions mapping
   const domainMetadata = {
@@ -55,8 +62,13 @@ const ProblemStatements = () => {
         fullDescription: problem.expectedSolution,
         difficulty: "Medium",
         timeEstimate: "24-48h",
-        technologies: [],
-        requirements: [],
+        technologies: ["React", "Node.js", "MongoDB", "TypeScript"],
+        requirements: [
+          "Build a scalable web application",
+          "Implement real-time features",
+          "Ensure responsive design",
+          "Write comprehensive tests"
+        ],
         prizes: ["$5,000", "$2,500", "$1,250"],
       });
     });
@@ -65,24 +77,33 @@ const ProblemStatements = () => {
   }, []);
 
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: 0, y: 40 },
     visible: {
       opacity: 1,
+      y: 0,
       transition: {
-        staggerChildren: 0.3,
-        delayChildren: 0.2,
+        type: "spring",
+        stiffness: 80,
+        damping: 20,
+        mass: 1,
+        staggerChildren: 0.2,
+        delayChildren: 0.3,
       },
     },
   };
 
   const titleVariants = {
-    hidden: { opacity: 0, y: -50 },
+    hidden: { opacity: 0, y: -60, scale: 0.9 },
     visible: {
       opacity: 1,
       y: 0,
+      scale: 1,
       transition: {
+        type: "spring",
+        stiffness: 120,
+        damping: 18,
+        mass: 1,
         duration: 0.8,
-        ease: "easeOut",
       },
     },
   };
@@ -93,6 +114,7 @@ const ProblemStatements = () => {
 
   return (
     <div
+      ref={sectionRef}
       className="min-h-screen relative overflow-hidden"
       style={{ backgroundColor: colors.primary }}
     >
@@ -232,7 +254,7 @@ const ProblemStatements = () => {
                           backgroundColor: `${colors.accent}15`,
                           fontFamily: "var(--font-mono)",
                         }}
-                        onClick={() => setExpandedDomainId(null)}
+                        onClick={() => setExpandedDomainId("#problem-statements")}
                       >
                         CLOSE
                       </button>

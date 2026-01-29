@@ -1,26 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState, useMemo } from "react";
+import { useEffect, useRef, useMemo } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLoading } from "@/context/LoadingContext";
-
+import berlinSvg from "@/assets/berlin.svg";
 // Register GSAP plugins
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
-}
-
-// Utility functions
-function pad2(n) {
-  return String(Math.max(0, n)).padStart(2, "0");
-}
-
-function getTimeParts(ms) {
-  const totalSeconds = Math.max(0, Math.floor(ms / 1000));
-  const hours = Math.floor(totalSeconds / 3600);
-  const minutes = Math.floor((totalSeconds % 3600) / 60);
-  const seconds = totalSeconds % 60;
-  return { hours, minutes, seconds };
 }
 
 // Animated Section component with GSAP
@@ -195,63 +182,6 @@ function FeatureCard({ icon, title, description, delay }) {
   );
 }
 
-// Countdown Timer with GSAP pulse
-function CountdownTimer({ targetDate }) {
-  const [now, setNow] = useState(() => Date.now());
-  const timerRef = useRef(null);
-
-  useEffect(() => {
-    const id = setInterval(() => setNow(Date.now()), 1000);
-    return () => clearInterval(id);
-  }, []);
-
-  useEffect(() => {
-    if (!timerRef.current) return;
-
-    gsap.fromTo(
-      timerRef.current,
-      { scale: 1 },
-      {
-        scale: 1.02,
-        duration: 0.5,
-        yoyo: true,
-        repeat: 1,
-        ease: "power1.inOut",
-      },
-    );
-  }, [now]);
-
-  const remainingMs = Math.max(0, targetDate.getTime() - now);
-  const t = getTimeParts(remainingMs);
-
-  return (
-    <div
-      ref={timerRef}
-      className="font-mono text-4xl font-bold tracking-wide flex items-center gap-1"
-    >
-      <span>{pad2(t.hours)}</span>
-      <span className="animate-pulse">:</span>
-      <span>{pad2(t.minutes)}</span>
-      <span className="animate-pulse">:</span>
-      <span>{pad2(t.seconds)}</span>
-    </div>
-  );
-}
-
-// Risk Bar component
-function RiskBars({ level = 4, max = 5 }) {
-  return (
-    <div className="flex gap-1">
-      {Array.from({ length: max }).map((_, i) => (
-        <span
-          key={i}
-          className={`w-5 h-1.5 rounded-sm ${i < level ? "bg-primary" : "bg-foreground/10"}`}
-        />
-      ))}
-    </div>
-  );
-}
-
 // Background Code Effect
 function BackgroundCode() {
   const codeLines = [
@@ -277,6 +207,7 @@ function BackgroundCode() {
 export default function About() {
   const sectionRef = useRef(null);
   const heroRef = useRef(null);
+  const svgRef = useRef(null);
   const { registerComponent, markComponentReady } = useLoading();
 
   const missionTarget = useMemo(() => new Date("2026-03-06T00:00:00Z"), []);
@@ -327,6 +258,45 @@ export default function About() {
     }, sectionRef);
 
     return () => ctx.revert();
+  }, []);
+
+  // SVG Animation with img element
+  useEffect(() => {
+    if (!svgRef.current) return;
+
+    const tl = gsap.timeline({ repeat: -1, repeatDelay: 1.5 });
+
+    // Main animation sequence for the img
+    tl.to(svgRef.current, {
+      scale: 1.1,
+      rotation: 5,
+      filter: "drop-shadow(0 0 8px rgba(196, 22, 28, 0.8))",
+      duration: 3,
+      ease: "power2.inOut",
+    })
+    .to(svgRef.current, {
+      scale: 0.95,
+      rotation: -3,
+      filter: "drop-shadow(0 0 4px rgba(196, 22, 28, 0.4))",
+      duration: 2.5,
+      ease: "power2.inOut",
+    })
+    .to(svgRef.current, {
+      scale: 1.05,
+      rotation: 2,
+      filter: "drop-shadow(0 0 12px rgba(196, 22, 28, 1))",
+      duration: 2,
+      ease: "sine.inOut",
+    })
+    .to(svgRef.current, {
+      scale: 1,
+      rotation: 0,
+      filter: "drop-shadow(0 0 2px rgba(196, 22, 28, 0.3))",
+      duration: 2,
+      ease: "power2.inOut",
+    });
+
+    return () => tl.kill();
   }, []);
 
   return (
@@ -410,32 +380,82 @@ export default function About() {
             </div>
           </div>
 
-          {/* Hero Card */}
+          {/* Hero Card
           <div className="hero-card flex justify-center lg:justify-end">
             <div className="bg-white/[0.02] dark:bg-white/[0.03] border border-foreground/10 rounded-xl p-6 min-w-[300px]">
               <div className="text-[10px] font-mono tracking-wider opacity-60 mb-2">
                 ⏱ MISSION COUNTDOWN
               </div>
 
-              <CountdownTimer targetDate={missionTarget} />
-
-              <div className="h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent my-5" />
-
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <div className="text-[10px] font-mono tracking-wider opacity-60">
-                    DIFFICULTY
-                  </div>
-                  <div className="text-2xl font-bold mt-1">HIGH</div>
+              <div className="flex justify-center items-center h-48 relative">
+                <img 
+                  ref={svgRef}
+                  src={berlinSvg}
+                  alt="Berlin Mission Status"
+                  className="w-32 h-32 object-contain"
+                  style={{ transformOrigin: 'center' }}
+                />
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
                 </div>
-                <div>
-                  <div className="text-[10px] font-mono tracking-wider opacity-60 mb-2">
-                    RISK LEVEL
-                  </div>
-                  <RiskBars level={4} max={5} />
-                  <div className="text-xs font-mono text-primary font-semibold mt-1">
-                    EXTREME
-                  </div>
+              </div>
+
+            </div>
+          </div> */}
+          <div className="flex justify-center lg:justify-end">
+            <div className="bg-white/[0.02] dark:bg-white/[0.03] border border-foreground/10 rounded-xl p-6 min-w-[300px] min-h-[400px] flex flex-col">
+              <div className="text-[10px] font-mono tracking-wider opacity-60 mb-4">
+                ⚡ MISSION TIMELINE
+              </div>
+              
+              <div className="space-y-4 flex-1 flex flex-col justify-between">
+                <div className="relative pl-3">
+                  <div className="absolute left-0 top-2 w-1 h-1 bg-primary/60"></div>
+                  <div className="text-xs font-mono text-foreground">08:00 AM</div>
+                  <div className="text-sm font-bold uppercase tracking-wide leading-relaxed text-primary">INFILTRATION BEGINS</div>
+                </div>
+                
+                <div className="relative pl-3">
+                  <div className="absolute left-0 top-2 w-1 h-1 bg-primary/60"></div>
+                  <div className="text-xs font-mono text-foreground">08:30 AM – 12:00 PM</div>
+                  <div className="text-sm font-bold uppercase tracking-wide leading-relaxed text-primary">CODE BREACH PHASE I</div>
+                </div>
+                
+                <div className="relative pl-3">
+                  <div className="absolute left-0 top-2 w-1 h-1 bg-primary/60"></div>
+                  <div className="text-xs font-mono text-foreground">12:00 PM – 01:00 PM</div>
+                  <div className="text-sm font-bold uppercase tracking-wide leading-relaxed text-primary">THE PROFESSOR'S BRIEFING</div>
+                </div>
+                
+                <div className="relative pl-3">
+                  <div className="absolute left-0 top-2 w-1 h-1 bg-primary/60"></div>
+                  <div className="text-xs font-mono text-foreground">01:00 PM – 02:00 PM</div>
+                  <div className="text-sm font-bold uppercase tracking-wide leading-relaxed text-primary">SUPPLY DROP</div>
+                </div>
+                
+                <div className="relative pl-3">
+                  <div className="absolute left-0 top-2 w-1 h-1 bg-primary/60"></div>
+                  <div className="text-xs font-mono text-foreground">02:00 PM – 06:30 PM</div>
+                  <div className="text-sm font-bold uppercase tracking-wide leading-relaxed text-primary">CODE BREACH PHASE II</div>
+                </div>
+                
+                <div className="relative pl-3">
+                  <div className="absolute left-0 top-2 w-1 h-1 bg-primary/60"></div>
+                  <div className="text-xs font-mono text-foreground">06:30 PM – 07:30 PM</div>
+                  <div className="text-sm font-bold uppercase tracking-wide leading-relaxed text-primary">EXTRACTION PROTOCOL</div>
+                </div>
+                
+                <div className="relative pl-3">
+                  <div className="absolute left-0 top-2 w-1 h-1 bg-green-500"></div>
+                  <div className="text-xs font-mono text-foreground">07:30 PM – 08:00 PM</div>
+                  <div className="text-sm font-bold uppercase tracking-wide leading-relaxed text-green-500">VAULT UNLOCKED</div>
+                </div>
+              </div>
+              
+              <div className="mt-4 p-3 bg-gradient-to-r from-primary/10 to-green-500/10 border border-primary/20 rounded">
+                <div className="flex items-center justify-center gap-2">
+                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                  <span className="text-xs font-mono text-green-500">MISSION ACTIVE</span>
                 </div>
               </div>
             </div>

@@ -10,7 +10,6 @@ import {
   Target,
   Users,
   Calendar,
-  AlertCircle,
 } from "lucide-react";
 
 const ProblemStatementDetail = ({ problem, onClose, layoutId }) => {
@@ -138,7 +137,7 @@ const ProblemStatementDetail = ({ problem, onClose, layoutId }) => {
           {/* Content */}
           <div className="p-6 space-y-8">
             {/* Quick Stats */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div
                 className="p-4 rounded-lg border"
                 style={{
@@ -162,7 +161,7 @@ const ProblemStatementDetail = ({ problem, onClose, layoutId }) => {
                         fontFamily: "var(--font-mono)",
                       }}
                     >
-                      {problem.timeEstimate}
+                      12 h
                     </div>
                   </div>
                 </div>
@@ -197,34 +196,7 @@ const ProblemStatementDetail = ({ problem, onClose, layoutId }) => {
                 </div>
               </div>
 
-              <div
-                className="p-4 rounded-lg border"
-                style={{
-                  backgroundColor: `${colors.accent}10`,
-                  borderColor: `${colors.accent}30`,
-                }}
-              >
-                <div className="flex items-center space-x-3">
-                  <Code style={{ color: colors.accent }} />
-                  <div>
-                    <div
-                      className="text-sm opacity-70"
-                      style={{ color: colors.text }}
-                    >
-                      Technologies
-                    </div>
-                    <div
-                      className="text-xl font-bold"
-                      style={{
-                        color: colors.accent,
-                        fontFamily: "var(--font-mono)",
-                      }}
-                    >
-                      {problem.technologies.length}
-                    </div>
-                  </div>
-                </div>
-              </div>
+             
             </div>
 
             {/* Full Description */}
@@ -237,7 +209,7 @@ const ProblemStatementDetail = ({ problem, onClose, layoutId }) => {
                 }}
               >
                 <Target size={24} />
-                <span>Mission Details</span>
+                <span>Expected Solution</span>
               </h3>
               <p
                 className="leading-relaxed"
@@ -251,132 +223,8 @@ const ProblemStatementDetail = ({ problem, onClose, layoutId }) => {
               </p>
             </div>
 
-            {/* Requirements */}
-            <div>
-              <h3
-                className="text-xl font-bold mb-4 flex items-center space-x-2"
-                style={{
-                  color: colors.accent,
-                  fontFamily: "var(--font-heading)",
-                }}
-              >
-                <AlertCircle size={24} />
-                <span>Requirements</span>
-              </h3>
-              <ul className="space-y-2">
-                {problem.requirements.map((requirement, index) => (
-                  <li
-                    key={index}
-                    className="flex items-start space-x-3"
-                    style={{ color: colors.text }}
-                  >
-                    <span
-                      className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold"
-                      style={{
-                        backgroundColor: colors.accent,
-                        color: colors.primary,
-                      }}
-                    >
-                      {index + 1}
-                    </span>
-                    <span style={{ fontFamily: "var(--font-body)" }}>
-                      {requirement}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
             {/* Technologies */}
-            <div>
-              <h3
-                className="text-xl font-bold mb-4 flex items-center space-x-2"
-                style={{
-                  color: colors.accent,
-                  fontFamily: "var(--font-heading)",
-                }}
-              >
-                <Code size={24} />
-                <span>Technology Stack</span>
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {problem.technologies.map((tech, index) => (
-                  <span
-                    key={index}
-                    className="px-4 py-2 rounded-lg font-medium"
-                    style={{
-                      backgroundColor: `${colors.accent}20`,
-                      color: colors.accent,
-                      border: `1px solid ${colors.accent}40`,
-                      fontFamily: "var(--font-mono)",
-                    }}
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Prizes */}
-            <div>
-              <h3
-                className="text-xl font-bold mb-4 flex items-center space-x-2"
-                style={{
-                  color: colors.accent,
-                  fontFamily: "var(--font-heading)",
-                }}
-              >
-                <Trophy size={24} />
-                <span>Prize Distribution</span>
-              </h3>
-              <div className="space-y-3">
-                {problem.prizes.map((prize, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center justify-between p-4 rounded-lg border"
-                    style={{
-                      backgroundColor: `${colors.accent}10`,
-                      borderColor: `${colors.accent}30`,
-                    }}
-                  >
-                    <div className="flex items-center space-x-3">
-                      <div
-                        className="w-8 h-8 rounded-full flex items-center justify-center font-bold"
-                        style={{
-                          backgroundColor: colors.accent,
-                          color: colors.primary,
-                        }}
-                      >
-                        {index + 1}
-                      </div>
-                      <span
-                        className="font-medium"
-                        style={{
-                          color: colors.text,
-                          fontFamily: "var(--font-body)",
-                        }}
-                      >
-                        {prize.includes("First")
-                          ? "🥇"
-                          : prize.includes("Second")
-                            ? "🥈"
-                            : "🥉"}{" "}
-                        {prize.split(":")[0]}
-                      </span>
-                    </div>
-                    <span
-                      className="text-xl font-bold"
-                      style={{
-                        color: colors.accent,
-                        fontFamily: "var(--font-mono)",
-                      }}
-                    >
-                      ${prize.split("$")[1]}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
+            
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 pt-6">

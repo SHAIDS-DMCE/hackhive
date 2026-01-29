@@ -10,31 +10,40 @@ const ProblemStatementCard = ({ problem, onClick, index, layoutId }) => {
   const cardVariants = {
     hidden: {
       opacity: 0,
-      x: -20,
-      scale: 0.95,
+      x: -30,
+      scale: 0.9,
     },
     visible: {
       opacity: 1,
       x: 0,
       scale: 1,
       transition: {
-        duration: 0.55,
+        type: "spring",
+        stiffness: 120,
+        damping: 18,
+        mass: 1,
         delay: index * 0.1,
-        ease: "easeOut",
+        duration: 0.6,
       },
     },
     hover: {
-      scale: 1.01,
-      x: 2,
+      scale: 1.02,
+      x: 4,
+      y: -2,
       transition: {
-        duration: 0.35,
-        ease: "easeInOut",
+        type: "spring",
+        stiffness: 500,
+        damping: 28,
+        mass: 0.6,
       },
     },
     tap: {
-      scale: 0.995,
+      scale: 0.98,
       transition: {
-        duration: 0.14,
+        type: "spring",
+        stiffness: 600,
+        damping: 30,
+        mass: 0.5,
       },
     },
   };
@@ -48,12 +57,12 @@ const ProblemStatementCard = ({ problem, onClick, index, layoutId }) => {
       whileTap="tap"
       onClick={onClick}
       transition={{
-        layout: { type: "spring", stiffness: 110, damping: 26, mass: 1 },
+        layout: { type: "spring", stiffness: 100, damping: 20, mass: 1 },
       }}
       className="cursor-pointer relative group h-full"
     >
       <div
-        className="rounded-2xl border p-8 transition-all duration-300 h-[420px] md:h-[460px] flex flex-col"
+        className="rounded-2xl border p-8 transition-all duration-300 h-[420px] md:h-[360px] flex flex-col"
         style={{
           backgroundColor: `${colors.accent}10`,
           borderColor: `${colors.accent}40`,
@@ -82,33 +91,7 @@ const ProblemStatementCard = ({ problem, onClick, index, layoutId }) => {
         </div>
 
         {/* Tech Stack */}
-        <div className="flex flex-wrap gap-3 mb-7 min-h-[56px]">
-          {problem.technologies.slice(0, 3).map((tech, techIndex) => (
-            <span
-              key={techIndex}
-              className="px-4 py-3 rounded-lg text-base"
-              style={{
-                backgroundColor: `${colors.accent}20`,
-                color: colors.accent,
-                fontFamily: "var(--font-mono)",
-              }}
-            >
-              {tech}
-            </span>
-          ))}
-          {problem.technologies.length > 3 && (
-            <span
-              className="px-4 py-3 rounded-lg text-base"
-              style={{
-                backgroundColor: `${colors.text}20`,
-                color: colors.text,
-                fontFamily: "var(--font-mono)",
-              }}
-            >
-              +{problem.technologies.length - 3}
-            </span>
-          )}
-        </div>
+        
 
         {/* Footer Stats */}
         <div className="flex items-center justify-between mt-auto">
@@ -120,7 +103,7 @@ const ProblemStatementCard = ({ problem, onClick, index, layoutId }) => {
             >
               <Clock size={20} />
               <span style={{ fontFamily: "var(--font-mono)" }}>
-                {problem.timeEstimate}
+                12 h
               </span>
             </div>
 

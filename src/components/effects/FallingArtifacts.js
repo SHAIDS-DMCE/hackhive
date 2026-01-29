@@ -5,6 +5,8 @@ import { useTheme } from 'next-themes';
 
 export default function FallingArtifacts() {
   const canvasRef = useRef(null);
+  const mouseRef = useRef({ x: 0, y: 0 });
+  const shakeRef = useRef({ x: 0, y: 0 });
   const { resolvedTheme } = useTheme();
 
   useEffect(() => {
@@ -23,7 +25,19 @@ export default function FallingArtifacts() {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Rectangular artifact with natural physics
+    // Track mouse movement for background shake
+    const handleMouseMove = (e) => {
+      // Calculate normalized mouse position from center (-1 to 1)
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+      mouseRef.current = {
+        x: (e.clientX - centerX) / centerX,
+        y: (e.clientY - centerY) / centerY,
+      };
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+
+    // Rectangular artifact with natural physics - SLOWED DOWN ~55%
     class RectArtifact {
       constructor() {
         this.reset();
@@ -33,26 +47,26 @@ export default function FallingArtifacts() {
         this.x = Math.random() * canvas.width;
         this.y = -100 - Math.random() * 300;
 
-        // Natural free-fall physics
+        // SLOWED DOWN: Natural free-fall physics (~55% slower)
         this.velocity = 0;
-        this.acceleration = 0.02 + Math.random() * 0.03; // Gravity
-        this.maxSpeed = 1.5 + Math.random() * 1.5;
+        this.acceleration = 0.004 + Math.random() * 0.012;
+        this.maxSpeed = 0.65 + Math.random() * 0.7;
 
         // Wider rectangles
         this.width = 30 + Math.random() * 20;
         this.height = 10 + Math.random() * 8;
 
-        this.opacity = 0.06 + Math.random() * 0.12;
+        this.opacity = 0.03 + Math.random() * 0.12;
 
         // Rotation with natural wobble
         this.rotation = Math.random() * Math.PI * 2;
-        this.rotationSpeed = (Math.random() - 0.5) * 0.02;
+        this.rotationSpeed = (Math.random() - 0.5) * 0.01;
         this.wobble = Math.random() * Math.PI * 2;
-        this.wobbleSpeed = 0.01 + Math.random() * 0.02;
+        this.wobbleSpeed = 0.005 + Math.random() * 0.01;
         this.wobbleAmplitude = 0.3 + Math.random() * 0.5;
 
-        // Horizontal drift
-        this.driftSpeed = (Math.random() - 0.5) * 0.3;
+        // Horizontal drift - slowed
+        this.driftSpeed = (Math.random() - 0.5) * 0.15;
       }
 
       update() {
@@ -61,11 +75,11 @@ export default function FallingArtifacts() {
         this.y += this.velocity;
 
         // Horizontal drift
-        this.x += this.driftSpeed + Math.sin(this.wobble) * 0.2;
+        this.x += this.driftSpeed + Math.sin(this.wobble) * 0.1;
 
         // Natural wobble rotation
         this.wobble += this.wobbleSpeed;
-        this.rotation += this.rotationSpeed + Math.sin(this.wobble) * 0.01;
+        this.rotation += this.rotationSpeed + Math.sin(this.wobble) * 0.005;
 
         if (this.y > canvas.height + 100) {
           this.reset();
@@ -78,7 +92,8 @@ export default function FallingArtifacts() {
         const glowColor = isDark ? 'rgba(255, 255, 255, 1)' : 'rgba(0, 0, 0, 1)';
 
         ctx.save();
-        ctx.translate(this.x, this.y);
+        // Apply background shake offset to each particle's position
+        ctx.translate(this.x + shakeRef.current.x, this.y + shakeRef.current.y);
         ctx.rotate(this.rotation);
 
         // Subtle glow effect
@@ -100,13 +115,22 @@ export default function FallingArtifacts() {
     for (let i = 0; i < particleCount; i++) {
       const p = new RectArtifact();
       p.y = Math.random() * canvas.height;
-      p.velocity = Math.random() * p.maxSpeed; // Start with some velocity
+      p.velocity = Math.random() * p.maxSpeed;
       particles.push(p);
     }
 
     // Animation loop
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Smooth interpolation for background shake based on mouse position
+      const shakeIntensity = 8; // Max pixels of shake
+      const targetShakeX = mouseRef.current.x * shakeIntensity;
+      const targetShakeY = mouseRef.current.y * shakeIntensity;
+
+      // Smooth easing for shake effect
+      shakeRef.current.x += (targetShakeX - shakeRef.current.x) * 0.08;
+      shakeRef.current.y += (targetShakeY - shakeRef.current.y) * 0.08;
 
       particles.forEach(p => {
         p.update();
@@ -121,6 +145,7 @@ export default function FallingArtifacts() {
     return () => {
       cancelAnimationFrame(animationId);
       window.removeEventListener('resize', resizeCanvas);
+      window.removeEventListener('mousemove', handleMouseMove);
     };
   }, [resolvedTheme]);
 
