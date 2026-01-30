@@ -1425,3 +1425,49 @@ samp,
     filter: brightness(1);
   }
 }
+
+/* --- TIMELINE SECTION --- */
+.timeline-section {
+  position: relative;
+}
+
+.timeline-track {
+  will-change: transform;
+}
+
+.timeline-phase {
+  will-change: transform, opacity;
+}
+
+/* Hide scrollbar for timeline horizontal scroll */
+.timeline-section::-webkit-scrollbar {
+  display: none;
+}
+
+.timeline-section {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Timeline phase card hover effects */
+.timeline-phase > div {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.timeline-phase > div:hover {
+  transform: translateY(-4px);
+}
+
+/* Timeline progress dot animation */
+@keyframes timelinePulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(218, 47, 53, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(218, 47, 53, 0);
+  }
+}
+
+.timeline-section .animate-pulse {
+  animation: timelinePulse 2s ease-in-out infinite;
+}
