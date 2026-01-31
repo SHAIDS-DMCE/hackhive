@@ -71,7 +71,7 @@ export default function FAQ() {
         aria-hidden="true"
       />
 
-      <div className="relative mx-auto w-full max-w-6xl px-6 py-14 sm:px-8 sm:py-20">
+      <div className="relative mx-auto w-full max-w-7xl px-6 sm:px-8 lg:px-12 py-14 sm:py-20">
 
         <Reveal>
           <div className="mb-6">

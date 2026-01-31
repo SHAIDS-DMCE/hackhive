@@ -314,7 +314,7 @@ export default function About() {
       <div className="laser-line absolute top-[70%] left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent opacity-10" />
 
       {/* Main content */}
-      <div className="relative mx-auto max-w-6xl px-6 sm:px-8">
+      <div className="relative mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
         {/* Top bar */}
         <div className="flex justify-between items-center mb-12">
           <span className="text-[10px] font-mono tracking-[0.2em] text-primary/70">

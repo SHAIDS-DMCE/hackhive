@@ -63,7 +63,7 @@ export default function Navbar() {
             : "bg-background/60"
         )}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="flex items-center justify-between py-4">
             {/* Logo */}
             <Link

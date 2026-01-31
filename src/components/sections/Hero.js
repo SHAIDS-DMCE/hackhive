@@ -180,7 +180,7 @@ export default function Hero() {
 
       {/* Centered Content */}
       {startAnimations && (
-        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
+        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 sm:px-8 lg:px-12">
 
           {/* Title - HACKHIVE 2026 */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-bold tracking-tight leading-none text-center">

@@ -124,7 +124,7 @@ const ProblemStatements = () => {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 container mx-auto px-4 py-16">
+      <div className="relative z-10 container mx-auto px-6 sm:px-8 lg:px-12 py-16">
         {/* Bold Title Section */}
         <motion.div
           variants={titleVariants}
@@ -223,7 +223,7 @@ const ProblemStatements = () => {
                     },
                   }}
                 >
-                  <div className="container mx-auto px-4 py-10">
+                  <div className="container mx-auto px-6 sm:px-8 lg:px-12 py-10">
                     <div className="flex items-start justify-between gap-4 mb-8">
                       <div>
                         <h2
