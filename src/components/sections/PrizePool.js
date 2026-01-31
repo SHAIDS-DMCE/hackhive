@@ -17,7 +17,7 @@ const PrizePool = () => {
   const [expandedTier, setExpandedTier] = useState(null);
   const { theme } = useTheme();
 
-  // --- DATA FROM YOUR JSON FILE ---
+  // --- DATA ---
   const prizeTiers = [
     {
       id: "winner",
@@ -78,57 +78,53 @@ const PrizePool = () => {
   };
 
   return (
-    <div className={`hhv-about min-h-screen relative overflow-hidden font-sans transition-colors duration-500 ease-in-out ${theme === 'dark' ? 'dark' : ''}`}>
-      
+    <div className={`bg-background text-foreground min-h-screen relative overflow-hidden font-sans transition-colors duration-500 ease-in-out ${theme === 'dark' ? 'dark' : ''}`}>
+
       {/* Background Effects */}
       <div className="hhv-about__grain absolute inset-0 pointer-events-none" />
 
       <div className="relative z-10 container mx-auto px-4 py-20">
 
         {/* --- HEADER --- */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="text-center mb-20"
         >
           <div className="flex flex-col items-center justify-center gap-2 mb-6">
-            <div className="hhv-kicker tracking-widest hhv-font-body">
+            <div className="inline-flex items-center text-xs tracking-[0.22em] uppercase text-primary/75 font-body">
               <span></span>
             </div>
-            
-            {/* --- BOLD RED TITLE (Title Case) --- */}
-            <h2 
-              className="text-7xl md:text-9xl hhv-font-heading font-black tracking-tighter" 
-              style={{ 
-                color: '#e62429', 
-              }}
+
+            {/* --- TITLE --- */}
+            <h2
+              className="text-7xl md:text-9xl font-heading font-black tracking-tighter text-primary"
             >
               The Vault
             </h2>
 
           </div>
-          
-          <div className="w-full max-w-md mx-auto hhv-heroCard__divider mb-8"></div>
 
-          <motion.blockquote 
+          <div className="w-full max-w-md mx-auto h-px bg-gradient-to-r from-transparent via-primary/80 to-transparent opacity-80 mb-8"></div>
+
+          <motion.blockquote
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
-            className="text-xl md:text-2xl hhv-font-heading italic mb-4 font-medium tracking-wide"
-            style={{ color: 'var(--hhv-accent)' }}
+            className="text-xl md:text-2xl font-heading italic mb-4 font-medium tracking-wide text-primary"
           >
             "The perfect heist isn't about the money—it's about making history."
           </motion.blockquote>
 
-          <p className={`text-md md:text-lg hhv-font-body max-w-2xl mx-auto uppercase tracking-widest opacity-80`}>
+          <p className="text-md md:text-lg font-body max-w-2xl mx-auto uppercase tracking-widest opacity-80">
             Choose Your Target. Crack the Code. Win the Prize.
           </p>
         </motion.div>
 
         {/* --- CARDS GRID --- */}
         <LayoutGroup>
-          <motion.div 
+          <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
@@ -137,69 +133,61 @@ const PrizePool = () => {
             {prizeTiers.map((tier) => (
               <motion.div
                 key={tier.id}
-                layoutId={`card-${tier.id}`} 
+                layoutId={`card-${tier.id}`}
                 variants={cardVariants}
                 onClick={() => setExpandedTier(tier)}
-                whileHover={{ 
+                whileHover={{
                   y: -5,
-                  borderColor: "#c51b20",
-                  boxShadow: "0 10px 40px -10px rgba(197, 27, 32, 0.5)"
                 }}
-                transition={spring} 
-                className={`hhv-heroCard cursor-pointer flex flex-col justify-between ${tier.id === 'participation' ? 'lg:col-span-2' : ''}`}
+                transition={spring}
+                className={`border border-border rounded-2xl bg-card/70 backdrop-blur-md p-4 shadow-2xl cursor-pointer flex flex-col justify-between hover:border-primary/50 ${tier.id === 'participation' ? 'lg:col-span-2' : ''}`}
               >
                 <div className="relative z-10 flex flex-col h-full">
-                  
-                  {/* --- CARD HEADER (Standard Left Aligned) --- */}
+
+                  {/* --- CARD HEADER --- */}
                   <div className="flex items-start justify-between mb-6">
                     <div className="flex gap-4">
-                      <motion.div 
-                        layoutId={`icon-${tier.id}`} 
-                        className="w-16 h-16 min-w-[4rem] rounded-xl flex items-center justify-center text-3xl border"
-                        style={{ 
-                           backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                           borderColor: 'var(--hhv-border)'
-                        }}
+                      <motion.div
+                        layoutId={`icon-${tier.id}`}
+                        className="w-16 h-16 min-w-[4rem] rounded-xl flex items-center justify-center text-3xl border border-border bg-muted/20"
                       >
                         {tier.icon}
                       </motion.div>
-                      
+
                       <div>
-                        {/* --- UPDATED CARD TITLE FONT & COLOR --- */}
-                        <motion.h3 
-                          layoutId={`title-${tier.id}`} 
-                          className="text-3xl hhv-font-heading font-black uppercase leading-none mb-1 tracking-wide" 
-                          style={{ color: '#e62429' }} // Explicitly set to red
+                        <motion.h3
+                          layoutId={`title-${tier.id}`}
+                          className="text-3xl font-heading font-black uppercase leading-none mb-1 tracking-wide text-primary"
                         >
                           {tier.title}
                         </motion.h3>
-                        <motion.p 
+                        <motion.p
                           layoutId={`subtitle-${tier.id}`}
-                          className={`text-sm hhv-font-body opacity-80`}
+                          className="text-sm font-body opacity-80"
                         >
                           {tier.subtitle}
                         </motion.p>
                       </div>
                     </div>
 
-                    <div className="hhv-tag hhv-font-body tracking-wider">
+                    <div className="text-xs tracking-wider uppercase px-2 py-1 rounded-full border border-primary/50 text-primary font-body">
                       Active
                     </div>
                   </div>
 
-                  <p className={`hhv-font-body text-sm mb-8 line-clamp-2 h-10 opacity-70`}>
+                  <p className="font-body text-sm mb-8 line-clamp-2 h-10 opacity-70">
                     {tier.description}
                   </p>
 
-                  <div className="hhv-heroCard__divider mb-6"></div>
+                  <div className="h-px bg-gradient-to-r from-transparent via-primary/80 to-transparent opacity-80 mb-6"></div>
 
                   <div className="grid grid-cols-3 gap-2 text-center">
                     {tier.stats.map((stat, idx) => (
                       <div key={idx} className="flex flex-col items-center justify-center">
-                        <span className="hhv-label hhv-font-body tracking-widest">
+                        <span className="text-[11px] tracking-widest uppercase opacity-80 font-body">
                           {stat.label}
                         </span>
-                        <span className="hhv-heroCard__value hhv-font-heading" style={{ fontSize: '18px' }}>
+                        <span className="mt-1.5 tracking-[0.14em] font-extrabold text-lg font-heading">
                           {stat.value}
                         </span>
                       </div>
@@ -219,82 +207,75 @@ const PrizePool = () => {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   onClick={() => setExpandedTier(null)}
-                  className="absolute inset-0 backdrop-blur-md bg-black/60"
+                  className="absolute inset-0 backdrop-blur-md bg-muted/10 dark:bg-background/80"
                 />
-                
+
                 <motion.div
-                  layoutId={`card-${expandedTier.id}`} 
-                  transition={spring} 
-                  className="hhv-heroCard w-full max-w-3xl relative z-10 !bg-[var(--hhv-bg)]"
-                  style={{ border: '1px solid var(--hhv-accent)' }}
+                  layoutId={`card-${expandedTier.id}`}
+                  transition={spring}
+                  className="border border-primary rounded-2xl bg-card backdrop-blur-md p-4 shadow-2xl w-full max-w-3xl relative z-10"
                 >
                   <div className="p-4 md:p-8">
                     <div className="flex justify-between items-start mb-8">
                       <div className="flex gap-6 items-center">
-                         <motion.div 
-                            layoutId={`icon-${expandedTier.id}`}
-                            className="w-20 h-20 rounded-xl flex items-center justify-center text-4xl border"
-                            style={{ 
-                              backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                              borderColor: 'var(--hhv-border)'
-                            }}
-                         >
-                            {expandedTier.icon}
-                         </motion.div>
+                        <motion.div
+                          layoutId={`icon-${expandedTier.id}`}
+                          className="w-20 h-20 rounded-xl flex items-center justify-center text-4xl border border-border bg-muted/20"
+                        >
+                          {expandedTier.icon}
+                        </motion.div>
 
-                         <div>
-                            <motion.h2 
-                              layoutId={`title-${expandedTier.id}`}
-                              className="text-5xl md:text-7xl hhv-font-heading uppercase mb-2 tracking-wide"
-                              style={{ color: 'var(--hhv-text)' }}
-                            >
-                              {expandedTier.title}
-                            </motion.h2>
-                            <motion.p 
-                              layoutId={`subtitle-${expandedTier.id}`}
-                              className="text-xl hhv-font-heading font-bold tracking-wide" 
-                              style={{ color: 'var(--hhv-accent)' }}
-                            >
-                              Total Prize Pool: {expandedTier.amount}
-                            </motion.p>
-                         </div>
+                        <div>
+                          <motion.h2
+                            layoutId={`title-${expandedTier.id}`}
+                            className="text-5xl md:text-7xl font-heading uppercase mb-2 tracking-wide text-foreground"
+                          >
+                            {expandedTier.title}
+                          </motion.h2>
+                          <motion.p
+                            layoutId={`subtitle-${expandedTier.id}`}
+                            className="text-xl font-heading font-bold tracking-wide text-primary"
+                          >
+                            Total Prize Pool: {expandedTier.amount}
+                          </motion.p>
+                        </div>
                       </div>
 
-                      <button 
+                      <button
                         onClick={() => setExpandedTier(null)}
-                        className="hhv-micro hover:bg-red-500/20 transition-colors hhv-font-body tracking-widest"
+                        className="text-xs tracking-wider uppercase px-2 py-1 rounded border border-border bg-muted/50 font-body hover:bg-red-500/20 transition-colors"
                       >
                         CLOSE
                       </button>
                     </div>
 
-                    <div className="hhv-heroCard__divider mb-8"></div>
+                    <div className="h-px bg-gradient-to-r from-transparent via-primary/80 to-transparent opacity-80 mb-8"></div>
 
-                    <motion.div 
+                    <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.2, duration: 0.4 }}
                       className="grid md:grid-cols-2 gap-8"
                     >
                       <div>
-                        <h4 className="hhv-font-heading text-xl mb-4 uppercase tracking-wider" style={{ color: 'var(--hhv-accent)' }}>
+                        <h4 className="font-heading text-xl mb-4 uppercase tracking-wider text-primary">
                           Rewards Breakdown
                         </h4>
-                        <div className="hhv-pillrow">
+                        <div className="flex flex-wrap gap-2.5">
                           {expandedTier.rewards.map((reward, i) => (
-                            <span key={i} className="hhv-micro hhv-font-body tracking-wider">
+                            <span key={i} className="text-xs tracking-wider uppercase px-2 py-1 rounded border border-border bg-muted/50 font-body">
                               {reward}
                             </span>
                           ))}
                         </div>
                       </div>
-                      
-                      <div className="p-6 rounded-xl border border-[var(--hhv-border)] bg-[var(--hhv-surface)]">
-                        <h4 className="hhv-font-heading text-xl mb-4 uppercase tracking-wider" style={{ color: 'var(--hhv-text)' }}>
+
+                      <div className="p-6 rounded-xl border border-border bg-muted/50">
+                        <h4 className="font-heading text-xl mb-4 uppercase tracking-wider text-foreground">
                           Mission Brief
                         </h4>
-                        <p className="hhv-font-body leading-relaxed opacity-80">
-                          {expandedTier.description} This tier represents the pinnacle of achievement. 
+                        <p className="font-body leading-relaxed opacity-80">
+                          {expandedTier.description} This tier represents the pinnacle of achievement.
                           Only the boldest innovators will unlock this vault.
                         </p>
                       </div>

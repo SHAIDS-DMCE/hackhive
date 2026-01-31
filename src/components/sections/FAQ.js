@@ -38,7 +38,7 @@ function Reveal({ children, delayMs = 0, className = "" }) {
     <div
       ref={ref}
       style={{ transitionDelay: `${delayMs}ms` }}
-      className={`${visible ? "hhv-reveal is-visible" : "hhv-reveal"} ${className}`}
+      className={`transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} ${className}`}
     >
       {children}
     </div>
@@ -55,92 +55,58 @@ export default function FAQ() {
   return (
     <section
       id="faq"
-      className="hhv-about relative w-full overflow-hidden"
+      className="bg-background text-foreground relative w-full overflow-hidden"
       aria-label="FAQ HackHive"
     >
-      {/* <div className="hhv-about__bg absolute inset-0" aria-hidden="true" /> */}
-      <div className="hhv-bgcode absolute inset-0" aria-hidden="true">
-        {/* <div className="hhv-bgcode__scroll">
-          {Array.from({ length: 34 }).map((_, i) => (
-            <div key={i} className="hhv-bgcode__line">
-              {i % 4 === 0
-                ? "ssh://hive-node  | auth=ok | route=shadow"
-                : i % 4 === 1
-                  ? "[OP] sync --team=4 --mode=stealth"
-                  : i % 4 === 2
-                    ? "commit: clean  // build: armed  // exit: planned"
-                    : "01001000 01100001 01100011 01101000"}
-            </div>
-          ))}
-        </div> */}
-      </div>
+      {/* Background effects - keeping grain for visual effect */}
       <div className="hhv-about__grain absolute inset-0" aria-hidden="true" />
+
+      {/* Laser lines */}
       <div
-        className="hhv-about__laserline hhv-about__laserline--a"
+        className="absolute left-0 right-0 top-[28%] h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-60"
         aria-hidden="true"
       />
       <div
-        className="hhv-about__laserline hhv-about__laserline--b"
+        className="absolute left-0 right-0 top-[72%] h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-40"
         aria-hidden="true"
       />
 
       <div className="relative mx-auto w-full max-w-6xl px-6 py-14 sm:px-8 sm:py-20">
 
         <Reveal>
-          <div className="hhv-sectionHead mb-6">
-            <div className="hhv-kicker hhv-font-mono">INTEL</div>
-            <h2 className="hhv-font-title hhv-sectionHead__title">
+          <div className="mb-6">
+            <div className="inline-flex items-center text-xs tracking-[0.22em] uppercase text-primary/75 font-mono">INTEL</div>
+            <h2 className="font-heading text-2xl sm:text-3xl font-extrabold tracking-[0.14em] uppercase mt-2.5">
               FAQ – FREQUENTLY ASKED QUESTIONS
             </h2>
-            <div className="hhv-divider" aria-hidden="true" />
+            <div className="h-px mt-3.5 bg-gradient-to-r from-transparent via-primary/80 to-transparent max-w-md opacity-80" aria-hidden="true" />
           </div>
         </Reveal>
 
-        {/* <Reveal delayMs={120}>
-          <div className="hhv-panel mt-6">
-            <div className="hhv-label hhv-font-mono">MISSION BRIEFING</div>
-            <p className="hhv-font-body mt-3 leading-7">
-              Below are answers to common questions about the HackHive
-              operation. Review them carefully before you begin your mission.
-            </p>
-            <div className="mt-5 grid grid-cols-2 gap-4">
-              <div className="hhv-stat">
-                <div className="hhv-font-mono hhv-stat__k">STATUS</div>
-                <div className="hhv-font-title hhv-stat__v">ACTIVE</div>
-              </div>
-              <div className="hhv-stat">
-                <div className="hhv-font-mono hhv-stat__k">CLEARANCE</div>
-                <div className="hhv-font-title hhv-stat__v">LEVEL 3</div>
-              </div>
-            </div>
-          </div>
-        </Reveal> */}
-
-        <div className="hhv-faq mt-6 space-y-3">
+        <div className="mt-6 space-y-3">
           {faqData.map((item, idx) => (
             <Reveal key={idx} delayMs={idx * 60 + 240}>
               <div
-                className={`hhv-faqItem ${openIndex === idx ? "is-open" : ""}`}
+                className={`border border-border rounded-2xl bg-card/70 backdrop-blur-md overflow-hidden transition-all duration-300 ${openIndex === idx ? "border-primary/50 shadow-lg shadow-primary/10" : "hover:border-primary/30"}`}
                 onClick={() => toggleFAQ(idx)}
               >
                 <button
                   type="button"
-                  className="hhv-faqQuestion hhv-font-title"
+                  className="w-full flex items-center justify-between p-4 sm:p-5 text-left font-heading font-bold tracking-wide text-foreground"
                   aria-expanded={openIndex === idx}
                   aria-controls={`faq-answer-${idx}`}
                 >
                   <span>{item.q}</span>
-                  <span className="hhv-faqIcon" aria-hidden="true">
-                    <span className="hhv-faqIcon__line" />
-                    <span className="hhv-faqIcon__line" />
+                  <span className="relative w-5 h-5 ml-4 flex-shrink-0" aria-hidden="true">
+                    <span className={`absolute top-1/2 left-0 w-full h-0.5 bg-primary rounded transition-transform duration-300 ${openIndex === idx ? "rotate-0" : ""}`} style={{ transform: 'translateY(-50%)' }} />
+                    <span className={`absolute top-1/2 left-0 w-full h-0.5 bg-primary rounded transition-transform duration-300 ${openIndex === idx ? "rotate-0 opacity-0" : "rotate-90"}`} style={{ transform: 'translateY(-50%)' }} />
                   </span>
                 </button>
                 <div
                   id={`faq-answer-${idx}`}
-                  className="hhv-faqAnswer"
-                  hidden={openIndex !== idx}
+                  className={`overflow-hidden transition-all duration-300 ${openIndex === idx ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}
                 >
-                  <p className="hhv-font-body">{item.a}</p>
+                  <p className="px-4 sm:px-5 pb-4 sm:pb-5 font-body text-foreground/80 leading-relaxed">{item.a}</p>
                 </div>
               </div>
             </Reveal>
@@ -148,7 +114,7 @@ export default function FAQ() {
         </div>
 
         <div className="mt-14 flex justify-end">
-          <span className="hhv-micro">CLASSIFIED</span>
+          <span className="text-xs tracking-wider uppercase px-2 py-1 rounded border border-border bg-muted/50 font-mono">CLASSIFIED</span>
         </div>
       </div>
     </section>

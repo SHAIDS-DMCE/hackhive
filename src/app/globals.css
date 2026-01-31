@@ -2,57 +2,63 @@
 
 /* --- 1. CORE THEME VARIABLES --- */
 :root {
-  /* Primary Colors */
-  --background: #fceded;
-  --foreground: #586068;
-  --primary: #da2f35;
-  --primary-foreground: #fceded;
+  /* Primary Colors - Money Heist Light Mode */
+  /* Warm paper/document aesthetic like heist planning papers */
+  --background: #f8f5f0;
+  --foreground: #2d2926;
+  --primary: #c41e24;
+  --primary-foreground: #fff;
 
-  /* Secondary/Muted */
-  --muted: #f0f0f0;
-  --muted-foreground: #586068;
+  /* Secondary/Muted - Aged paper tones */
+  --muted: #ebe6df;
+  --muted-foreground: #5c5652;
 
-  /* Accent */
-  --accent: #f5f5f5;
-  --accent-foreground: #586068;
+  /* Accent - Slightly warmer highlights */
+  --accent: #e8e2d9;
+  --accent-foreground: #2d2926;
 
-  /* Card/Surface */
+  /* Card/Surface - Clean paper white */
   --card: #ffffff;
-  --card-foreground: #586068;
+  --card-foreground: #2d2926;
 
   /* Border/Ring */
-  --border: rgba(88, 96, 104, 0.2);
-  --ring: #da2f35;
+  --border: rgba(45, 41, 38, 0.15);
+  --ring: #c41e24;
 
   /* Destructive */
-  --destructive: #da2f35;
-  --destructive-foreground: #fceded;
+  --destructive: #c41e24;
+  --destructive-foreground: #fff;
 
   /* Radius */
   --radius: 0.5rem;
 }
 
-/* Dark Theme */
+/* Dark Theme - Money Heist Vault/Bunker Aesthetic */
 .dark {
-  --background: #1b1718;
-  --foreground: #f2f3f4;
-  --primary: #c4161c;
-  --primary-foreground: #f2f3f4;
+  /* Deep brownish-black like the vault interior */
+  --background: #151112;
+  --foreground: #ede9e3;
+  --primary: #e62429;
+  --primary-foreground: #151112;
 
-  --muted: #3a3535;
-  --muted-foreground: rgba(242, 243, 244, 0.7);
+  /* Muted - Dark charcoal with warm undertones */
+  --muted: #2a2425;
+  --muted-foreground: rgba(237, 233, 227, 0.75);
 
-  --accent: #3a3535;
-  --accent-foreground: #f2f3f4;
+  /* Accent */
+  --accent: #2a2425;
+  --accent-foreground: #ede9e3;
 
-  --card: #252020;
-  --card-foreground: #f2f3f4;
+  /* Card - Slightly lighter than background */
+  --card: #1e1a1b;
+  --card-foreground: #ede9e3;
 
-  --border: rgba(242, 243, 244, 0.1);
-  --ring: #c4161c;
+  /* Border - Subtle warm gray */
+  --border: rgba(237, 233, 227, 0.12);
+  --ring: #e62429;
 
-  --destructive: #c4161c;
-  --destructive-foreground: #f2f3f4;
+  --destructive: #e62429;
+  --destructive-foreground: #151112;
 }
 
 /* --- 2. TAILWIND CONFIGURATION --- */
@@ -229,36 +235,41 @@ samp,
 
 /* Scroll Animation */
 @keyframes scroll-code {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-50%); }
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-50%);
+  }
 }
 
 .animate-scroll-code {
   animation: scroll-code 60s linear infinite;
 }
 
-/* HHV Base Variables */
+/* HHV Base Variables - Updated to match Money Heist theme */
 .hhv-about {
-  --hhv-dark-bg: #1b1718;
-  --hhv-dark-accent: #c4161c;
-  --hhv-dark-text: #f2f3f4;
-  --hhv-light-bg: #fceded;
-  --hhv-light-accent: #da2f35;
-  --hhv-light-text: #586068;
+  --hhv-dark-bg: #151112;
+  --hhv-dark-accent: #e62429;
+  --hhv-dark-text: #ede9e3;
+  --hhv-light-bg: #f8f5f0;
+  --hhv-light-accent: #c41e24;
+  --hhv-light-text: #2d2926;
 
   --hhv-bg: var(--hhv-light-bg);
   --hhv-accent: var(--hhv-light-accent);
   --hhv-text: var(--hhv-light-text);
   --hhv-surface: rgba(255, 255, 255, 0.65);
-  --hhv-border: rgba(88, 96, 104, 0.28);
+  --hhv-border: rgba(45, 41, 38, 0.2);
 }
 
 .dark .hhv-about {
   --hhv-bg: var(--hhv-dark-bg);
   --hhv-accent: var(--hhv-dark-accent);
   --hhv-text: var(--hhv-dark-text);
-  --hhv-surface: rgba(0, 0, 0, 0.25);
-  --hhv-border: rgba(242, 243, 244, 0.18);
+  --hhv-surface: rgba(0, 0, 0, 0.35);
+  --hhv-border: rgba(237, 233, 227, 0.15);
 }
 
 .hhv-about {
@@ -1450,19 +1461,22 @@ samp,
 }
 
 /* Timeline phase card hover effects */
-.timeline-phase > div {
+.timeline-phase>div {
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
-.timeline-phase > div:hover {
+.timeline-phase>div:hover {
   transform: translateY(-4px);
 }
 
 /* Timeline progress dot animation */
 @keyframes timelinePulse {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 0 0 rgba(218, 47, 53, 0.4);
   }
+
   50% {
     box-shadow: 0 0 0 8px rgba(218, 47, 53, 0);
   }

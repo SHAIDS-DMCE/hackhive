@@ -101,14 +101,14 @@ function StepCard({ num, title, description, delay }) {
     const handleEnter = () => {
       gsap.to(card, {
         scale: 1.02,
-        borderColor: "rgba(218, 47, 53, 0.5)",
+        borderColor: "var(--primary)",
         duration: 0.3,
       });
     };
     const handleLeave = () => {
       gsap.to(card, {
         scale: 1,
-        borderColor: "rgba(255, 255, 255, 0.1)",
+        borderColor: "var(--border)",
         duration: 0.3,
       });
     };
@@ -125,7 +125,7 @@ function StepCard({ num, title, description, delay }) {
   return (
     <div
       ref={cardRef}
-      className="flex gap-4 p-5 bg-white/[0.02] dark:bg-white/[0.02] border border-foreground/10 rounded-lg transition-colors"
+      className="flex gap-4 p-5 border border-border rounded-2xl bg-card/70 backdrop-blur-md shadow-lg transition-colors"
     >
       <div className="text-2xl font-bold text-primary font-mono">{num}</div>
       <div>
@@ -167,7 +167,7 @@ function FeatureCard({ icon, title, description, delay }) {
   return (
     <div
       ref={cardRef}
-      className="p-5 bg-white/[0.02] dark:bg-white/[0.02] border border-foreground/10 rounded-lg hover:border-primary/30 hover:-translate-y-1 transition-all duration-300"
+      className="p-5 border border-border rounded-2xl bg-card/70 backdrop-blur-md shadow-lg hover:border-primary/30 hover:-translate-y-1 transition-all duration-300"
     >
       <div className="flex items-center gap-3 mb-3">
         <div className="w-6 h-6 border-2 border-primary rounded" />
@@ -274,27 +274,27 @@ export default function About() {
       duration: 3,
       ease: "power2.inOut",
     })
-    .to(svgRef.current, {
-      scale: 0.95,
-      rotation: -3,
-      filter: "drop-shadow(0 0 4px rgba(196, 22, 28, 0.4))",
-      duration: 2.5,
-      ease: "power2.inOut",
-    })
-    .to(svgRef.current, {
-      scale: 1.05,
-      rotation: 2,
-      filter: "drop-shadow(0 0 12px rgba(196, 22, 28, 1))",
-      duration: 2,
-      ease: "sine.inOut",
-    })
-    .to(svgRef.current, {
-      scale: 1,
-      rotation: 0,
-      filter: "drop-shadow(0 0 2px rgba(196, 22, 28, 0.3))",
-      duration: 2,
-      ease: "power2.inOut",
-    });
+      .to(svgRef.current, {
+        scale: 0.95,
+        rotation: -3,
+        filter: "drop-shadow(0 0 4px rgba(196, 22, 28, 0.4))",
+        duration: 2.5,
+        ease: "power2.inOut",
+      })
+      .to(svgRef.current, {
+        scale: 1.05,
+        rotation: 2,
+        filter: "drop-shadow(0 0 12px rgba(196, 22, 28, 1))",
+        duration: 2,
+        ease: "sine.inOut",
+      })
+      .to(svgRef.current, {
+        scale: 1,
+        rotation: 0,
+        filter: "drop-shadow(0 0 2px rgba(196, 22, 28, 0.3))",
+        duration: 2,
+        ease: "power2.inOut",
+      });
 
     return () => tl.kill();
   }, []);
@@ -403,55 +403,55 @@ export default function About() {
             </div>
           </div> */}
           <div className="flex justify-center lg:justify-end">
-            <div className="bg-white/[0.02] dark:bg-white/[0.03] border border-foreground/10 rounded-xl p-6 min-w-[300px] min-h-[400px] flex flex-col">
+            <div className="border border-border rounded-2xl p-4 bg-card/70 backdrop-blur-md shadow-lg min-w-[300px] min-h-[400px] flex flex-col">
               <div className="text-[10px] font-mono tracking-wider opacity-60 mb-4">
                 ⚡ MISSION TIMELINE
               </div>
-              
+
               <div className="space-y-4 flex-1 flex flex-col justify-between">
                 <div className="relative pl-3">
                   <div className="absolute left-0 top-2 w-1 h-1 bg-primary/60"></div>
                   <div className="text-xs font-mono text-foreground">08:00 AM</div>
                   <div className="text-sm font-bold uppercase tracking-wide leading-relaxed text-primary">INFILTRATION BEGINS</div>
                 </div>
-                
+
                 <div className="relative pl-3">
                   <div className="absolute left-0 top-2 w-1 h-1 bg-primary/60"></div>
                   <div className="text-xs font-mono text-foreground">08:30 AM – 12:00 PM</div>
                   <div className="text-sm font-bold uppercase tracking-wide leading-relaxed text-primary">CODE BREACH PHASE I</div>
                 </div>
-                
+
                 <div className="relative pl-3">
                   <div className="absolute left-0 top-2 w-1 h-1 bg-primary/60"></div>
                   <div className="text-xs font-mono text-foreground">12:00 PM – 01:00 PM</div>
                   <div className="text-sm font-bold uppercase tracking-wide leading-relaxed text-primary">THE PROFESSOR'S BRIEFING</div>
                 </div>
-                
+
                 <div className="relative pl-3">
                   <div className="absolute left-0 top-2 w-1 h-1 bg-primary/60"></div>
                   <div className="text-xs font-mono text-foreground">01:00 PM – 02:00 PM</div>
                   <div className="text-sm font-bold uppercase tracking-wide leading-relaxed text-primary">SUPPLY DROP</div>
                 </div>
-                
+
                 <div className="relative pl-3">
                   <div className="absolute left-0 top-2 w-1 h-1 bg-primary/60"></div>
                   <div className="text-xs font-mono text-foreground">02:00 PM – 06:30 PM</div>
                   <div className="text-sm font-bold uppercase tracking-wide leading-relaxed text-primary">CODE BREACH PHASE II</div>
                 </div>
-                
+
                 <div className="relative pl-3">
                   <div className="absolute left-0 top-2 w-1 h-1 bg-primary/60"></div>
                   <div className="text-xs font-mono text-foreground">06:30 PM – 07:30 PM</div>
                   <div className="text-sm font-bold uppercase tracking-wide leading-relaxed text-primary">EXTRACTION PROTOCOL</div>
                 </div>
-                
+
                 <div className="relative pl-3">
                   <div className="absolute left-0 top-2 w-1 h-1 bg-green-500"></div>
                   <div className="text-xs font-mono text-foreground">07:30 PM – 08:00 PM</div>
                   <div className="text-sm font-bold uppercase tracking-wide leading-relaxed text-green-500">VAULT UNLOCKED</div>
                 </div>
               </div>
-              
+
               <div className="mt-4 p-3 bg-gradient-to-r from-primary/10 to-green-500/10 border border-primary/20 rounded">
                 <div className="flex items-center justify-center gap-2">
                   <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
@@ -478,7 +478,7 @@ export default function About() {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <AnimatedSection className="lg:col-span-2" delay={0.1}>
-              <div className="bg-white/[0.02] border border-foreground/10 rounded-lg p-6 h-full">
+              <div className="bg-muted/50 border border-border rounded-lg p-6 h-full">
                 <div className="text-[10px] font-mono tracking-wider opacity-60 mb-3">
                   OVERVIEW
                 </div>
@@ -517,7 +517,7 @@ export default function About() {
             </AnimatedSection>
 
             <AnimatedSection delay={0.2}>
-              <div className="bg-white/[0.02] border border-foreground/10 rounded-lg p-6 h-full">
+              <div className="bg-muted/50 border border-border rounded-lg p-6 h-full">
                 <div className="text-[10px] font-mono tracking-wider opacity-60 mb-4">
                   MISSION STATUS
                 </div>
@@ -559,7 +559,7 @@ export default function About() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <AnimatedSection delay={0.1}>
-              <div className="bg-white/[0.02] border border-foreground/10 rounded-lg p-6 h-full">
+              <div className="bg-muted/50 border border-border rounded-lg p-6 h-full">
                 <div className="text-[10px] font-mono tracking-wider opacity-60 mb-3">
                   MISSION
                 </div>
@@ -572,7 +572,7 @@ export default function About() {
             </AnimatedSection>
 
             <AnimatedSection delay={0.15}>
-              <div className="bg-white/[0.02] border border-foreground/10 rounded-lg p-6 h-full">
+              <div className="bg-muted/50 border border-border rounded-lg p-6 h-full">
                 <div className="text-[10px] font-mono tracking-wider opacity-60 mb-3">
                   VISION
                 </div>
