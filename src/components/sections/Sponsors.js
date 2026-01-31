@@ -49,15 +49,12 @@ const Sponsors = () => {
         >
           {/* --- TITLE LAYOUT --- */}
           <div className="flex flex-col items-center justify-center gap-2 mb-6">
-            <div className="hhv-kicker tracking-widest hhv-font-body">
-              <span>HACKHIVE 2026</span>
-            </div>
 
             {/* --- MAIN PAGE TITLE --- */}
-            <h2 
-              className="text-7xl md:text-9xl hhv-font-heading font-black tracking-tighter" 
-              style={{ 
-                color: '#e62429', 
+            <h2
+              className="text-7xl md:text-9xl hhv-font-heading font-black tracking-tighter"
+              style={{
+                color: '#e62429',
               }}
             >
               Our Sponsors
@@ -92,10 +89,10 @@ const Sponsors = () => {
                 variants={cardVariants}
                 onClick={() => setExpandedTier(sponsor)}
                 transition={spring}
-                
+
                 // HOVER EFFECT: Red Border & Glow applied here via Global CSS
-                whileHover={{ 
-                  scale: 1.02, 
+                whileHover={{
+                  scale: 1.02,
                   y: -5,
                   borderColor: "#c51b20",
                   boxShadow: "0 10px 40px -10px rgba(197, 27, 32, 0.5)"
@@ -107,7 +104,7 @@ const Sponsors = () => {
               >
                 {/* Content */}
                 <div className="relative z-10">
-                  
+
                   {/* --- UPDATED CARD TITLE (Bold Red Style) --- */}
                   <motion.h3
                     layoutId={`title-${sponsor.id}`}
@@ -157,7 +154,7 @@ const Sponsors = () => {
                           <motion.h2
                             layoutId={`title-${expandedTier.id}`}
                             className="text-4xl md:text-6xl hhv-font-heading font-black uppercase mb-2 tracking-wide"
-                            style={{ color: "#e62429" }} 
+                            style={{ color: "#e62429" }}
                           >
                             {expandedTier.title}
                           </motion.h2>
