@@ -305,7 +305,7 @@ export default function Hero() {
                 backgroundColor: '#3769bf',
               }}
             >
-              Unstop
+              Register with Unstop
             </a>
           </motion.div>
 

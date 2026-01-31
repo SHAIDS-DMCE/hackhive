@@ -96,8 +96,11 @@ export default function Navbar() {
                 variant="default"
                 size="default"
                 className="hidden sm:inline-flex px-5"
+                style={{
+                  backgroundColor: '#3769bf',
+                }}
               >
-                Register
+                Unstop
               </ButtonLink>
 
               {/* Mobile Register Button (icon only) */}
@@ -107,7 +110,10 @@ export default function Navbar() {
                 rel="noopener noreferrer"
                 variant="default"
                 size="icon"
-                className="sm:hidden rounded-full"
+                style={{
+                  backgroundColor: '#3769bf',
+                }}
+                className="sm:hidden rounded-full "
               >
                 <OpenInNewIcon />
               </ButtonLink>
