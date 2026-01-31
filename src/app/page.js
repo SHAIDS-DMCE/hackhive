@@ -10,26 +10,23 @@ import Sponsors from "@/components/sections/Sponsors";
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Hero Section with 3D */}
       <section id="hero">
         <Hero />
       </section>
-
-      {/* About Section */}
       <section id="about">
         <About />
       </section>
-
-      {/* Timeline Section */}
+      <section id="gallery">
+        <Gallery />
+      </section>
+      <section id="problem-statements">
+        <ProblemStatements />
+      </section>
       <section id="timeline">
         <Timeline />
       </section>
-      <section id="pricepool">
+      <section id="prizepool">
         <PrizePool />
-      </section>
-      {/* Problem Statements Section */}
-      <section id="problem-statements">
-        <ProblemStatements />
       </section>
       <section id="gallery">
         <Gallery />
@@ -37,15 +34,11 @@ export default function Home() {
       <section id="sponsors">
         <Sponsors />
       </section>
-
-      {/* FAQ Section */}
-      <section id="faq">
-        <FAQ />
-      </section>
-
-      {/* Contact Section */}
       <section id="contact">
         <Contact />
+      </section>
+      <section id="faq">
+        <FAQ />
       </section>
     </div>
   );
