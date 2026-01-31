@@ -6,7 +6,6 @@ import AnimatedLetters from '@/components/animations/AnimatedLetters';
 import FallingArtifacts from '@/components/effects/FallingArtifacts';
 import { useLoading } from '@/context/LoadingContext';
 
-// CHANGE THIS DATE - Countdown target date
 const TARGET_DATE = new Date('2026-02-23T11:00:00');
 
 export default function Hero() {
@@ -53,7 +52,7 @@ export default function Hero() {
     if (!startAnimations || !taglineRef.current) return;
 
     const tagline = taglineRef.current;
-    const targetText = 'Join the resistance, the ultimate heist';
+    const targetText = 'Join the resistance, the ultimate heist...';
     const scrambleChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 
     let scrambleInterval;
@@ -204,7 +203,7 @@ export default function Hero() {
             className="mt-4 sm:mt-6 md:mt-8 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-foreground/70 text-center sm:max-w-sm md:max-w-md lg:max-w-lg font-body opacity-0"
             style={{ minHeight: '1.5em' }}
           >
-            Join the resistance, the ultimate heist
+            Join the resistance, the ultimate heist...
           </p>
 
           {/* Huge Glowing Timer */}
