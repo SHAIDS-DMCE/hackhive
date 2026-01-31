@@ -45,59 +45,6 @@ function Reveal({ children, delayMs = 0, className = "" }) {
   );
 }
 
-function ThemeToggle() {
-  const [mode, setMode] = useState("dark");
-
-  useEffect(() => {
-    try {
-      const stored = window.localStorage.getItem("hhv-theme");
-      if (stored === "dark" || stored === "light") {
-        setMode(stored);
-        document.documentElement.classList.toggle("dark", stored === "dark");
-        return;
-      }
-    } catch {
-      // ignore
-    }
-
-    const prefersDark =
-      typeof window !== "undefined" &&
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-    const initial = prefersDark ? "dark" : "light";
-    setMode(initial);
-    document.documentElement.classList.toggle("dark", initial === "dark");
-  }, []);
-
-  const isDark = mode === "dark";
-
-  const toggle = () => {
-    const next = isDark ? "light" : "dark";
-    setMode(next);
-    document.documentElement.classList.toggle("dark", next === "dark");
-    try {
-      window.localStorage.setItem("hhv-theme", next);
-    } catch {
-      // ignore
-    }
-  };
-
-  return (
-    <button
-      type="button"
-      className="hhv-toggle hhv-font-mono"
-      aria-label="Toggle theme"
-      onClick={toggle}
-    >
-      <span className="hhv-toggle__dot" aria-hidden="true" />
-      <span className="hhv-toggle__text">
-        MODE: {isDark ? "DARK" : "LIGHT"}
-      </span>
-    </button>
-  );
-}
-
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState(null);
 
@@ -138,10 +85,6 @@ export default function FAQ() {
       />
 
       <div className="relative mx-auto w-full max-w-6xl px-6 py-14 sm:px-8 sm:py-20">
-        <div className="hhv-topbar">
-          <span className="hhv-micro">TOP SECRET</span>
-          <ThemeToggle />
-        </div>
 
         <Reveal>
           <div className="hhv-sectionHead mb-6">
