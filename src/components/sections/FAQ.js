@@ -77,7 +77,7 @@ export default function FAQ() {
           <div className="mb-6">
             <div className="inline-flex items-center text-xs tracking-[0.22em] uppercase text-primary/75 font-mono">INTEL</div>
             <h2 className="font-heading text-2xl sm:text-3xl font-extrabold tracking-[0.14em] uppercase mt-2.5">
-              FAQ – FREQUENTLY ASKED QUESTIONS
+              FREQUENTLY ASKED QUESTIONS
             </h2>
             <div className="h-px mt-3.5 bg-gradient-to-r from-transparent via-primary/80 to-transparent max-w-md opacity-80" aria-hidden="true" />
           </div>
