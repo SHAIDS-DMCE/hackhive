@@ -142,16 +142,16 @@ export default function Footer() {
                   <span>Divesh Dalvi: </span>+91 70577 20106
                 </a>
                 <a
-                  href="tel:+917666812655"
-                  className="text-foreground/70 hover:text-primary transition-colors text-sm"
-                >
-                  <span>Ajay Jadhav: </span>+91 76668 12655
-                </a>
-                <a
                   href="tel:+919326141910"
                   className="text-foreground/70 hover:text-primary transition-colors text-sm"
                 >
-                  <span>Aayush Thoke: </span>+91 93261 41910
+                  <span>Ajay Jadhav: </span>+91 93261 41910
+                </a>
+                <a
+                  href="tel:+917666812655"
+                  className="text-foreground/70 hover:text-primary transition-colors text-sm"
+                >
+                  <span>Aayush Thoke: </span>+91 76668 12655
                 </a>
               </div>
             </div>
