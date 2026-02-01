@@ -23,17 +23,17 @@ export default function Gallery() {
   const col1Y = useTransform(
     scrollYProgress,
     [0, 1],
-    reduceMotion ? [0, 0] : [-100, 100],
+    reduceMotion ? [0, 0] : [-200, 200],
   );
   const col2Y = useTransform(
     scrollYProgress,
     [0, 1],
-    reduceMotion ? [0, 0] : [-150, 150],
+    reduceMotion ? [0, 0] : [-300, 300],
   );
   const col3Y = useTransform(
     scrollYProgress,
     [0, 1],
-    reduceMotion ? [0, 0] : [-100, 100],
+    reduceMotion ? [0, 0] : [-200, 200],
   );
 
   const images = galleryData;
@@ -98,17 +98,17 @@ export default function Gallery() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full py-12 sm:py-16 md:py-24 lg:py-32 overflow-hidden"
+      className="relative w-full py-16 sm:py-20 md:py-24 lg:py-32"
       style={{ backgroundColor: colors.primary }}
     >
       <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
-        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-14 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-14 items-center lg:min-h-screen">
           <motion.div
             variants={titleVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
-            className="flex flex-col justify-center order-1 lg:order-1"
+            className="flex flex-col justify-center"
           >
             <div className="max-w-2xl">
               <h1
@@ -121,7 +121,7 @@ export default function Gallery() {
                 HACKHIVE 2025
               </h1>
               <p
-                className="mt-3 sm:mt-4 text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed"
+                className="mt-2 sm:mt-3 md:mt-4 text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed"
                 style={{
                   color: colors.text,
                   fontFamily: "var(--font-body)",
@@ -132,10 +132,10 @@ export default function Gallery() {
             </div>
           </motion.div>
 
-          <div className="grid grid-cols-3 gap-1.5 sm:gap-2 md:gap-3 lg:gap-4 xl:gap-5 w-full overflow-hidden">
+          <div className="grid grid-cols-3 gap-2 sm:gap-3 md:gap-4 relative h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] mt-4 lg:-mt-16">
             <motion.div
               style={{ y: col1Y }}
-              className="flex flex-col gap-1.5 sm:gap-2 md:gap-3 lg:gap-4 xl:gap-5"
+              className="flex flex-col gap-2 sm:gap-3 md:gap-4 pt-1 sm:pt-2"
             >
               {columns[0].map((img, index) => (
                 <motion.div
@@ -146,7 +146,7 @@ export default function Gallery() {
                   viewport={{ once: true, amount: 0.3 }}
                   whileHover="hover"
                   transition={{ delay: index * 0.1 }}
-                  className="relative h-[60px] sm:h-[75px] md:h-[100px] lg:h-[130px] xl:h-[160px] rounded-md sm:rounded-lg md:rounded-xl lg:rounded-2xl overflow-hidden border border-opacity-70 sm:border-2"
+                  className="relative h-[75px] sm:h-[90px] md:h-[105px] lg:h-[120px] xl:h-[140px] rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden border sm:border-2"
                   style={{
                     borderColor: `${colors.accent}70`,
                     backgroundColor: `${colors.accent}12`,
@@ -174,7 +174,7 @@ export default function Gallery() {
 
             <motion.div
               style={{ y: col2Y }}
-              className="flex flex-col gap-1.5 sm:gap-2 md:gap-3 lg:gap-4 xl:gap-5"
+              className="flex flex-col gap-2 sm:gap-3 md:gap-4 pt-2 sm:pt-3 md:pt-4"
             >
               {columns[1].map((img, index) => (
                 <motion.div
@@ -185,7 +185,7 @@ export default function Gallery() {
                   viewport={{ once: true, amount: 0.3 }}
                   whileHover="hover"
                   transition={{ delay: index * 0.1 + 0.3 }}
-                  className="relative h-[60px] sm:h-[75px] md:h-[100px] lg:h-[130px] xl:h-[160px] rounded-md sm:rounded-lg md:rounded-xl lg:rounded-2xl overflow-hidden border border-opacity-70 sm:border-2"
+                  className="relative h-[75px] sm:h-[90px] md:h-[105px] lg:h-[120px] xl:h-[140px] rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden border sm:border-2"
                   style={{
                     borderColor: `${colors.accent}70`,
                     backgroundColor: `${colors.accent}12`,
@@ -213,7 +213,7 @@ export default function Gallery() {
 
             <motion.div
               style={{ y: col3Y }}
-              className="flex flex-col gap-1.5 sm:gap-2 md:gap-3 lg:gap-4 xl:gap-5"
+              className="flex flex-col gap-2 sm:gap-3 md:gap-4 pt-1 sm:pt-2"
             >
               {columns[2].map((img, index) => (
                 <motion.div
@@ -224,7 +224,7 @@ export default function Gallery() {
                   viewport={{ once: true, amount: 0.3 }}
                   whileHover="hover"
                   transition={{ delay: index * 0.1 + 0.6 }}
-                  className="relative h-[60px] sm:h-[75px] md:h-[100px] lg:h-[130px] xl:h-[160px] rounded-md sm:rounded-lg md:rounded-xl lg:rounded-2xl overflow-hidden border border-opacity-70 sm:border-2"
+                  className="relative h-[75px] sm:h-[90px] md:h-[105px] lg:h-[120px] xl:h-[140px] rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden border sm:border-2"
                   style={{
                     borderColor: `${colors.accent}70`,
                     backgroundColor: `${colors.accent}12`,

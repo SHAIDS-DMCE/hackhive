@@ -128,24 +128,23 @@ export default function Contact() {
   ];
 
   return (
-    <section className="relative min-h-screen py-20 px-6 sm:px-8 lg:px-12 bg-background text-foreground overflow-hidden">
+    <section className="relative py-10 sm:py-12 md:py-16 lg:py-20 px-4 sm:px-6 md:px-8 lg:px-12 bg-background text-foreground overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-16 xl:gap-24"
         >
           {/* Left Column - Header & Context */}
-          <div className="flex flex-col justify-center h-full space-y-12">
-            <motion.div variants={itemVariants} className="space-y-6">
-              <h1 className="text-6xl sm:text-7xl md:text-8xl font-heading font-black tracking-tight text-primary">
+          <div className="flex flex-col justify-center h-full space-y-6 sm:space-y-8 md:space-y-10 lg:space-y-12">
+            <motion.div variants={itemVariants} className="space-y-3 sm:space-y-4 md:space-y-5 lg:space-y-6">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-heading font-black tracking-tight text-primary">
                 Contact us
               </h1>
-              <p className="text-xl sm:text-2xl text-muted-foreground font-body max-w-md leading-relaxed">
-                Join the resistance. Get in touch with us for any inquiries,
-                questions, or alliance proposals.
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-muted-foreground font-body max-w-md leading-relaxed">
+                Join the resistance. Get in touch with us for any inquiries, questions, or alliance proposals.
               </p>
             </motion.div>
 
@@ -155,19 +154,19 @@ export default function Contact() {
           </div>
 
           {/* Right Column - Grid Info & Map */}
-          <div className="space-y-16">
+          <div className="space-y-8 sm:space-y-10 md:space-y-12 lg:space-y-16">
             {/* Info Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 sm:gap-x-6 md:gap-x-8 gap-y-6 sm:gap-y-8 md:gap-y-10 lg:gap-y-12">
               {contactInfo.map((info, idx) => (
                 <motion.div
                   key={idx}
                   variants={itemVariants}
-                  className="space-y-3"
+                  className="space-y-2 sm:space-y-3"
                 >
-                  <h3 className="text-sm font-mono tracking-widest uppercase text-muted-foreground/80">
+                  <h3 className="text-[10px] sm:text-xs md:text-sm font-mono tracking-widest uppercase text-muted-foreground/80">
                     {info.title}
                   </h3>
-                  <div className="font-body text-lg font-medium">
+                  <div className="font-body text-sm sm:text-base md:text-lg font-medium">
                     {info.content}
                   </div>
                 </motion.div>
@@ -177,7 +176,7 @@ export default function Contact() {
             {/* Google Map Iframe */}
             <motion.div
               variants={itemVariants}
-              className="w-full aspect-[16/9] lg:aspect-[4/3] rounded-2xl overflow-hidden border border-border bg-muted/50 relative group"
+              className="w-full aspect-[16/10] sm:aspect-[16/9] lg:aspect-[4/3] rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden border border-border bg-muted/50 relative group"
             >
               <div className="absolute inset-0 pointer-events-none z-10 group-hover:bg-transparent transition-colors duration-500" />
               <iframe
