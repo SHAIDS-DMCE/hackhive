@@ -7,9 +7,11 @@ import Hero from "@/components/sections/Hero";
 import Gallery from "@/components/sections/Gallery";
 import PrizePool from "@/components/sections/PrizePool";
 import Sponsors from "@/components/sections/Sponsors";
+import { Analytics } from "@vercel/analytics/next"
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
+      <Analytics/>
       <section id="hero">
         <Hero />
       </section>
