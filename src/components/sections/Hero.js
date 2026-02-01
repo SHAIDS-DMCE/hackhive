@@ -261,7 +261,7 @@ export default function Hero() {
             {/* Problem Statements Button */}
             <a
               href="#problem-statements"
-              className="inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 lg:px-8 lg:py-4 rounded-lg bg-primary text-primary-foreground text-xs sm:text-sm lg:text-base font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-primary/30"
+              className="inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 lg:px-8 lg:py-4 rounded-lg bg-primary text-white text-xs sm:text-sm lg:text-base font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-primary/30"
             >
               Problem Statements
               <svg
