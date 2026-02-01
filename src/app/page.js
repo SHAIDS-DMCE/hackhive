@@ -11,7 +11,7 @@ import { Analytics } from "@vercel/analytics/next"
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
-      <Analytics/>
+      <Analytics />
       <section id="hero">
         <Hero />
       </section>

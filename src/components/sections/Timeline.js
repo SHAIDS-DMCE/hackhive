@@ -370,14 +370,6 @@ export default function Timeline() {
           />
         ))}
       </div>
-
-      {/* Scroll hint */}
-      <div className="fixed bottom-6 right-12 flex items-center gap-2 text-foreground/40 z-30">
-        <span className="text-[10px] font-mono tracking-wider hidden md:inline">SCROLL</span>
-        <svg className="w-4 h-4 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-        </svg>
-      </div>
     </section>
   );
 }

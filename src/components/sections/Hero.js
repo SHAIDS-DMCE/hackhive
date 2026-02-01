@@ -247,9 +247,9 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          {/* Buttons - Side by Side */}
+          {/* Buttons - Stacked on mobile, side by side on sm+ */}
           <motion.div
-            className="mt-12 sm:mt-10 md:mt-12 flex flex-row items-center justify-center gap-3 sm:gap-4"
+            className="mt-8 sm:mt-10 md:mt-12 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{
@@ -261,7 +261,7 @@ export default function Hero() {
             {/* Problem Statements Button */}
             <a
               href="#problem-statements"
-              className="inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 lg:px-8 lg:py-4 rounded-lg bg-primary text-white text-xs sm:text-sm lg:text-base font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-primary/30"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 lg:px-8 lg:py-4 rounded-lg bg-primary text-white text-xs sm:text-sm lg:text-base font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-primary/30"
             >
               Problem Statements
               <svg
@@ -284,7 +284,7 @@ export default function Hero() {
               href="https://unstop.com/p/hackhive-20-shaids-student-hive-of-artificial-intelligence-data-science-students-1630401"
               target="_blank"
               rel="noopener noreferrer"
-              className="unstop-btn inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 lg:px-8 lg:py-4 rounded-lg bg-[#3769bf] text-white text-xs sm:text-sm lg:text-base font-semibold transition-all duration-300 hover:opacity-90"
+              className="unstop-btn w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 lg:px-8 lg:py-4 rounded-lg bg-[#3769bf] text-white text-xs sm:text-sm lg:text-base font-semibold transition-all duration-300 hover:opacity-90"
             >
               Register with Unstop
             </a>

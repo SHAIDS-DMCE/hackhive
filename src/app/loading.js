@@ -135,22 +135,22 @@ export default function Loading() {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-background transition-colors duration-300"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-background transition-colors duration-300 min-h-screen w-full overflow-hidden"
     >
-      {/* Main content wrapper */}
-      <div className="flex flex-col items-center gap-10 px-6">
+      {/* Main content wrapper - centered on all screens */}
+      <div className="flex flex-col items-center justify-center gap-6 sm:gap-8 md:gap-10 px-4 sm:px-6 w-full max-w-[280px] sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto">
         {/* Progress number display */}
-        <div className="relative">
+        <div className="relative w-full flex flex-col items-center">
           <div
             ref={progressRef}
-            className="text-7xl sm:text-8xl md:text-9xl font-bold text-primary font-mono tracking-tight"
+            className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-primary font-mono tracking-tight text-center"
           >
             {Math.floor(displayProgress)}
-            <span className="text-4xl sm:text-5xl md:text-6xl">%</span>
+            <span className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl">%</span>
           </div>
 
           {/* Progress bar */}
-          <div className="mt-4 w-full h-1 bg-foreground/10 rounded-full overflow-hidden">
+          <div className="mt-3 sm:mt-4 w-full max-w-[200px] sm:max-w-[250px] md:max-w-[300px] h-1 bg-foreground/10 rounded-full overflow-hidden mx-auto">
             <div
               className="h-full bg-primary transition-all duration-200 ease-out"
               style={{ width: `${displayProgress}%` }}
@@ -159,27 +159,27 @@ export default function Loading() {
         </div>
 
         {/* Loader dots */}
-        <div className="flex items-center gap-2">
-          <div className="loader-dot w-2.5 h-2.5 rounded-full bg-primary" />
-          <div className="loader-dot w-2.5 h-2.5 rounded-full bg-primary" />
-          <div className="loader-dot w-2.5 h-2.5 rounded-full bg-primary" />
+        <div className="flex items-center justify-center gap-2">
+          <div className="loader-dot w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-primary" />
+          <div className="loader-dot w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-primary" />
+          <div className="loader-dot w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-primary" />
         </div>
 
         {/* Quote display */}
-        <div className="max-w-md text-center min-h-[80px] flex items-center">
-          <p ref={quoteRef} className={"text-base md:text-lg font-medium text-foreground/80 leading-relaxed tracking-wide italic"}>
+        <div className="w-full text-center min-h-[60px] sm:min-h-[70px] md:min-h-[80px] flex items-center justify-center px-2">
+          <p ref={quoteRef} className="text-sm sm:text-base md:text-lg font-medium text-foreground/80 leading-relaxed tracking-wide italic">
             {isMounted ? randomizedQuotes[currentQuoteIndex] : ""}
           </p>
         </div>
 
         {/* Loading status text */}
-        <p className="text-xs text-foreground/50 uppercase tracking-[0.3em] font-mono">
+        <p className="text-[10px] sm:text-xs text-foreground/50 uppercase tracking-[0.2em] sm:tracking-[0.3em] font-mono text-center">
           Initializing Heist Protocol
         </p>
       </div>
 
       {/* Bottom gradient fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-24 sm:h-32 bg-gradient-to-t from-background to-transparent pointer-events-none" />
     </div>
   );
 }
