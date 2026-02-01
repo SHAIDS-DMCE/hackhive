@@ -2,7 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useTheme } from "@/context/ThemeContext";
-import { Clock, Trophy, Code, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 const ProblemStatementCard = ({ problem, onClick, index, layoutId }) => {
   const { colors } = useTheme();
@@ -62,7 +62,7 @@ const ProblemStatementCard = ({ problem, onClick, index, layoutId }) => {
       className="cursor-pointer relative group h-full"
     >
       <div
-        className="rounded-2xl border p-8 transition-all duration-300 h-[420px] md:h-[360px] flex flex-col"
+        className="rounded-2xl border p-8 transition-all duration-300 flex flex-col"
         style={{
           backgroundColor: `${colors.accent}10`,
           borderColor: `${colors.accent}40`,
@@ -71,7 +71,7 @@ const ProblemStatementCard = ({ problem, onClick, index, layoutId }) => {
         {/* Header */}
         <div className="mb-6">
           <h4
-            className="font-bold text-3xl mb-3 line-clamp-2"
+            className="font-bold text-3xl mb-3"
             style={{
               color: colors.text,
               fontFamily: "var(--font-heading)",
@@ -80,46 +80,20 @@ const ProblemStatementCard = ({ problem, onClick, index, layoutId }) => {
             {problem.title}
           </h4>
           <p
-            className="text-lg opacity-80 line-clamp-2"
+            className="text-lg opacity-80"
             style={{
               color: colors.text,
               fontFamily: "var(--font-body)",
+              whiteSpace: "pre-wrap",
             }}
           >
-            {problem.description}
+            {problem.fullDescription || problem.description}
           </p>
         </div>
 
-        {/* Tech Stack */}
-        
-
-        {/* Footer Stats */}
+        {/* Footer Action */}
         <div className="flex items-center justify-between mt-auto">
-          <div className="flex items-center space-x-8 text-base">
-            {/* Time Estimate */}
-            <div
-              className="flex items-center space-x-1"
-              style={{ color: colors.text }}
-            >
-              <Clock size={20} />
-              <span style={{ fontFamily: "var(--font-mono)" }}>
-                12 h
-              </span>
-            </div>
-
-            {/* Prize */}
-            <div
-              className="flex items-center space-x-1"
-              style={{ color: colors.text }}
-            >
-              <Trophy size={20} />
-              <span style={{ fontFamily: "var(--font-mono)" }}>
-                {problem.prizes[0].split("$")[1]}
-              </span>
-            </div>
-          </div>
-
-          {/* Action Indicator */}
+          <div /> {/* spacer to keep VIEW aligned right */}
           <div
             className="flex items-center space-x-2 text-base opacity-60 group-hover:opacity-100 transition-opacity"
             style={{ color: colors.accent }}

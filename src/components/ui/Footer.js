@@ -12,7 +12,11 @@ const QUICK_LINKS_1 = [
 const QUICK_LINKS_2 = [
   { href: "#problem-statements", label: "Problem Statements" },
   { href: "#contact", label: "Contact" },
-  { href: "https://unstop.com", label: "Register", external: true },
+  {
+    href: "https://unstop.com/p/hackhive-20-shaids-student-hive-of-artificial-intelligence-data-science-students-1630401",
+    label: "Register",
+    external: true,
+  },
 ];
 
 export default function Footer() {
@@ -34,8 +38,8 @@ export default function Footer() {
               <h2 className="text-xl font-bold text-foreground">HackHive</h2>
             </div>
             <p className="text-foreground/70 text-sm leading-relaxed mb-6">
-              Official Hackathon conducted under SHAIDS. Build, learn,
-              showcase and join us for an unforgettable experience.
+              Official Hackathon conducted under SHAIDS. Build, learn, showcase
+              and join us for an unforgettable experience.
             </p>
 
             {/* Social Icons */}
@@ -125,10 +129,10 @@ export default function Footer() {
             </p>
             <div className="flex flex-col gap-3">
               <a
-                href="mailto:contact@hackhive.com"
+                href="mailto:shaids_dmce@dmce.ac.in"
                 className="text-foreground/70 hover:text-primary transition-colors text-sm"
               >
-                Email: contact@hackhive.com
+                Email: shaids_dmce@dmce.ac.in
               </a>
               <div className="flex flex-col gap-2 mt-4">
                 <a
@@ -181,7 +185,6 @@ function WebIcon({ className }) {
     </svg>
   );
 }
-
 
 function LinkedInIcon({ className }) {
   return (

@@ -2,15 +2,7 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "../../context/ThemeContext";
-import {
-  X,
-  Clock,
-  Trophy,
-  Code,
-  Target,
-  Users,
-  Calendar,
-} from "lucide-react";
+import { X, Trophy, Users, Target, Code } from "lucide-react";
 
 const ProblemStatementDetail = ({ problem, onClose, layoutId }) => {
   const { colors } = useTheme();
@@ -123,11 +115,12 @@ const ProblemStatementDetail = ({ problem, onClose, layoutId }) => {
               {/* Close Button */}
               <button
                 onClick={onClose}
-                className="p-2 rounded-lg transition-colors ml-4"
+                className="p-2 rounded-lg transition-colors ml-4 cursor-pointer"
                 style={{
                   backgroundColor: `${colors.accent}20`,
                   color: colors.text,
                 }}
+                aria-label="Close details"
               >
                 <X size={24} />
               </button>
@@ -136,37 +129,8 @@ const ProblemStatementDetail = ({ problem, onClose, layoutId }) => {
 
           {/* Content */}
           <div className="p-6 space-y-8">
-            {/* Quick Stats */}
+            {/* Quick Stats: First Prize & Runner Up */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div
-                className="p-4 rounded-lg border"
-                style={{
-                  backgroundColor: `${colors.accent}10`,
-                  borderColor: `${colors.accent}30`,
-                }}
-              >
-                <div className="flex items-center space-x-3">
-                  <Clock style={{ color: colors.accent }} />
-                  <div>
-                    <div
-                      className="text-sm opacity-70"
-                      style={{ color: colors.text }}
-                    >
-                      Time Estimate
-                    </div>
-                    <div
-                      className="text-xl font-bold"
-                      style={{
-                        color: colors.accent,
-                        fontFamily: "var(--font-mono)",
-                      }}
-                    >
-                      12 h
-                    </div>
-                  </div>
-                </div>
-              </div>
-
               <div
                 className="p-4 rounded-lg border"
                 style={{
@@ -181,7 +145,7 @@ const ProblemStatementDetail = ({ problem, onClose, layoutId }) => {
                       className="text-sm opacity-70"
                       style={{ color: colors.text }}
                     >
-                      Top Prize
+                      First Prize
                     </div>
                     <div
                       className="text-xl font-bold"
@@ -190,16 +154,47 @@ const ProblemStatementDetail = ({ problem, onClose, layoutId }) => {
                         fontFamily: "var(--font-mono)",
                       }}
                     >
-                      {problem.prizes[0]}
+                      {Array.isArray(problem.prizes) && problem.prizes[0]
+                        ? problem.prizes[0]
+                        : "TBD"}
                     </div>
                   </div>
                 </div>
               </div>
 
-             
+              <div
+                className="p-4 rounded-lg border"
+                style={{
+                  backgroundColor: `${colors.accent}10`,
+                  borderColor: `${colors.accent}30`,
+                }}
+              >
+                <div className="flex items-center space-x-3">
+                  <Users style={{ color: colors.accent }} />
+                  <div>
+                    <div
+                      className="text-sm opacity-70"
+                      style={{ color: colors.text }}
+                    >
+                      Runner Up
+                    </div>
+                    <div
+                      className="text-xl font-bold"
+                      style={{
+                        color: colors.accent,
+                        fontFamily: "var(--font-mono)",
+                      }}
+                    >
+                      {Array.isArray(problem.prizes) && problem.prizes[1]
+                        ? problem.prizes[1]
+                        : "TBD"}
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            {/* Full Description */}
+            {/* Expected Solution */}
             <div>
               <h3
                 className="text-xl font-bold mb-4 flex items-center space-x-2"
@@ -224,33 +219,88 @@ const ProblemStatementDetail = ({ problem, onClose, layoutId }) => {
             </div>
 
             {/* Technologies */}
-            
+            {problem.technologies && problem.technologies.length > 0 && (
+              <div>
+                <h3
+                  className="text-xl font-bold mb-4"
+                  style={{
+                    color: colors.accent,
+                    fontFamily: "var(--font-heading)",
+                  }}
+                >
+                  <Code size={20} /> Technologies
+                </h3>
+                <div
+                  className="flex flex-wrap gap-2"
+                  style={{ color: colors.text, fontFamily: "var(--font-mono)" }}
+                >
+                  {problem.technologies.map((t, i) => (
+                    <span
+                      key={i}
+                      className="px-3 py-1 rounded-full text-sm"
+                      style={{
+                        backgroundColor: `${colors.accent}10`,
+                        border: `1px solid ${colors.accent}20`,
+                      }}
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
 
-            {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-6">
-              <button
-                className="flex-1 py-4 px-6 rounded-lg font-bold text-lg transition-all hover:scale-105"
+            {/* Deliverables */}
+            <div>
+              <h3
+                className="text-xl font-bold mb-4"
                 style={{
-                  backgroundColor: colors.accent,
-                  color: colors.primary,
-                  fontFamily: "var(--font-heading)",
-                }}
-              >
-                ACCEPT MISSION
-              </button>
-              <button
-                onClick={onClose}
-                className="flex-1 py-4 px-6 rounded-lg font-bold text-lg transition-all hover:scale-105 border-2"
-                style={{
-                  backgroundColor: "transparent",
                   color: colors.accent,
-                  borderColor: colors.accent,
                   fontFamily: "var(--font-heading)",
                 }}
               >
-                REVIEW LATER
-              </button>
+                Deliverables
+              </h3>
+
+              <ul
+                className="list-disc pl-5 space-y-2"
+                style={{ color: colors.text, fontFamily: "var(--font-body)" }}
+              >
+                <li>
+                  <strong>Expected solution:</strong>{" "}
+                  {problem.fullDescription ? (
+                    <span>{problem.fullDescription}</span>
+                  ) : (
+                    <span>{problem.description}</span>
+                  )}
+                </li>
+
+                {problem.requirements && problem.requirements.length > 0 && (
+                  <li>
+                    <strong>Requirements / Acceptance criteria:</strong>
+                    <ul className="list-decimal pl-5 mt-2 space-y-1">
+                      {problem.requirements.map((req, idx) => (
+                        <li key={idx}>{req}</li>
+                      ))}
+                    </ul>
+                  </li>
+                )}
+
+                {/* Additional deliverables if provided */}
+                {problem.deliverables && problem.deliverables.length > 0 && (
+                  <li>
+                    <strong>Additional deliverables:</strong>
+                    <ul className="pl-5 mt-2 space-y-1">
+                      {problem.deliverables.map((d, i) => (
+                        <li key={i}>{d}</li>
+                      ))}
+                    </ul>
+                  </li>
+                )}
+              </ul>
             </div>
+
+            {/* NOTE: Action buttons removed per request */}
           </div>
         </motion.div>
       </div>

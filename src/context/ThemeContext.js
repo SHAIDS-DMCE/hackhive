@@ -13,13 +13,14 @@ export const useTheme = () => {
 
 export const ThemeProvider = ({ children }) => {
   const [isDark, setIsDark] = useState(() => {
-    // Check for system preference on initial load
-    if (typeof window !== 'undefined') {
-      const savedTheme = localStorage.getItem('theme');
+    // Default to dark if no saved preference
+    if (typeof window !== "undefined") {
+      const savedTheme = localStorage.getItem("theme");
       if (savedTheme) {
-        return savedTheme === 'dark';
+        return savedTheme === "dark";
       }
-      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+      // Default to dark (ignore system preference)
+      return true;
     }
     return true;
   });
@@ -27,7 +28,7 @@ export const ThemeProvider = ({ children }) => {
   const colors = {
     dark: {
       primary: "var(--background)", // Background from CSS
-      accent: "var(--primary)", // Primary/accent color  
+      accent: "var(--primary)", // Primary/accent color
       text: "var(--foreground)", // Text color
     },
     light: {
@@ -42,8 +43,8 @@ export const ThemeProvider = ({ children }) => {
   const toggleTheme = () => {
     const newTheme = !isDark;
     setIsDark(newTheme);
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('theme', newTheme ? 'dark' : 'light');
+    if (typeof window !== "undefined") {
+      localStorage.setItem("theme", newTheme ? "dark" : "light");
     }
   };
 
@@ -57,17 +58,17 @@ export const ThemeProvider = ({ children }) => {
 
   // Listen for system theme changes
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    if (typeof window !== "undefined") {
+      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
       const handleChange = (e) => {
         // Only update if user hasn't manually set a preference
-        if (!localStorage.getItem('theme')) {
+        if (!localStorage.getItem("theme")) {
           setIsDark(e.matches);
         }
       };
 
-      mediaQuery.addEventListener('change', handleChange);
-      return () => mediaQuery.removeEventListener('change', handleChange);
+      mediaQuery.addEventListener("change", handleChange);
+      return () => mediaQuery.removeEventListener("change", handleChange);
     }
   }, []);
 

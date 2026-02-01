@@ -6,7 +6,7 @@ import AnimatedLetters from '@/components/animations/AnimatedLetters';
 import FallingArtifacts from '@/components/effects/FallingArtifacts';
 import { useLoading } from '@/context/LoadingContext';
 
-const TARGET_DATE = new Date('2026-02-23T11:00:00');
+const TARGET_DATE = new Date('2026-02-20T11:00:00');
 
 export default function Hero() {
   const containerRef = useRef(null);
@@ -181,15 +181,14 @@ export default function Hero() {
       {/* Centered Content */}
       {startAnimations && (
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 sm:px-8 lg:px-12">
-
           {/* Title - HACKHIVE 2026 */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-bold tracking-tight leading-none text-center">
             <AnimatedLetters
               segments={[
-                { text: 'HACK', className: 'text-foreground glow-white' },
-                { text: 'HIVE', className: 'text-primary glow-red' },
-                { text: ' ', className: '' },
-                { text: '2026', className: 'text-foreground glow-white' },
+                { text: "HACK", className: "text-foreground glow-white" },
+                { text: "HIVE", className: "text-primary glow-red" },
+                { text: " ", className: "" },
+                { text: "2026", className: "text-foreground glow-white" },
               ]}
               perLetterDelay={perLetterDelay}
               delayStart={delayStart}
@@ -201,7 +200,7 @@ export default function Hero() {
           <p
             ref={taglineRef}
             className="mt-4 sm:mt-6 md:mt-8 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-foreground/70 text-center sm:max-w-sm md:max-w-md lg:max-w-lg font-body opacity-0"
-            style={{ minHeight: '1.5em' }}
+            style={{ minHeight: "1.5em" }}
           >
             Join the resistance, the ultimate heist...
           </p>
@@ -220,17 +219,15 @@ export default function Hero() {
           >
             <div className="flex items-center justify-center gap-3 sm:gap-6 md:gap-8 lg:gap-10">
               {[
-                { value: timeLeft.days, label: 'Days' },
-                { value: timeLeft.hours, label: 'Hours' },
-                { value: timeLeft.minutes, label: 'Mins' },
-                { value: timeLeft.seconds, label: 'Secs' },
+                { value: timeLeft.days, label: "Days" },
+                { value: timeLeft.hours, label: "Hours" },
+                { value: timeLeft.minutes, label: "Mins" },
+                { value: timeLeft.seconds, label: "Secs" },
               ].map((item, index) => (
                 <div key={item.label} className="flex flex-col items-center">
-                  <div
-                    className="font-code text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold"
-                  >
+                  <div className="font-code text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold">
                     <span className="timer-value text-primary">
-                      {String(item.value).padStart(2, '0')}
+                      {String(item.value).padStart(2, "0")}
                     </span>
                   </div>
                   <span className="mt-2 text-[10px] sm:text-xs md:text-sm text-foreground/50 uppercase tracking-widest font-semibold">
@@ -240,7 +237,7 @@ export default function Hero() {
                   {index < 3 && (
                     <span
                       className="absolute top-1/3 -right-2 sm:-right-4 md:-right-5 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary/40"
-                      style={{ transform: 'translateY(-50%)' }}
+                      style={{ transform: "translateY(-50%)" }}
                     >
                       :
                     </span>
@@ -267,14 +264,24 @@ export default function Hero() {
               className="inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 lg:px-8 lg:py-4 rounded-lg bg-primary text-primary-foreground text-xs sm:text-sm lg:text-base font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-primary/30"
             >
               Problem Statements
-              <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M5 12h14m-7-7l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
+              <svg
+                className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path
+                  d="M5 12h14m-7-7l7 7-7 7"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
             </a>
 
             {/* Unstop Button */}
             <a
-              href="https://unstop.com/"
+              href="https://unstop.com/p/hackhive-20-shaids-student-hive-of-artificial-intelligence-data-science-students-1630401"
               target="_blank"
               rel="noopener noreferrer"
               className="unstop-btn inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 lg:px-8 lg:py-4 rounded-lg bg-[#3769bf] text-white text-xs sm:text-sm lg:text-base font-semibold transition-all duration-300 hover:opacity-90"
@@ -282,7 +289,6 @@ export default function Hero() {
               Register with Unstop
             </a>
           </motion.div>
-
         </div>
       )}
     </section>

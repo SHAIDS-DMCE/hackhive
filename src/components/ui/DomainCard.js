@@ -1,53 +1,153 @@
+
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
 import { useTheme } from "../../context/ThemeContext";
 
-const DomainCard = ({ domain, onClick, layoutId, index }) => {
+/**
+ * DomainCard
+ *
+ * - Cleans up duplicate/unfinished code from previous version.
+ * - Implements downloading a PDF from a CDN URL if available.
+ *   - Tries to fetch the remote file as a blob and download it with a filename.
+ *   - If fetching fails (likely due to CORS), falls back to opening the URL in a new tab.
+ * - Falls back to generating a plain-text file with problem statements when no CDN/pdf URL is present.
+ */
+
+const DomainCard = ({
+  domain,
+  onClick,
+  layoutId,
+  index,
+  des,
+  shortDescription,
+}) => {
   const { colors } = useTheme();
 
-  const handleDownloadPDF = (domain) => {
-    // Create PDF content for the domain's problem statements
-    const pdfContent = generatePDFContent(domain);
-    
-    // Create a blob and download
-    const blob = new Blob([pdfContent], { type: 'text/plain' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${domain.title.replace(/\s+/g, '_')}_Problem_Statements.txt`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    window.URL.revokeObjectURL(url);
+  // Helper: safely create a filename from domain title and an extension
+  const makeFileName = (title, ext) => {
+    const safe = (title || "domain").replace(/[^\w\d-_\.]/g, "_");
+    return `${safe}_Problem_Statements.${ext}`;
   };
 
-  const generatePDFContent = (domain) => {
-    let content = `${domain.title.toUpperCase()} - PROBLEM STATEMENTS\n`;
-    content += `${domain.description}\n`;
-    content += `${'='.repeat(80)}\n\n`;
-    
-    domain.problems.forEach((problem, index) => {
-      content += `PROBLEM ${index + 1}: ${problem.title}\n`;
-      content += `${'-'.repeat(40)}\n`;
-      content += `Description: ${problem.description}\n\n`;
-      content += `Expected Solution: ${problem.fullDescription}\n\n`;
-      content += `Difficulty: ${problem.difficulty}\n`;
-      content += `Time Estimate: ${problem.timeEstimate}\n`;
-      content += `Technologies: ${problem.technologies.join(', ')}\n`;
-      content += `Prizes: ${problem.prizes.join(', ')}\n\n`;
-      
-      if (problem.requirements && problem.requirements.length > 0) {
-        content += `Requirements:\n`;
-        problem.requirements.forEach((req, reqIndex) => {
-          content += `${reqIndex + 1}. ${req}\n`;
-        });
-        content += '\n';
-      }
-      content += `${'='.repeat(80)}\n\n`;
-    });
-    
+  // Helper: try to derive a filename from a URL (falls back to provided fallback)
+  const getFileNameFromUrl = (url, fallback) => {
+    try {
+      const u = new URL(url);
+      const pathname = u.pathname;
+      const last = pathname.split("/").filter(Boolean).pop();
+      if (last) return decodeURIComponent(last.split("?")[0]);
+    } catch (e) {
+      // ignore
+    }
+    return fallback;
+  };
+
+  // Fallback generator for textual representation of problems (used when no PDF available)
+  const generateTextContent = (domain) => {
+    let content = `Domain: ${domain.title || "Untitled"}\n`;
+    content += `Description: ${domain.description || ""}\n\n`;
+    content += `Problems (${(domain.problems && domain.problems.length) || 0}):\n\n`;
+
+    if (Array.isArray(domain.problems)) {
+      domain.problems.forEach((problem, idx) => {
+        content += `${idx + 1}. ${problem.title || "Untitled Problem"}\n\n`;
+        if (problem.fullDescription) {
+          content += `${problem.fullDescription}\n\n`;
+        } else if (problem.description) {
+          content += `${problem.description}\n\n`;
+        }
+        if (problem.difficulty) content += `Difficulty: ${problem.difficulty}\n`;
+        if (problem.timeEstimate) content += `Time Estimate: ${problem.timeEstimate}\n`;
+        if (problem.technologies && problem.technologies.length)
+          content += `Technologies: ${problem.technologies.join(", ")}\n`;
+        if (problem.prizes && problem.prizes.length)
+          content += `Prizes: ${problem.prizes.join(", ")}\n`;
+        if (problem.requirements && problem.requirements.length) {
+          content += `Requirements:\n`;
+          problem.requirements.forEach((req, rIdx) => {
+            content += `  ${rIdx + 1}. ${req}\n`;
+          });
+        }
+        content += `${"=".repeat(80)}\n\n`;
+      });
+    }
+
     return content;
+  };
+
+  // Download handler: prefer CDN/pdf URL when available
+  const handleDownloadPDF = async (domain, e) => {
+    if (e && e.stopPropagation) e.stopPropagation();
+
+    const cdnUrl = domain?.pdfUrl || domain?.cdnUrl || domain?.pdf || null;
+
+    if (cdnUrl) {
+      // Try to fetch the remote resource as a blob to force a download and provide a filename.
+      // If fetch fails due to CORS, fallback to opening the URL in a new tab/window.
+      try {
+        const response = await fetch(cdnUrl, { mode: "cors" });
+        if (!response.ok) {
+          throw new Error(`Failed to fetch resource: ${response.status}`);
+        }
+        const blob = await response.blob();
+
+        // Determine filename and extension
+        const extFromMime = (() => {
+          const t = blob.type || "";
+          if (t.includes("pdf")) return "pdf";
+          if (t.includes("text")) return "txt";
+          return null;
+        })();
+
+        const fallbackName = makeFileName(domain?.title, extFromMime || "pdf");
+        const filename = getFileNameFromUrl(cdnUrl, fallbackName);
+
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = filename;
+        // In some cases browser will ignore download attribute for cross-origin; still try
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+        return;
+      } catch (err) {
+        // Fetch failed (likely CORS) -> fallback to opening in new tab for user to download manually
+        try {
+          window.open(cdnUrl, "_blank", "noopener,noreferrer");
+          return;
+        } catch (openErr) {
+          // If even that fails, continue to fallback generation
+          // (We intentionally don't rethrow; we'll fallback to generated text)
+        }
+      }
+    }
+
+    // No CDN/pdf available or all attempts failed -> generate text fallback and download
+    try {
+      const text = generateTextContent(domain || {});
+      const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = makeFileName(domain?.title, "txt");
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    } catch (finalErr) {
+      // If everything fails, as a last resort open a new tab with the CDN link if present
+      if (cdnUrl) {
+        try {
+          window.open(cdnUrl, "_blank", "noopener,noreferrer");
+        } catch (e) {
+          // nothing further we can do here
+          /* intentionally empty */
+        }
+      }
+    }
   };
 
   const cardVariants = {
@@ -91,7 +191,7 @@ const DomainCard = ({ domain, onClick, layoutId, index }) => {
         layout: { type: "spring", stiffness: 110, damping: 24, mass: 1 },
       }}
       className="relative group h-full min-h-[320px] md:min-h-[360px]"
-      id = "domain_card"
+      id="domain_card"
     >
       {/* Main Domain Card */}
       <div
@@ -142,7 +242,9 @@ const DomainCard = ({ domain, onClick, layoutId, index }) => {
                     fontFamily: "var(--font-mono)",
                   }}
                 >
-                  {domain.description}
+                  {shortDescription ||
+                    domain.shortDescription ||
+                    domain.description}
                 </p>
               </div>
             </div>
@@ -165,56 +267,25 @@ const DomainCard = ({ domain, onClick, layoutId, index }) => {
             style={{ backgroundColor: colors.accent }}
           />
 
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-3 text-center">
-            <div>
-              <div
-                className="text-base font-bold"
-                style={{ color: colors.accent }}
+          {/* Brief description (uses prop `des`). Render only when provided to avoid empty space. */}
+          {des ? (
+            <div className="mb-3">
+              <p
+                className="text-sm"
+                style={{
+                  color: colors.text,
+                  fontFamily: "var(--font-body)",
+                }}
               >
-                {domain.problems.length}
-              </div>
-              <div className="text-xs" style={{ color: colors.text }}>
-                MISSIONS
-              </div>
+                {des}
+              </p>
             </div>
-            <div>
-              <div
-                className="text-base font-bold"
-                style={{ color: colors.accent }}
-              >
-                12
-                h
-              </div>
-              <div className="text-xs" style={{ color: colors.text }}>
-                TOTAL TIME
-              </div>
-            </div>
-            <div>
-              <div
-                className="text-base font-bold"
-                style={{ color: colors.accent }}
-              >
-                $
-                {domain.problems
-                  .reduce(
-                    (sum, p) =>
-                      sum +
-                      parseInt(p.prizes[0].split("$")[1].replace(",", "")),
-                    0,
-                  )
-                  .toLocaleString()}
-              </div>
-              <div className="text-xs" style={{ color: colors.text }}>
-                TOP PRIZE
-              </div>
-            </div>
-          </div>
+          ) : null}
         </div>
 
         {/* Problem Statement Cards */}
-        <div className="flex-grow p-3">
-          <div className="text-center">
+        <div className="flex-grow p-3 flex items-center justify-center">
+          <div className="text-center w-full">
             <p
               className="text-xs opacity-70 mb-2"
               style={{
@@ -222,10 +293,10 @@ const DomainCard = ({ domain, onClick, layoutId, index }) => {
                 fontFamily: "var(--font-mono)",
               }}
             >
-              Click to explore {domain.problems.length} missions
+              Click to explore {Array.isArray(domain.problems) ? domain.problems.length : 0} missions
             </p>
             <div
-              className="inline-block px-2 py-1 rounded-lg text-xs"
+              className="inline-block px-2 py-1 rounded-lg text-xs cursor-pointer"
               style={{
                 backgroundColor: `${colors.accent}15`,
                 color: colors.accent,
@@ -238,9 +309,12 @@ const DomainCard = ({ domain, onClick, layoutId, index }) => {
         </div>
 
         {/* Download PDF Button */}
-        <div className="p-3 border-t" style={{ borderColor: `${colors.accent}30` }}>
+        <div
+          className="p-3 border-t"
+          style={{ borderColor: `${colors.accent}30` }}
+        >
           <button
-            className="w-full py-2 px-3 rounded-lg text-xs font-medium transition-all hover:scale-105 flex items-center justify-center space-x-2"
+            className="w-full py-2 px-3 rounded-lg text-xs cursor-pointer font-medium transition-all hover:scale-105 flex items-center justify-center space-x-2"
             style={{
               backgroundColor: colors.accent,
               color: colors.primary,
@@ -249,18 +323,16 @@ const DomainCard = ({ domain, onClick, layoutId, index }) => {
               fontWeight: "bold",
               boxShadow: `0 4px 12px ${colors.accent}40`,
             }}
-            onClick={(e) => {
-              e.stopPropagation(); // Prevent card click
-              // Download PDF functionality
-              handleDownloadPDF(domain);
-            }}
+            onClick={(e) => handleDownloadPDF(domain, e)}
             title={`Download PDF for ${domain.title} problem statements`}
+            aria-label={`Download PDF for ${domain.title} problem statements`}
           >
             <svg
               className="w-3 h-3"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
+              aria-hidden="true"
             >
               <path
                 strokeLinecap="round"
@@ -278,7 +350,7 @@ const DomainCard = ({ domain, onClick, layoutId, index }) => {
           <div
             className="h-full w-full"
             style={{
-              backgroundImage: `radial-gradient(circle at 20% 80%, ${colors.accent} 0%, transparent 50%), 
+              backgroundImage: `radial-gradient(circle at 20% 80%, ${colors.accent} 0%, transparent 50%),
                              radial-gradient(circle at 80% 20%, ${colors.accent} 0%, transparent 50%)`,
             }}
           />

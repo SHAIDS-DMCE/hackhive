@@ -16,22 +16,36 @@ const ProblemStatements = () => {
 
   // Disable main page scroll when interacting with any PS elements
   // Enable scroll only when back at domain cards (both states are null)
-  const shouldLockScroll = selectedProblem !== null || expandedDomainId !== null;
+  const shouldLockScroll =
+    selectedProblem !== null || expandedDomainId !== null;
   useSimpleScrollLock(shouldLockScroll);
 
-  // Domain icons and descriptions mapping
+  // Domain icons, descriptions and CDN PDF placeholders mapping
+  // NOTE: Add your ImageKit CDN URL strings to `pdfUrl` later (e.g. https://ik.imagekit.io/your_path/yourfile.pdf)
   const domainMetadata = {
     Healthcare: {
       icon: "🏥",
-      description: "Transforming medical technology",
+      shortDescription: "Transforming medical technology",
+      description:
+        "Improving healthcare access through offline-first tools, digital records, and efficient grassroots health systems.",
+      pdfUrl:
+        "https://ik.imagekit.io/igsnxowfs/HackHive%202026/Healthcare%20PS.pdf",
     },
     Cybersecurity: {
       icon: "🔐",
-      description: "Securing digital systems",
+      shortDescription: "Securing digital systems",
+      description:
+        "Protecting users from digital threats using phishing detection, privacy tools, and deepfake awareness systems.",
+      pdfUrl:
+        "https://ik.imagekit.io/igsnxowfs/HackHive%202026/Cybersecurity%20PS.pdf",
     },
     "Smart Living & Consumer Tech": {
       icon: "💡",
-      description: "Empowering everyday innovation",
+      shortDescription: "Empowering everyday innovation",
+      description:
+        "Simplifying daily life with smart tools for warranties, government schemes, and NGO coordination platforms.",
+      pdfUrl:
+        "https://ik.imagekit.io/igsnxowfs/HackHive%202026/Smart%20Living%20&%20Consumer%20tech%20PS.pdf",
     },
   };
 
@@ -49,8 +63,14 @@ const ProblemStatements = () => {
             .replace(/\s+/g, "-"),
           title: domainName,
           icon: domainMetadata[domainName]?.icon || "🎯",
-          description:
-            domainMetadata[domainName]?.description || "Problem statements",
+          // shortDescription: single-line, hardcoded in domainMetadata
+          shortDescription:
+            domainMetadata[domainName]?.shortDescription ||
+            "Problem statements",
+          // description: longer (10-15 words) place to store more detail
+          description: domainMetadata[domainName]?.description || "",
+          // Domain-level CDN PDF (ImageKit) placeholder — fill with actual CDN link later
+          pdfUrl: domainMetadata[domainName]?.pdfUrl || null,
           problems: [],
         };
       }
@@ -62,14 +82,14 @@ const ProblemStatements = () => {
         fullDescription: problem.expectedSolution,
         difficulty: "Medium",
         timeEstimate: "24-48h",
-        technologies: ["React", "Node.js", "MongoDB", "TypeScript"],
+        // technologies: ["React", "Node.js", "MongoDB", "TypeScript"],
         requirements: [
           "Build a scalable web application",
           "Implement real-time features",
           "Ensure responsive design",
-          "Write comprehensive tests"
+          "Write comprehensive tests",
         ],
-        prizes: ["$5,000", "$2,500", "$1,250"],
+        prizes: ["₹6000", "₹3000"],
       });
     });
 
@@ -134,7 +154,7 @@ const ProblemStatements = () => {
         >
           <div className="relative inline-block">
             <h1
-              className="relative text-6xl md:text-8xl font-black tracking-tight mb-4"
+              className="relative text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black tracking-tight mb-4 leading-tight break-words whitespace-normal"
               style={{
                 color: colors.accent,
                 fontFamily: "var(--font-heading)",
@@ -183,6 +203,8 @@ const ProblemStatements = () => {
               <DomainCard
                 key={domain.id}
                 domain={domain}
+                shortDescription={domain.shortDescription}
+                des={domain.description}
                 onClick={() => setExpandedDomainId(domain.id)}
                 layoutId={`domain-${domain.id}`}
                 index={index}
@@ -247,14 +269,16 @@ const ProblemStatements = () => {
                       </div>
 
                       <button
-                        className="px-4 py-2 rounded-lg border"
+                        className="px-4 py-2 rounded-lg border cursor-pointer"
                         style={{
                           borderColor: colors.accent,
                           color: colors.text,
                           backgroundColor: `${colors.accent}15`,
                           fontFamily: "var(--font-mono)",
                         }}
-                        onClick={() => setExpandedDomainId("#problem-statements")}
+                        onClick={() =>
+                          setExpandedDomainId("#problem-statements")
+                        }
                       >
                         CLOSE
                       </button>

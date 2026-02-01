@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { motion, AnimatePresence, LayoutGroup } from 'framer-motion';
-import { useTheme } from '@/context/ThemeContext';
+import React, { useState } from "react";
+import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
+import { useTheme } from "@/context/ThemeContext";
 
 // --- ANIMATION CONFIGURATION ---
 const spring = {
   type: "spring",
   stiffness: 300,
   damping: 30,
-  mass: 0.8
+  mass: 0.8,
 };
 
 // --- MAIN COMPONENT ---
@@ -23,29 +23,30 @@ const PrizePool = () => {
       id: "winner",
       title: "GRAND PRIZE",
       icon: "🏆",
-      amount: "₹12,000",
+      amount: "₹6000",
       subtitle: "The Ultimate Loot",
       stats: [
         { label: "POSITIONS", value: "1 Winner" },
         { label: "PERKS", value: "Certificate" },
-        { label: "CASH PRIZE", value: "₹12,000" }
+        { label: "CASH PRIZE", value: "₹6,000" },
       ],
-      description: "The ultimate reward for the team that cracks the toughest code.",
-      rewards: ["Direct Internship", "Winner Trophy", "Merch Kit", "VIP Access"]
+      description:
+        "The ultimate reward for the team that cracks the toughest code.",
+      rewards: ["Certificate"],
     },
     {
       id: "runnerup",
       title: "RUNNER UP",
       icon: "🥈",
-      amount: "₹8,000",
+      amount: "₹3,000",
       subtitle: "Second Command",
       stats: [
         { label: "POSITIONS", value: "1 Runner Up" },
         { label: "PERKS", value: "Certificate" },
-        { label: "CASH PRIZE", value: "₹8,000" }
+        { label: "CASH PRIZE", value: "₹3,000" },
       ],
       description: "For the team that was just one step away from the vault.",
-      rewards: ["Mentorship Sessions", "Runner Up Certs", "Premium Swag"]
+      rewards: ["Certificate"],
     },
     {
       id: "participation",
@@ -56,35 +57,36 @@ const PrizePool = () => {
       stats: [
         { label: "ELIGIBILITY", value: "All Teams" },
         { label: "REQUIREMENT", value: "Submission" },
-        { label: "REWARD", value: "Certificate" }
+        { label: "REWARD", value: "Certificate" },
       ],
-      description: "Every participant who submits a valid project will be recognized. Your effort counts.",
-      rewards: [
-        "Official Certificate of Participation",
-        "Access to Community",
-        "Learning Resources"
-      ]
-    }
+      description:
+        "Every participant who submits a valid project will be recognized. Your effort counts.",
+      rewards: [],
+    },
   ];
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
+    visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
   };
 
   const cardVariants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } }
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+    },
   };
 
   return (
-    <div className={`bg-background text-foreground min-h-screen relative overflow-hidden font-sans transition-colors duration-500 ease-in-out ${theme === 'dark' ? 'dark' : ''}`}>
-
+    <div
+      className={`bg-background text-foreground min-h-screen relative overflow-hidden font-sans transition-colors duration-500 ease-in-out ${theme === "dark" ? "dark" : ""}`}
+    >
       {/* Background Effects */}
       <div className="hhv-about__grain absolute inset-0 pointer-events-none" />
 
       <div className="relative z-10 container mx-auto px-6 sm:px-8 lg:px-12 py-20">
-
         {/* --- HEADER --- */}
         <motion.div
           initial={{ opacity: 0, y: -30 }}
@@ -98,12 +100,9 @@ const PrizePool = () => {
             </div>
 
             {/* --- TITLE --- */}
-            <h2
-              className="text-7xl md:text-9xl font-heading font-black tracking-tighter text-primary"
-            >
+            <h2 className="text-7xl md:text-9xl font-heading font-black tracking-tighter text-primary">
               The Vault
             </h2>
-
           </div>
 
           <div className="w-full max-w-md mx-auto h-px bg-gradient-to-r from-transparent via-primary/80 to-transparent opacity-80 mb-8"></div>
@@ -140,10 +139,9 @@ const PrizePool = () => {
                   y: -5,
                 }}
                 transition={spring}
-                className={`border border-border rounded-2xl bg-card/70 backdrop-blur-md p-4 shadow-2xl cursor-pointer flex flex-col justify-between hover:border-primary/50 ${tier.id === 'participation' ? 'lg:col-span-2' : ''}`}
+                className={`border border-border rounded-2xl bg-card/70 backdrop-blur-md p-4 shadow-2xl cursor-pointer flex flex-col justify-between hover:border-primary/50 ${tier.id === "participation" ? "lg:col-span-2" : ""}`}
               >
                 <div className="relative z-10 flex flex-col h-full">
-
                   {/* --- CARD HEADER --- */}
                   <div className="flex items-start justify-between mb-6">
                     <div className="flex gap-4">
@@ -183,7 +181,10 @@ const PrizePool = () => {
 
                   <div className="grid grid-cols-3 gap-2 text-center">
                     {tier.stats.map((stat, idx) => (
-                      <div key={idx} className="flex flex-col items-center justify-center">
+                      <div
+                        key={idx}
+                        className="flex flex-col items-center justify-center"
+                      >
                         <span className="text-[11px] tracking-widest uppercase opacity-80 font-body">
                           {stat.label}
                         </span>
@@ -236,7 +237,7 @@ const PrizePool = () => {
                             layoutId={`subtitle-${expandedTier.id}`}
                             className="text-xl font-heading font-bold tracking-wide text-primary"
                           >
-                            Total Prize Pool: {expandedTier.amount}
+                            Amount: {expandedTier.amount}
                           </motion.p>
                         </div>
                       </div>
@@ -263,7 +264,10 @@ const PrizePool = () => {
                         </h4>
                         <div className="flex flex-wrap gap-2.5">
                           {expandedTier.rewards.map((reward, i) => (
-                            <span key={i} className="text-xs tracking-wider uppercase px-2 py-1 rounded border border-border bg-muted/50 font-body">
+                            <span
+                              key={i}
+                              className="text-xs tracking-wider uppercase px-2 py-1 rounded border border-border bg-muted/50 font-body"
+                            >
                               {reward}
                             </span>
                           ))}
@@ -275,8 +279,9 @@ const PrizePool = () => {
                           Mission Brief
                         </h4>
                         <p className="font-body leading-relaxed opacity-80">
-                          {expandedTier.description} This tier represents the pinnacle of achievement.
-                          Only the boldest innovators will unlock this vault.
+                          {expandedTier.description} This tier represents the
+                          pinnacle of achievement. Only the boldest innovators
+                          will unlock this vault.
                         </p>
                       </div>
                     </motion.div>

@@ -622,7 +622,7 @@ export default function About() {
             <StepCard
               num="04"
               title="Loot"
-              description='Face the "experts" for evaluation and claim the total prize pool of ₹30,000.'
+              description='Face the "experts" for evaluation and claim the total prize pool of ₹27,000.'
               delay={0.25}
             />
           </div>
@@ -655,7 +655,7 @@ export default function About() {
             />
             <FeatureCard
               title="WIN"
-              description="	Compete for a share of the ₹30,000 prize pool and earn domain-wise recognition for your technical excellence."
+              description="	Compete for a share of the ₹27,000 prize pool and earn domain-wise recognition for your technical excellence."
               delay={0.2}
             />
           </div>

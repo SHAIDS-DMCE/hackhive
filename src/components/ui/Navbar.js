@@ -60,7 +60,7 @@ export default function Navbar() {
           "backdrop-blur-sm border-b border-border",
           isScrolled || isMobileMenuOpen
             ? "bg-background/80 shadow-sm"
-            : "bg-background/60"
+            : "bg-background/60",
         )}
       >
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
@@ -90,14 +90,14 @@ export default function Navbar() {
 
               {/* Register Button - Using primary color (30% accent) */}
               <ButtonLink
-                href="https://unstop.com"
+                href="https://unstop.com/p/hackhive-20-shaids-student-hive-of-artificial-intelligence-data-science-students-1630401"
                 target="_blank"
                 rel="noopener noreferrer"
                 variant="default"
                 size="default"
                 className="hidden sm:inline-flex px-5"
                 style={{
-                  backgroundColor: '#3769bf',
+                  backgroundColor: "#3769bf",
                 }}
               >
                 Unstop
@@ -105,13 +105,13 @@ export default function Navbar() {
 
               {/* Mobile Register Button (icon only) */}
               <ButtonLink
-                href="https://unstop.com"
+                href="https://unstop.com/p/hackhive-20-shaids-student-hive-of-artificial-intelligence-data-science-students-1630401"
                 target="_blank"
                 rel="noopener noreferrer"
                 variant="default"
                 size="icon"
                 style={{
-                  backgroundColor: '#3769bf',
+                  backgroundColor: "#3769bf",
                 }}
                 className="sm:hidden rounded-full "
               >
@@ -119,14 +119,14 @@ export default function Navbar() {
               </ButtonLink>
 
               {/* Theme Toggle Button */}
-              <Button
+              {/* <Button
                 onClick={toggleTheme}
                 variant="outline"
                 size="icon"
                 aria-label="Toggle theme"
               >
                 {getResolvedThemeIcon()}
-              </Button>
+              </Button> */}
 
               {/* Mobile Menu Button */}
               <Button
@@ -146,7 +146,7 @@ export default function Navbar() {
         <div
           className={cn(
             "lg:hidden overflow-hidden transition-all duration-300 ease-in-out",
-            isMobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+            isMobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0",
           )}
         >
           <div className="px-4 pb-4 pt-2 border-t border-border">
