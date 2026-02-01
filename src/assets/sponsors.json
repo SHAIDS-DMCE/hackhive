@@ -1,0 +1,56 @@
+[
+  {
+    "id": "techcorp",
+    "title": "Sponsor1",
+    "icon": "💎",
+    "role": "Title Sponsor",
+    "size": "large",
+    "description": "Leading the way in global tech innovation and software solutions.",
+    "rewards": ["Keynote Session", "Exclusive Booth", "Merch Branding"]
+  },
+  {
+    "id": "innovation",
+    "title": "Sponsor2",
+    "icon": "🚀",
+    "role": "Title Sponsor",
+    "size": "large",
+    "description": "Pioneering research and development for the next generation of startups.",
+    "rewards": ["Workshop Host", "Premium Stall", "Database Access"]
+  },
+  {
+    "id": "digital",
+    "title": "Sponsor3",
+    "icon": "☁️",
+    "role": "Associate Sponsor",
+    "size": "small",
+    "description": "Providing cloud infrastructure and digital transformation services.",
+    "rewards": ["Tech Talk", "Standard Booth"]
+  },
+  {
+    "id": "cloud",
+    "title": "Sponsor4",
+    "icon": "🌐",
+    "role": "Associate Sponsor",
+    "size": "small",
+    "description": "Scalable cloud architecture for modern applications.",
+    "rewards": ["Mentorship", "Logo on Website"]
+  },
+  {
+    "id": "data",
+    "title": "Sponsor5",
+    "icon": "📊",
+    "role": "Partner",
+    "size": "small",
+    "description": "Big data analytics and AI-driven insights.",
+    "rewards": ["Networking Access", "Swag Distribution"]
+  },
+  {
+    "id": "web",
+    "title": "Sponsor6",
+    "icon": "💻",
+    "role": "Partner",
+    "size": "small",
+    "description": "Building the future of the web, one pixel at a time.",
+    "rewards": ["Recruiting Access", "Social Media Shoutout"]
+  }
+]
