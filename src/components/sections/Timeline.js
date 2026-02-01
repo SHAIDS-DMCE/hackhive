@@ -206,12 +206,12 @@ export default function Timeline() {
       <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.02] via-transparent to-primary/[0.01] pointer-events-none" />
 
       {/* Header */}
-      <div className="timeline-header fixed top-6 md:top-8 left-0 right-0 z-30 px-6 md:px-12 pointer-events-none">
+      <div className="timeline-header fixed top-20 sm:top-24 md:top-28 left-0 right-0 z-30 px-4 sm:px-6 md:px-12 pointer-events-none">
         <div className="max-w-7xl mx-auto">
-          <span className="text-[10px] font-mono tracking-[0.2em] text-primary/70 mb-1 block">
+          <span className="text-[8px] sm:text-[10px] font-mono tracking-[0.15em] sm:tracking-[0.2em] text-primary/70 mb-0.5 sm:mb-1 block">
             THE OPERATION
           </span>
-          <h2 className="text-xl md:text-2xl lg:text-3xl font-bold tracking-wide">
+          <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold tracking-wide">
             EVENT TIMELINE
           </h2>
         </div>
@@ -225,13 +225,13 @@ export default function Timeline() {
         {phases.map((phase, index) => (
           <div
             key={phase.id}
-            className="timeline-phase flex-shrink-0 w-screen h-screen flex items-center"
+            className="timeline-phase flex-shrink-0 w-screen h-screen flex items-center pt-16 sm:pt-20 md:pt-24 pb-4 sm:pb-6"
           >
-            <div className="w-full max-w-7xl mx-auto px-6 md:px-12">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+            <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-16 items-center">
                 {/* Left - SVG */}
-                <div className="phase-svg-container relative h-[30vh] md:h-[40vh] lg:h-[50vh] flex items-center justify-center order-2 lg:order-1">
-                  <div className="relative w-[60%] md:w-[50%] aspect-square">
+                <div className="phase-svg-container relative h-[20vh] sm:h-[25vh] md:h-[35vh] lg:h-[45vh] flex items-center justify-center order-2 lg:order-1">
+                  <div className="relative w-[50%] sm:w-[55%] md:w-[50%] aspect-square">
                     {/* Glow */}
                     <div className="absolute inset-0 bg-primary/10 rounded-full blur-3xl" />
 
@@ -279,8 +279,8 @@ export default function Timeline() {
                     </svg>
 
                     {/* Phase label under SVG */}
-                    <div className="absolute -bottom-8 left-0 right-0 text-center">
-                      <span className="text-[10px] font-mono tracking-[0.2em] text-primary/60">
+                    <div className="absolute -bottom-5 sm:-bottom-6 md:-bottom-8 left-0 right-0 text-center">
+                      <span className="text-[8px] sm:text-[9px] md:text-[10px] font-mono tracking-[0.15em] sm:tracking-[0.2em] text-primary/60">
                         {phase.phaseName?.toUpperCase()}
                       </span>
                     </div>
@@ -290,30 +290,30 @@ export default function Timeline() {
                 {/* Right - Content */}
                 <div className="phase-content order-1 lg:order-2 will-change-transform">
                   {/* Phase Label */}
-                  <div className="mb-3">
-                    <span className="text-xs font-mono tracking-[0.2em] text-primary">
+                  <div className="mb-1.5 sm:mb-2 md:mb-3">
+                    <span className="text-[10px] sm:text-xs font-mono tracking-[0.15em] sm:tracking-[0.2em] text-primary">
                       {phase.phaseName?.toUpperCase()}
                     </span>
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 tracking-wide">
+                  <h3 className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold mb-2 sm:mb-3 tracking-wide">
                     {phase.title}
                   </h3>
 
                   {/* Time/Duration */}
-                  <div className="mb-4 flex flex-wrap gap-2">
+                  <div className="mb-2 sm:mb-3 md:mb-4 flex flex-wrap gap-1.5 sm:gap-2">
                     {phase.time && (
-                      <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/30 rounded-lg">
-                        <span className="text-sm font-mono font-bold text-primary">
+                      <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 bg-primary/10 border border-primary/30 rounded-md sm:rounded-lg">
+                        <span className="text-[10px] sm:text-xs md:text-sm font-mono font-bold text-primary">
                           ⏱ {phase.time}
                         </span>
                       </div>
                     )}
                     {phase.duration && (
                       <>
-                        <div className="px-4 py-2 bg-primary/10 border border-primary/30 rounded-lg">
-                          <span className="text-sm font-mono font-bold text-primary">
+                        <div className="px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 bg-primary/10 border border-primary/30 rounded-md sm:rounded-lg">
+                          <span className="text-[10px] sm:text-xs md:text-sm font-mono font-bold text-primary">
                             📅 {phase.duration.startDate}
                             {phase.duration.endDate !== phase.duration.startDate && (
                               <> — {phase.duration.endDate}</>
@@ -321,8 +321,8 @@ export default function Timeline() {
                           </span>
                         </div>
                         {phase.resultDate && (
-                          <div className="px-3 py-2 bg-foreground/5 border border-foreground/10 rounded-lg">
-                            <span className="text-xs font-mono">
+                          <div className="px-2 sm:px-3 py-1.5 sm:py-2 bg-foreground/5 border border-foreground/10 rounded-md sm:rounded-lg">
+                            <span className="text-[9px] sm:text-[10px] md:text-xs font-mono">
                               🎯 Results: {phase.resultDate}
                             </span>
                           </div>
@@ -332,21 +332,21 @@ export default function Timeline() {
                   </div>
 
                   {/* Description */}
-                  <p className="text-foreground/70 leading-relaxed mb-5 max-w-lg text-sm md:text-base">
+                  <p className="text-foreground/70 leading-relaxed mb-3 sm:mb-4 md:mb-5 max-w-lg text-xs sm:text-sm md:text-base">
                     {phase.description}
                   </p>
 
                   {/* Activities */}
                   {phase.activities && (
                     <div>
-                      <div className="text-xs font-mono tracking-[0.15em] text-foreground/50 mb-2">
+                      <div className="text-[9px] sm:text-[10px] md:text-xs font-mono tracking-[0.1em] sm:tracking-[0.15em] text-foreground/50 mb-1.5 sm:mb-2">
                         ACTIVITIES
                       </div>
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-1 sm:gap-1.5 md:gap-2">
                         {phase.activities.map((activity, i) => (
                           <span
                             key={i}
-                            className="px-3 py-1.5 text-xs font-mono bg-foreground/5 border border-foreground/10 rounded-full"
+                            className="px-2 sm:px-2.5 md:px-3 py-1 sm:py-1.5 text-[9px] sm:text-[10px] md:text-xs font-mono bg-foreground/5 border border-foreground/10 rounded-full"
                           >
                             {activity}
                           </span>
@@ -358,16 +358,6 @@ export default function Timeline() {
               </div>
             </div>
           </div>
-        ))}
-      </div>
-
-      {/* Progress indicator */}
-      <div className="fixed right-4 md:right-8 top-1/2 -translate-y-1/2 z-30 flex flex-col gap-2">
-        {phases.map((_, index) => (
-          <div
-            key={index}
-            className="w-2 h-2 rounded-full bg-foreground/20 transition-colors duration-300"
-          />
         ))}
       </div>
     </section>
