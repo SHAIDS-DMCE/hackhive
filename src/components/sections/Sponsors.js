@@ -41,30 +41,29 @@ const Sponsors = () => {
 
   return (
     <div
-      className={`bg-background text-foreground min-h-screen relative overflow-hidden font-sans transition-colors duration-500 ease-in-out ${
-        theme === "dark" ? "dark" : ""
-      }`}
+      className={`bg-background text-foreground min-h-screen relative overflow-hidden font-sans transition-colors duration-500 ease-in-out ${theme === "dark" ? "dark" : ""
+        }`}
     >
       <div className="hhv-about__grain absolute inset-0 pointer-events-none" />
 
-      <div className="relative z-10 container mx-auto px-6 sm:px-8 lg:px-12 py-20">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-12 sm:py-16 md:py-20">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65 }}
-          className="text-center mb-16"
+          className="text-center mb-10 sm:mb-12 md:mb-16"
         >
-          <h2 className="text-5xl md:text-7xl lg:text-8xl font-heading font-black tracking-tighter text-primary">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-heading font-black tracking-tighter text-primary">
             Our Sponsors
           </h2>
 
-          <div className="w-full max-w-md mx-auto h-px mt-4 bg-gradient-to-r from-transparent via-primary/80 to-transparent opacity-80 mb-6" />
+          <div className="w-full max-w-xs sm:max-w-sm md:max-w-md mx-auto h-px mt-3 sm:mt-4 bg-gradient-to-r from-transparent via-primary/80 to-transparent opacity-80 mb-4 sm:mb-6" />
 
           <motion.blockquote
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.15 }}
-            className="text-lg md:text-xl font-heading italic mb-2 font-medium tracking-wide text-primary"
+            className="text-sm sm:text-base md:text-lg lg:text-xl font-heading italic mb-2 font-medium tracking-wide text-primary px-2"
           >
             When the odds are against us, that&apos;s when we shine the
             brightest.
@@ -76,7 +75,7 @@ const Sponsors = () => {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-10 gap-6 max-w-7xl mx-auto items-stretch"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-10 gap-4 sm:gap-5 md:gap-6 max-w-7xl mx-auto items-stretch"
           >
             {Array.isArray(sponsorsData) &&
               sponsorsData.map((sponsor) => (
@@ -88,13 +87,13 @@ const Sponsors = () => {
                   transition={spring}
                   onClick={() => setExpanded(sponsor)}
                   whileHover={{ scale: 1.02, y: -4 }}
-                  className={`text-left border border-border rounded-2xl bg-card/70 backdrop-blur-md p-4 shadow-2xl relative group cursor-pointer flex items-center gap-4 hover:border-primary/50 hover:shadow-primary/20 ${getColSpan(
+                  className={`text-left border border-border rounded-xl sm:rounded-2xl bg-card/70 backdrop-blur-md p-3 sm:p-4 shadow-2xl relative group cursor-pointer flex items-center gap-3 sm:gap-4 hover:border-primary/50 hover:shadow-primary/20 ${getColSpan(
                     sponsor,
-                  )} h-32 lg:h-40`}
+                  )} h-24 sm:h-28 md:h-32 lg:h-40`}
                 >
-                  <div className="relative z-10 w-full flex items-center gap-4">
+                  <div className="relative z-10 w-full flex items-center gap-3 sm:gap-4">
                     {/* Always show logo. Use placeholder if missing. */}
-                    <div className="flex-shrink-0 w-28 h-16 lg:w-32 lg:h-20 flex items-center justify-center overflow-hidden rounded">
+                    <div className="flex-shrink-0 w-16 h-12 sm:w-20 sm:h-14 md:w-24 md:h-16 lg:w-32 lg:h-20 flex items-center justify-center overflow-hidden rounded">
                       <img
                         src={sponsor.logo || placeholderLogo}
                         alt={`${sponsor.title} logo`}
@@ -102,17 +101,17 @@ const Sponsors = () => {
                       />
                     </div>
 
-                    <div className="flex-1">
+                    <div className="flex-1 min-w-0">
                       <motion.h3
                         layoutId={`title-${sponsor.id}`}
-                        className="text-lg md:text-xl font-heading font-black uppercase tracking-wide mb-0 text-primary"
+                        className="text-sm sm:text-base md:text-lg lg:text-xl font-heading font-black uppercase tracking-wide mb-0 text-primary truncate"
                       >
                         {sponsor.title}
                       </motion.h3>
 
                       <motion.p
                         layoutId={`role-${sponsor.id}`}
-                        className="text-xs md:text-sm font-body uppercase tracking-widest opacity-80 text-primary"
+                        className="text-[10px] sm:text-xs md:text-sm font-body uppercase tracking-widest opacity-80 text-primary"
                       >
                         {sponsor.role}
                       </motion.p>
@@ -124,7 +123,7 @@ const Sponsors = () => {
 
           <AnimatePresence>
             {expanded && (
-              <motion.div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+              <motion.div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4">
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -136,30 +135,30 @@ const Sponsors = () => {
                 <motion.div
                   layoutId={`card-${expanded.id}`}
                   transition={spring}
-                  className="border border-border rounded-2xl bg-card backdrop-blur-md p-6 md:p-8 shadow-2xl w-full max-w-3xl relative z-10"
+                  className="border border-border rounded-xl sm:rounded-2xl bg-card backdrop-blur-md p-4 sm:p-6 md:p-8 shadow-2xl w-full max-w-3xl relative z-10 max-h-[90vh] overflow-y-auto"
                 >
-                  <div className="flex flex-col md:flex-row gap-6">
+                  <div className="flex flex-col md:flex-row gap-4 sm:gap-6">
                     <div className="flex-shrink-0 flex items-center justify-center">
                       <img
                         src={expanded.logo || placeholderLogo}
                         alt={`${expanded.title} logo`}
-                        className="w-32 h-32 object-contain"
+                        className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 object-contain"
                       />
                     </div>
 
                     <div className="flex-1">
-                      <div className="flex justify-between items-start gap-4">
+                      <div className="flex justify-between items-start gap-3 sm:gap-4">
                         <div>
                           <motion.h2
                             layoutId={`title-${expanded.id}`}
-                            className="text-2xl md:text-4xl font-heading font-black uppercase mb-1 tracking-wide text-primary"
+                            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-heading font-black uppercase mb-1 tracking-wide text-primary"
                           >
                             {expanded.title}
                           </motion.h2>
 
                           <motion.p
                             layoutId={`role-${expanded.id}`}
-                            className="text-base md:text-lg font-heading font-semibold tracking-wide text-primary"
+                            className="text-sm sm:text-base md:text-lg font-heading font-semibold tracking-wide text-primary"
                           >
                             {expanded.role}
                           </motion.p>
@@ -168,16 +167,16 @@ const Sponsors = () => {
                         <div>
                           <button
                             onClick={() => setExpanded(null)}
-                            className="text-xs tracking-wider uppercase px-3 py-1 rounded border border-border bg-muted/50 font-body hover:bg-red-500/20 transition-colors"
+                            className="text-[10px] sm:text-xs tracking-wider uppercase px-2 sm:px-3 py-0.5 sm:py-1 rounded border border-border bg-muted/50 font-body hover:bg-red-500/20 transition-colors"
                           >
                             Close
                           </button>
                         </div>
                       </div>
 
-                      <div className="h-px bg-gradient-to-r from-transparent via-primary/80 to-transparent opacity-80 my-6" />
+                      <div className="h-px bg-gradient-to-r from-transparent via-primary/80 to-transparent opacity-80 my-4 sm:my-6" />
 
-                      <div className="grid md:grid-cols-2 gap-6">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                         {/* <div>
                           <h4 className="font-heading text-lg mb-3 uppercase tracking-wider text-primary">
                             Perks &amp; Branding
@@ -200,11 +199,11 @@ const Sponsors = () => {
                           </div>
                         </div>*/}
 
-                        <div className="p-4 rounded-xl ">
+                        <div className="p-3 sm:p-4 rounded-lg sm:rounded-xl">
                           {/* <h4 className="font-heading text-lg mb-3 uppercase tracking-wider text-foreground">
                             Company Profile
                           </h4>*/}
-                          <p className="font-body leading-relaxed opacity-80 text-foreground">
+                          <p className="font-body text-sm sm:text-base leading-relaxed opacity-80 text-foreground">
                             {expanded.description ||
                               expanded.about ||
                               "No description available."}
