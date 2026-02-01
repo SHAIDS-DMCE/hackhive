@@ -95,7 +95,7 @@ export default function Navbar() {
                 rel="noopener noreferrer"
                 variant="default"
                 size="default"
-                className="hidden sm:inline-flex px-5"
+                className="hidden sm:inline-flex px-5 text-white"
                 style={{
                   backgroundColor: "#3769bf",
                 }}
@@ -113,7 +113,7 @@ export default function Navbar() {
                 style={{
                   backgroundColor: "#3769bf",
                 }}
-                className="sm:hidden rounded-full "
+                className="sm:hidden rounded-full"
               >
                 <OpenInNewIcon />
               </ButtonLink>
