@@ -49,14 +49,14 @@ export default function FallingArtifacts() {
 
         // SLOWED DOWN: Natural free-fall physics (~55% slower)
         this.velocity = 0;
-        this.acceleration = 0.004 + Math.random() * 0.012;
-        this.maxSpeed = 0.65 + Math.random() * 0.7;
+        this.acceleration = 0.001 + Math.random() * 0.01;
+        this.maxSpeed = 0.2 + Math.random() * 0.5;
 
         // Wider rectangles
-        this.width = 30 + Math.random() * 20;
-        this.height = 10 + Math.random() * 8;
+        this.width = 40 + Math.random() * 12;
+        this.height = 20 + Math.random() * 6;
 
-        this.opacity = 0.03 + Math.random() * 0.12;
+        this.opacity = 0.01 + Math.random() * 0.05;
 
         // Rotation with natural wobble
         this.rotation = Math.random() * Math.PI * 2;
@@ -66,7 +66,7 @@ export default function FallingArtifacts() {
         this.wobbleAmplitude = 0.3 + Math.random() * 0.5;
 
         // Horizontal drift - slowed
-        this.driftSpeed = (Math.random() - 0.5) * 0.15;
+        this.driftSpeed = (Math.random() - 0.5) * 0.1;
       }
 
       update() {

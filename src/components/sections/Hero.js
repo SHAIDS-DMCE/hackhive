@@ -6,7 +6,6 @@ import AnimatedLetters from '@/components/animations/AnimatedLetters';
 import FallingArtifacts from '@/components/effects/FallingArtifacts';
 import { useLoading } from '@/context/LoadingContext';
 
-// CHANGE THIS DATE - Countdown target date
 const TARGET_DATE = new Date('2026-02-23T11:00:00');
 
 export default function Hero() {
@@ -53,7 +52,7 @@ export default function Hero() {
     if (!startAnimations || !taglineRef.current) return;
 
     const tagline = taglineRef.current;
-    const targetText = 'Join the resistance, the ultimate heist';
+    const targetText = 'Join the resistance, the ultimate heist...';
     const scrambleChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 
     let scrambleInterval;
@@ -181,7 +180,7 @@ export default function Hero() {
 
       {/* Centered Content */}
       {startAnimations && (
-        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
+        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 sm:px-8 lg:px-12">
 
           {/* Title - HACKHIVE 2026 */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-bold tracking-tight leading-none text-center">
@@ -204,24 +203,13 @@ export default function Hero() {
             className="mt-4 sm:mt-6 md:mt-8 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-foreground/70 text-center sm:max-w-sm md:max-w-md lg:max-w-lg font-body opacity-0"
             style={{ minHeight: '1.5em' }}
           >
-            Join the resistance, the ultimate heist
+            Join the resistance, the ultimate heist...
           </p>
 
           {/* Huge Glowing Timer */}
           <motion.div
             ref={timerRef}
-            className="mt-8 sm:mt-10 md:mt-12 px-6 sm:px-10 md:px-14 lg:px-20 py-6 sm:py-8 md:py-10 rounded-2xl sm:rounded-3xl"
-            style={{
-              background: 'linear-gradient(135deg, rgba(218, 47, 53, 0.1), rgba(218, 47, 53, 0.02))',
-              boxShadow: `
-                0 0 60px rgba(218, 47, 53, 0.3),
-                0 0 120px rgba(218, 47, 53, 0.15),
-                0 25px 50px rgba(0, 0, 0, 0.3),
-                inset 0 0 60px rgba(218, 47, 53, 0.05)
-              `,
-              border: '1px solid rgba(218, 47, 53, 0.2)',
-              backdropFilter: 'blur(10px)',
-            }}
+            className="mt-8 sm:mt-10 md:mt-12 px-6 sm:px-10 md:px-14 lg:px-20 py-6 sm:py-8 md:py-10 rounded-2xl sm:rounded-3xl bg-primary/10 border border-primary/20 backdrop-blur-[10px] shadow-[0_0_60px_rgba(var(--primary-rgb),0.3),0_0_120px_rgba(var(--primary-rgb),0.15),0_25px_50px_rgba(0,0,0,0.3)]"
             initial={{ opacity: 0, y: 30, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{
@@ -240,9 +228,6 @@ export default function Hero() {
                 <div key={item.label} className="flex flex-col items-center">
                   <div
                     className="font-code text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold"
-                    style={{
-                      textShadow: '0 0 30px rgba(218, 47, 53, 0.6), 0 0 60px rgba(218, 47, 53, 0.3)',
-                    }}
                   >
                     <span className="timer-value text-primary">
                       {String(item.value).padStart(2, '0')}
@@ -279,16 +264,7 @@ export default function Hero() {
             {/* Problem Statements Button */}
             <a
               href="#problem-statements"
-              className="inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 lg:px-8 lg:py-4 rounded-lg text-white text-xs sm:text-sm lg:text-base font-semibold transition-all duration-300"
-              style={{
-                boxShadow: '0 2px 12px rgba(218, 47, 53, 0.4)',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = '0 10px 30px rgba(218, 47, 53, 0.5), 0 0 20px rgba(218, 47, 53, 0.3)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = '0 4px 15px rgba(218, 47, 53, 0.4)';
-              }}
+              className="inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 lg:px-8 lg:py-4 rounded-lg bg-primary text-primary-foreground text-xs sm:text-sm lg:text-base font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-primary/30"
             >
               Problem Statements
               <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -301,12 +277,9 @@ export default function Hero() {
               href="https://unstop.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="unstop-btn inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 lg:px-8 lg:py-4 rounded-lg text-white text-xs sm:text-sm lg:text-base font-semibold transition-all duration-300 hover:opacity-90"
-              style={{
-                backgroundColor: '#3769bf',
-              }}
+              className="unstop-btn inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 lg:px-8 lg:py-4 rounded-lg bg-[#3769bf] text-white text-xs sm:text-sm lg:text-base font-semibold transition-all duration-300 hover:opacity-90"
             >
-              Unstop
+              Register with Unstop
             </a>
           </motion.div>
 

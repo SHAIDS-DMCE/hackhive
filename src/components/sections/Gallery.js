@@ -101,7 +101,7 @@ export default function Gallery() {
       className="relative w-full py-32"
       style={{ backgroundColor: colors.primary }}
     >
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-6 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center min-h-screen">
           <motion.div
             variants={titleVariants}

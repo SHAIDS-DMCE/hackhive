@@ -1,0 +1,90 @@
+{
+  "phases": [
+    {
+      "id": 1,
+      "phaseName": "Phase 1",
+      "title": "REGISTRATION & SCREENING",
+      "duration": {
+        "startDate": "02 February",
+        "endDate": "20 February"
+      },
+      "activities": [
+        "Participant registration",
+        "Team formation",
+        "Problem statement selection",
+        "Idea submission",
+        "PPT submission"
+      ],
+      "description": "Phase 1 focuses on registrations and idea evaluation. Teams submit their ideas and presentations for screening.",
+      "resultDate": "28 February",
+      "icon": "register"
+    },
+    {
+      "id": 2,
+      "phaseName": "Phase 2",
+      "title": "THE HEIST DAY",
+      "duration": {
+        "startDate": "06 March",
+        "endDate": "06 March"
+      },
+      "description": "Phase 2 is the final on-site hackathon where shortlisted teams participate in a full day of coding, mentoring, and presentations.",
+      "icon": "heist"
+    },
+    {
+      "id": 3,
+      "phaseName": "Reporting",
+      "title": "INFILTRATION BEGINS",
+      "time": "08:00 AM",
+      "description": "All operators arrive, credentials verified, mission access granted.",
+      "icon": "reporting"
+    },
+    {
+      "id": 4,
+      "phaseName": "Morning Session",
+      "title": "CODE BREACH PHASE I",
+      "time": "08:30 AM — 12:00 PM",
+      "description": "Initial coding phase where teams begin building their solutions.",
+      "icon": "coding"
+    },
+    {
+      "id": 5,
+      "phaseName": "Mentoring",
+      "title": "THE PROFESSOR'S BRIEFING",
+      "time": "12:00 PM — 01:00 PM",
+      "description": "Mentor guidance and review session. Strategic guidance, flaw detection, and optimization.",
+      "icon": "mentor"
+    },
+    {
+      "id": 6,
+      "phaseName": "Break",
+      "title": "SUPPLY DROP",
+      "time": "01:00 PM — 02:00 PM",
+      "description": "Lunch break. Operatives refuel before final execution phase.",
+      "icon": "break"
+    },
+    {
+      "id": 7,
+      "phaseName": "Afternoon Session",
+      "title": "CODE BREACH PHASE II",
+      "time": "02:00 PM — 06:30 PM",
+      "description": "Continuous coding and project refinement. Feature completion, debugging, and final system lockdown.",
+      "icon": "coding2"
+    },
+    {
+      "id": 8,
+      "phaseName": "Presentation",
+      "title": "EXTRACTION PROTOCOL",
+      "time": "06:30 PM — 07:30 PM",
+      "description": "Final PPT presentation before judges. Teams present their solution and impact.",
+      "icon": "presentation"
+    },
+    {
+      "id": 9,
+      "phaseName": "Closing",
+      "title": "VAULT UNLOCKED",
+      "time": "07:30 PM — 08:00 PM",
+      "description": "Winner announcement and prize distribution. Successful crews escape with rewards.",
+      "icon": "victory"
+    }
+  ]
+}

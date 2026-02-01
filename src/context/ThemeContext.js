@@ -26,14 +26,14 @@ export const ThemeProvider = ({ children }) => {
 
   const colors = {
     dark: {
-      primary: "#1B1718", // 60% - primary background, sections, containers
-      accent: "#C4161C", // 30% - accent color for highlights, headings, CTAs
-      text: "#F2F3F4", // 10% - text, icons, subtle outlines
+      primary: "var(--background)", // Background from CSS
+      accent: "var(--primary)", // Primary/accent color  
+      text: "var(--foreground)", // Text color
     },
     light: {
-      primary: "#FCEDED", // 60% - primary background
-      accent: "#DA2F35", // 30% - accent highlights, buttons
-      text: "#586068", // 10% - text, icons, borders
+      primary: "var(--background)", // Background from CSS
+      accent: "var(--primary)", // Primary/accent color
+      text: "var(--foreground)", // Text color
     },
   };
 

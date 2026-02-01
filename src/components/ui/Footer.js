@@ -22,7 +22,7 @@ export default function Footer() {
 
   return (
     <footer className="bg-background text-foreground pt-16 pb-8 border-t border-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mb-12">
           {/* Brand Section */}
@@ -34,8 +34,8 @@ export default function Footer() {
               <h2 className="text-xl font-bold text-foreground">HackHive</h2>
             </div>
             <p className="text-foreground/70 text-sm leading-relaxed mb-6">
-              Official Hackathon conducted under SHAIDS. Build, learn and
-              showcase – join us for an unforgettable experience.
+              Official Hackathon conducted under SHAIDS. Build, learn,
+              showcase and join us for an unforgettable experience.
             </p>
 
             {/* Social Icons */}
@@ -130,14 +130,26 @@ export default function Footer() {
               >
                 Email: contact@hackhive.com
               </a>
-              <a
-                href="tel:+919876543210"
-                className="text-foreground/70 hover:text-primary transition-colors text-sm"
-              >
-                Divesh: +91 98765 43210
-                <br />
-                Phone: +91 98765 43210
-              </a>
+              <div className="flex flex-col gap-2 mt-4">
+                <a
+                  href="tel:+917057720106"
+                  className="text-foreground/70 hover:text-primary transition-colors text-sm"
+                >
+                  <span>Divesh Dalvi: </span>+91 70577 20106
+                </a>
+                <a
+                  href="tel:+917666812655"
+                  className="text-foreground/70 hover:text-primary transition-colors text-sm"
+                >
+                  <span>Ajay Jadhav: </span>+91 76668 12655
+                </a>
+                <a
+                  href="tel:+919326141910"
+                  className="text-foreground/70 hover:text-primary transition-colors text-sm"
+                >
+                  <span>Aayush Thoke: </span>+91 93261 41910
+                </a>
+              </div>
             </div>
           </div>
         </div>

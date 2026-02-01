@@ -34,12 +34,12 @@ const Sponsors = () => {
 
   return (
     <div
-      className={`hhv-about min-h-screen relative overflow-hidden font-sans transition-colors duration-500 ease-in-out ${theme === "dark" ? "dark" : ""}`}
+      className={`bg-background text-foreground min-h-screen relative overflow-hidden font-sans transition-colors duration-500 ease-in-out ${theme === "dark" ? "dark" : ""}`}
     >
       {/* Background Effects */}
       <div className="hhv-about__grain absolute inset-0 pointer-events-none" />
 
-      <div className="relative z-10 container mx-auto px-4 py-20">
+      <div className="relative z-10 container mx-auto px-6 sm:px-8 lg:px-12 py-20">
         {/* --- HEADER --- */}
         <motion.div
           initial={{ opacity: 0, y: -30 }}
@@ -49,29 +49,22 @@ const Sponsors = () => {
         >
           {/* --- TITLE LAYOUT --- */}
           <div className="flex flex-col items-center justify-center gap-2 mb-6">
-            <div className="hhv-kicker tracking-widest hhv-font-body">
-              <span>HACKHIVE 2026</span>
-            </div>
 
             {/* --- MAIN PAGE TITLE --- */}
-            <h2 
-              className="text-7xl md:text-9xl hhv-font-heading font-black tracking-tighter" 
-              style={{ 
-                color: '#e62429', 
-              }}
+            <h2
+              className="text-7xl md:text-9xl font-heading font-black tracking-tighter text-primary"
             >
               Our Sponsors
             </h2>
           </div>
 
-          <div className="w-full max-w-md mx-auto hhv-heroCard__divider mb-8"></div>
+          <div className="w-full max-w-md mx-auto h-px mt-3.5 bg-gradient-to-r from-transparent via-primary/80 to-transparent opacity-80 mb-8"></div>
 
           <motion.blockquote
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
-            className="text-xl md:text-2xl hhv-font-heading italic mb-4 font-medium tracking-wide"
-            style={{ color: "var(--hhv-accent)" }}
+            className="text-xl md:text-2xl font-heading italic mb-4 font-medium tracking-wide text-primary"
           >
             "When the odds are against us, that's when we shine the brightest."
           </motion.blockquote>
@@ -92,27 +85,24 @@ const Sponsors = () => {
                 variants={cardVariants}
                 onClick={() => setExpandedTier(sponsor)}
                 transition={spring}
-                
-                // HOVER EFFECT: Red Border & Glow applied here via Global CSS
-                whileHover={{ 
-                  scale: 1.02, 
+
+                // HOVER EFFECT
+                whileHover={{
+                  scale: 1.02,
                   y: -5,
-                  borderColor: "#c51b20",
-                  boxShadow: "0 10px 40px -10px rgba(197, 27, 32, 0.5)"
                 }}
 
-                className={`hhv-heroCard relative group cursor-pointer flex flex-col justify-center items-center text-center p-8
+                className={`border border-border rounded-2xl bg-card/70 backdrop-blur-md p-4 shadow-2xl relative group cursor-pointer flex flex-col justify-center items-center text-center hover:border-primary/50 hover:shadow-primary/20
                   ${sponsor.size === "large" ? "lg:col-span-2 h-48 lg:h-64" : "lg:col-span-1 h-40 lg:h-48"}
                 `}
               >
                 {/* Content */}
                 <div className="relative z-10">
-                  
-                  {/* --- UPDATED CARD TITLE (Bold Red Style) --- */}
+
+                  {/* --- CARD TITLE --- */}
                   <motion.h3
                     layoutId={`title-${sponsor.id}`}
-                    className="text-2xl md:text-4xl hhv-font-heading font-black uppercase tracking-wide mb-2"
-                    style={{ color: "#e62429" }} // Explicit Red
+                    className="text-2xl md:text-4xl font-heading font-black uppercase tracking-wide mb-2 text-primary"
                   >
                     {sponsor.title}
                   </motion.h3>
@@ -120,8 +110,7 @@ const Sponsors = () => {
                   {/* Subtle Role Text */}
                   <motion.p
                     layoutId={`role-${sponsor.id}`}
-                    className="text-xs md:text-sm hhv-font-body uppercase tracking-widest opacity-80"
-                    style={{ color: "var(--hhv-accent)" }}
+                    className="text-xs md:text-sm font-body uppercase tracking-widest opacity-80 text-primary"
                   >
                     {sponsor.role}
                   </motion.p>
@@ -139,32 +128,29 @@ const Sponsors = () => {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   onClick={() => setExpandedTier(null)}
-                  className="absolute inset-0 backdrop-blur-md bg-black/60"
+                  className="absolute inset-0 backdrop-blur-md bg-muted/10 dark:bg-background/80"
                 />
 
                 <motion.div
                   layoutId={`card-${expandedTier.id}`}
                   transition={spring}
-                  className="hhv-heroCard w-full max-w-3xl relative z-10 !bg-[var(--hhv-bg)]"
-                  style={{ border: "1px solid #c51b20", boxShadow: '0 0 50px rgba(197, 27, 32, 0.2)' }}
+                  className="border border-border rounded-2xl bg-card backdrop-blur-md p-4 shadow-2xl w-full max-w-3xl relative z-10 border-primary/50"
                 >
                   <div className="p-8 md:p-12">
                     <div className="flex justify-between items-start mb-8">
                       <div className="flex gap-6 items-center">
                         <div className="text-4xl">{expandedTier.icon}</div>
                         <div>
-                          {/* Modal Title also updated to Red */}
+                          {/* Modal Title */}
                           <motion.h2
                             layoutId={`title-${expandedTier.id}`}
-                            className="text-4xl md:text-6xl hhv-font-heading font-black uppercase mb-2 tracking-wide"
-                            style={{ color: "#e62429" }} 
+                            className="text-4xl md:text-6xl font-heading font-black uppercase mb-2 tracking-wide text-primary"
                           >
                             {expandedTier.title}
                           </motion.h2>
                           <motion.p
                             layoutId={`role-${expandedTier.id}`}
-                            className="text-xl hhv-font-heading font-bold tracking-wide"
-                            style={{ color: "var(--hhv-accent)" }}
+                            className="text-xl font-heading font-bold tracking-wide text-primary"
                           >
                             {expandedTier.role}
                           </motion.p>
@@ -173,41 +159,38 @@ const Sponsors = () => {
 
                       <button
                         onClick={() => setExpandedTier(null)}
-                        className="hhv-micro hover:bg-red-500/20 transition-colors hhv-font-body tracking-widest"
+                        className="text-xs tracking-wider uppercase px-2 py-1 rounded border border-border bg-muted/50 font-body hover:bg-red-500/20 transition-colors"
                       >
                         CLOSE
                       </button>
                     </div>
 
-                    <div className="hhv-heroCard__divider mb-8"></div>
+                    <div className="h-px bg-gradient-to-r from-transparent via-primary/80 to-transparent opacity-80 mb-8"></div>
 
                     <div className="grid md:grid-cols-2 gap-8">
                       <div>
                         <h4
-                          className="hhv-font-heading text-xl mb-4 uppercase tracking-wider"
-                          style={{ color: "var(--hhv-accent)" }}
+                          className="font-heading text-xl mb-4 uppercase tracking-wider text-primary"
                         >
-                          Perks & Branding
+                          Perks &amp; Branding
                         </h4>
-                        <div className="hhv-pillrow">
+                        <div className="flex flex-wrap gap-2.5">
                           {expandedTier.rewards.map((reward, i) => (
-                            <span key={i} className="hhv-micro hhv-font-body tracking-wider">
+                            <span key={i} className="text-xs tracking-wider uppercase px-2 py-1 rounded border border-border bg-muted/50 font-body">
                               {reward}
                             </span>
                           ))}
                         </div>
                       </div>
 
-                      <div className="p-6 rounded-xl border border-[var(--hhv-border)] bg-[var(--hhv-surface)]">
+                      <div className="p-6 rounded-xl border border-border bg-muted/50">
                         <h4
-                          className="hhv-font-heading text-xl mb-4 uppercase tracking-wider"
-                          style={{ color: "var(--hhv-text)" }}
+                          className="font-heading text-xl mb-4 uppercase tracking-wider text-foreground"
                         >
                           Company Profile
                         </h4>
                         <p
-                          className="hhv-font-body leading-relaxed opacity-80"
-                          style={{ color: "var(--hhv-text)" }}
+                          className="font-body leading-relaxed opacity-80 text-foreground"
                         >
                           {expandedTier.description}
                         </p>
