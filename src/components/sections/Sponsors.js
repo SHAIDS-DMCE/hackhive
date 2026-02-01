@@ -41,29 +41,29 @@ const Sponsors = () => {
 
   return (
     <div
-      className={`bg-background text-foreground min-h-screen relative overflow-hidden font-sans transition-colors duration-500 ease-in-out ${theme === "dark" ? "dark" : ""
+      className={`bg-background text-foreground relative overflow-hidden font-sans transition-colors duration-500 ease-in-out ${theme === "dark" ? "dark" : ""
         }`}
     >
       <div className="hhv-about__grain absolute inset-0 pointer-events-none" />
 
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-12 sm:py-16 md:py-20">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-10 sm:py-12 md:py-16 lg:py-20">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65 }}
-          className="text-center mb-10 sm:mb-12 md:mb-16"
+          className="text-center mb-6 sm:mb-8 md:mb-10 lg:mb-12"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-heading font-black tracking-tighter text-primary">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-heading font-black tracking-tighter text-primary">
             Our Sponsors
           </h2>
 
-          <div className="w-full max-w-xs sm:max-w-sm md:max-w-md mx-auto h-px mt-3 sm:mt-4 bg-gradient-to-r from-transparent via-primary/80 to-transparent opacity-80 mb-4 sm:mb-6" />
+          <div className="w-full max-w-[200px] sm:max-w-xs md:max-w-sm mx-auto h-px mt-2 sm:mt-3 bg-gradient-to-r from-transparent via-primary/80 to-transparent opacity-80 mb-3 sm:mb-4" />
 
           <motion.blockquote
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.15 }}
-            className="text-sm sm:text-base md:text-lg lg:text-xl font-heading italic mb-2 font-medium tracking-wide text-primary px-2"
+            className="text-xs sm:text-sm md:text-base lg:text-lg font-heading italic font-medium tracking-wide text-primary px-2"
           >
             When the odds are against us, that&apos;s when we shine the
             brightest.
@@ -75,7 +75,7 @@ const Sponsors = () => {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-10 gap-4 sm:gap-5 md:gap-6 max-w-7xl mx-auto items-stretch"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-10 gap-3 sm:gap-4 md:gap-5 max-w-5xl mx-auto items-stretch"
           >
             {Array.isArray(sponsorsData) &&
               sponsorsData.map((sponsor) => (
@@ -87,13 +87,13 @@ const Sponsors = () => {
                   transition={spring}
                   onClick={() => setExpanded(sponsor)}
                   whileHover={{ scale: 1.02, y: -4 }}
-                  className={`text-left border border-border rounded-xl sm:rounded-2xl bg-card/70 backdrop-blur-md p-3 sm:p-4 shadow-2xl relative group cursor-pointer flex items-center gap-3 sm:gap-4 hover:border-primary/50 hover:shadow-primary/20 ${getColSpan(
+                  className={`text-left border border-border rounded-lg sm:rounded-xl md:rounded-2xl bg-card/70 backdrop-blur-md p-2.5 sm:p-3 md:p-4 shadow-xl relative group cursor-pointer flex items-center gap-2 sm:gap-3 md:gap-4 hover:border-primary/50 hover:shadow-primary/20 ${getColSpan(
                     sponsor,
-                  )} h-24 sm:h-28 md:h-32 lg:h-40`}
+                  )} h-20 sm:h-24 md:h-28 lg:h-32`}
                 >
-                  <div className="relative z-10 w-full flex items-center gap-3 sm:gap-4">
+                  <div className="relative z-10 w-full flex items-center gap-2 sm:gap-3 md:gap-4">
                     {/* Always show logo. Use placeholder if missing. */}
-                    <div className="flex-shrink-0 w-16 h-12 sm:w-20 sm:h-14 md:w-24 md:h-16 lg:w-32 lg:h-20 flex items-center justify-center overflow-hidden rounded">
+                    <div className="flex-shrink-0 w-12 h-10 sm:w-16 sm:h-12 md:w-20 md:h-14 lg:w-24 lg:h-16 flex items-center justify-center overflow-hidden rounded">
                       <img
                         src={sponsor.logo || placeholderLogo}
                         alt={`${sponsor.title} logo`}
@@ -104,14 +104,14 @@ const Sponsors = () => {
                     <div className="flex-1 min-w-0">
                       <motion.h3
                         layoutId={`title-${sponsor.id}`}
-                        className="text-sm sm:text-base md:text-lg lg:text-xl font-heading font-black uppercase tracking-wide mb-0 text-primary truncate"
+                        className="text-xs sm:text-sm md:text-base lg:text-lg font-heading font-bold uppercase tracking-wide mb-0 text-primary truncate"
                       >
                         {sponsor.title}
                       </motion.h3>
 
                       <motion.p
                         layoutId={`role-${sponsor.id}`}
-                        className="text-[10px] sm:text-xs md:text-sm font-body uppercase tracking-widest opacity-80 text-primary"
+                        className="text-[9px] sm:text-[10px] md:text-xs font-body uppercase tracking-wider opacity-80 text-primary"
                       >
                         {sponsor.role}
                       </motion.p>
