@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { useTheme } from '@/context/ThemeContext';
+import { motion } from "framer-motion";
+import { useTheme } from "@/context/ThemeContext";
 
 export default function Contact() {
   const { colors } = useTheme();
@@ -25,53 +25,78 @@ export default function Contact() {
   const socials = [
     {
       icon: <InstagramIcon className="w-5 h-5" />,
-      href: 'https://instagram.com/shaidsdmce',
-      label: 'Instagram'
+      href: "https://instagram.com/shaidsdmce",
+      label: "Instagram",
     },
     {
       icon: <LinkedInIcon className="w-5 h-5" />,
-      href: 'https://www.linkedin.com/company/shaids-dmce/',
-      label: 'LinkedIn'
+      href: "https://www.linkedin.com/company/shaids-dmce/",
+      label: "LinkedIn",
     },
     {
       icon: <WebIcon className="w-5 h-5" />,
-      href: 'https://shaidsdmce.app/',
-      label: 'Website'
+      href: "https://shaidsdmce.app/",
+      label: "Website",
     },
   ];
 
   const contactInfo = [
     {
-      title: 'Email ID',
+      title: "Email ID",
       content: (
-        <a href="mailto:shaids_dmce@dmce.ac.in" className="block hover:text-primary transition-colors">
+        <a
+          href="mailto:shaids_dmce@dmce.ac.in"
+          className="block hover:text-primary transition-colors"
+        >
           shaids_dmce@dmce.ac.in
         </a>
       ),
       delay: 0,
     },
     {
-      title: 'Phone Numbers',
+      title: "Phone Numbers",
       content: (
         <div className="space-y-4">
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1">
-            <span className="text-muted-foreground text-base">Divesh Dalvi:</span>
-            <a href="tel:+917057720106" className="hover:text-primary transition-colors font-mono">+91 70577 20106</a>
+            <span className="text-muted-foreground text-base">
+              Divesh Dalvi:
+            </span>
+            <a
+              href="tel:+917057720106"
+              className="hover:text-primary transition-colors font-mono"
+            >
+              +91 70577 20106
+            </a>
           </div>
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1">
-            <span className="text-muted-foreground text-base">Ajay Jadhav:</span>
-            <a href="tel:+917666812655" className="hover:text-primary transition-colors font-mono text-primary">+91 76668 12655</a>
+            <span className="text-muted-foreground text-base">
+              Ajay Jadhav:
+            </span>
+            <a
+              href="tel:+919326141910"
+              className="hover:text-primary transition-colors font-mono text-primary"
+            >
+              +91 93261 41910
+            </a>
           </div>
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1">
-            <span className="text-muted-foreground text-base">Aayush Thoke:</span>
-            <a href="tel:+919326141910" className="hover:text-primary transition-colors font-mono">+91 93261 41910</a>
+            <span className="text-muted-foreground text-base">
+              Aayush Thoke:
+            </span>
+            <a
+              href="tel:+917666812655"
+              className="hover:text-primary transition-colors font-mono"
+            >
+              {" "}
+              +91 76668 12655
+            </a>
           </div>
         </div>
       ),
       delay: 0.1,
     },
     {
-      title: 'Address',
+      title: "Address",
       content: (
         <div className="text-foreground">
           <div>Sector 3, Airoli,</div>
@@ -81,7 +106,7 @@ export default function Contact() {
       delay: 0.2,
     },
     {
-      title: 'Other Links',
+      title: "Other Links",
       content: (
         <div className="flex items-center gap-3">
           {socials.map((social, idx) => (
@@ -119,7 +144,8 @@ export default function Contact() {
                 Contact us
               </h1>
               <p className="text-xl sm:text-2xl text-muted-foreground font-body max-w-md leading-relaxed">
-                Join the resistance. Get in touch with us for any inquiries, questions, or alliance proposals.
+                Join the resistance. Get in touch with us for any inquiries,
+                questions, or alliance proposals.
               </p>
             </motion.div>
 
@@ -158,7 +184,7 @@ export default function Contact() {
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3768.799726524518!2d72.99319562601649!3d19.16024194932097!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7bf4b7a73c0ab%3A0xcfeb8b94503749f3!2sDatta%20Meghe%20College%20Of%20Engineering%2C%20Sector%203%2C%20Airoli%2C%20Navi%20Mumbai%2C%20Maharashtra%20400708!5e0!3m2!1sen!2sin!4v1769862756970!5m2!1sen!2sin"
                 width="100%"
                 height="100%"
-                style={{ border: 0, filter: 'contrast(1.2)' }}
+                style={{ border: 0, filter: "contrast(1.2)" }}
                 allowFullScreen=""
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"

@@ -5,7 +5,9 @@ import { useTheme } from "@/context/ThemeContext";
 import { useSimpleScrollLock } from "@/hooks/useSimpleScrollLock";
 import DomainCard from "@/components/ui/DomainCard";
 import ProblemStatementCard from "@/components/ui/ProblmeStatementCard";
-import ProblemStatementDetail from "@/components/ui/ProblemStatementDetail";
+import ProblemStatementDetail, {
+  DomainModal,
+} from "@/components/ui/ProblemStatementDetail";
 import problemsData from "@/assets/Domains.json";
 
 const ProblemStatements = () => {
@@ -212,94 +214,13 @@ const ProblemStatements = () => {
             ))}
           </motion.div>
 
-          <AnimatePresence>
-            {expandedDomain && (
-              <motion.div
-                className="fixed inset-0 z-40"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.25, ease: "easeInOut" }}
-              >
-                <motion.div
-                  className="absolute inset-0"
-                  style={{ backgroundColor: "rgba(0, 0, 0, 0.75)" }}
-                  onClick={() => setExpandedDomainId(null)}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.25, ease: "easeInOut" }}
-                />
-
-                <motion.div
-                  layout
-                  layoutId={`domain-${expandedDomain.id}`}
-                  className="relative h-full w-full overflow-y-auto"
-                  style={{ backgroundColor: colors.primary }}
-                  transition={{
-                    layout: {
-                      type: "spring",
-                      stiffness: 110,
-                      damping: 24,
-                      mass: 1,
-                    },
-                  }}
-                >
-                  <div className="container mx-auto px-6 sm:px-8 lg:px-12 py-10">
-                    <div className="flex items-start justify-between gap-4 mb-8">
-                      <div>
-                        <h2
-                          className="text-4xl md:text-6xl font-black"
-                          style={{
-                            color: colors.accent,
-                            fontFamily: "var(--font-heading)",
-                          }}
-                        >
-                          {expandedDomain.title}
-                        </h2>
-                        <p
-                          className="text-base md:text-lg mt-2"
-                          style={{
-                            color: colors.text,
-                            fontFamily: "var(--font-body)",
-                          }}
-                        >
-                          {expandedDomain.description}
-                        </p>
-                      </div>
-
-                      <button
-                        className="px-4 py-2 rounded-lg border cursor-pointer"
-                        style={{
-                          borderColor: colors.accent,
-                          color: colors.text,
-                          backgroundColor: `${colors.accent}15`,
-                          fontFamily: "var(--font-mono)",
-                        }}
-                        onClick={() =>
-                          setExpandedDomainId("#problem-statements")
-                        }
-                      >
-                        CLOSE
-                      </button>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                      {expandedDomain.problems.map((problem, idx) => (
-                        <ProblemStatementCard
-                          key={problem.id}
-                          problem={problem}
-                          index={idx}
-                          layoutId={`problem-${problem.id}`}
-                          onClick={() => setSelectedProblem(problem)}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+          {expandedDomain && (
+            <DomainModal
+              domain={expandedDomain}
+              cdnUrl={expandedDomain.pdfUrl}
+              onClose={() => setExpandedDomainId(null)}
+            />
+          )}
 
           <AnimatePresence>
             {selectedProblem && (
