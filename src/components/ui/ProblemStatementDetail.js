@@ -409,42 +409,7 @@ const ProblemStatementDetail = ({ problem, onClose }) => {
           <div
             className="p-3 border-t"
             style={{ borderColor: `${colors.accent}30` }}
-          >
-            <button
-              className="w-full py-2 px-3 rounded-lg text-xs cursor-pointer font-medium transition-all hover:scale-105 flex items-center justify-center space-x-2"
-              style={{
-                backgroundColor: colors.accent,
-                color: colors.primary,
-                border: `2px solid ${colors.accent}`,
-                fontFamily: "var(--font-mono)",
-                fontWeight: "bold",
-                boxShadow: `0 4px 12px ${colors.accent}40`,
-              }}
-              onClick={async (e) => {
-                e.stopPropagation();
-                // Try problem-specific pdf first, then fallback to text
-                await handleDownloadPS(problem, e);
-              }}
-              title={`Download PS for ${problem?.title || "Problem"}`}
-              aria-label={`Download PS for ${problem?.title || "Problem"}`}
-            >
-              <svg
-                className="w-3 h-3"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                />
-              </svg>
-              <span>DOWNLOAD PS</span>
-            </button>
-          </div>
+          />
 
           {/* NOTE: Action buttons removed per request */}
         </div>
@@ -497,14 +462,14 @@ export const DomainModal = ({ domain, onClose }) => {
       />
 
       <div
-        className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-xl border-2 z-50 bg-white"
+        className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto overflow-x-hidden rounded-xl border-2 z-50 bg-white"
         style={{ backgroundColor: colors.primary, borderColor: colors.accent }}
       >
         <div className="container mx-auto px-6 sm:px-8 lg:px-12 py-6">
           <div className="flex items-start justify-between gap-4 mb-6">
             <div>
               <h2
-                className="text-4xl md:text-6xl font-black"
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black break-words leading-tight"
                 style={{
                   color: colors.accent,
                   fontFamily: "var(--font-heading)",
@@ -513,8 +478,12 @@ export const DomainModal = ({ domain, onClose }) => {
                 {domain.title}
               </h2>
               <p
-                className="text-base md:text-lg mt-2"
-                style={{ color: colors.text, fontFamily: "var(--font-body)" }}
+                className="text-base md:text-lg mt-2 break-words whitespace-normal"
+                style={{
+                  color: colors.text,
+                  fontFamily: "var(--font-body)",
+                  wordBreak: "break-word",
+                }}
               >
                 {domain.description}
               </p>
@@ -550,13 +519,13 @@ export const DomainModal = ({ domain, onClose }) => {
                   }}
                 >
                   <h3
-                    className="font-heading text-sm md:text-base font-bold mb-2"
+                    className="font-heading text-sm sm:text-base md:text-base font-bold mb-2 break-words"
                     style={{ color: colors.accent }}
                   >
                     {problem.title}
                   </h3>
                   <p
-                    className="text-xs md:text-sm"
+                    className="text-xs sm:text-sm md:text-sm break-words whitespace-normal"
                     style={{
                       color: colors.text,
                       fontFamily: "var(--font-body)",
@@ -573,7 +542,7 @@ export const DomainModal = ({ domain, onClose }) => {
             className="p-3 border-t"
             style={{ borderColor: `${colors.accent}30` }}
           >
-            <button
+            {/* <button
               className="w-full py-2 px-3 rounded-lg text-xs cursor-pointer font-medium transition-all hover:scale-105 flex items-center justify-center space-x-2"
               style={{
                 backgroundColor: colors.accent,
@@ -619,7 +588,7 @@ export const DomainModal = ({ domain, onClose }) => {
                 />
               </svg>
               <span>DOWNLOAD PDF</span>
-            </button>
+            </button>*/}
           </div>
         </div>
       </div>
