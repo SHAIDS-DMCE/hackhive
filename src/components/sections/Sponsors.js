@@ -5,7 +5,7 @@ import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { useTheme } from "@/context/ThemeContext";
 import sponsorsData from "@/assets/sponsors.json";
 
-// --- ANIMATION CONFIGURATION ---
+// Animation config
 const spring = {
   type: "spring",
   stiffness: 300,
@@ -13,192 +13,208 @@ const spring = {
   mass: 0.8,
 };
 
-// --- MAIN COMPONENT ---
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.12 } },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 14 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+const placeholderLogo = "https://via.placeholder.com/320x120?text=Sponsor+Logo";
+
 const Sponsors = () => {
-  const [expandedTier, setExpandedTier] = useState(null);
+  const [expanded, setExpanded] = useState(null);
   const { theme } = useTheme();
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
-    },
-  };
+  // 10-column grid on large screens so we can allocate 6/4 (60% / 40%)
+  const getColSpan = (sponsor) =>
+    sponsor && sponsor.role && sponsor.role.toLowerCase().includes("title")
+      ? "lg:col-span-6"
+      : "lg:col-span-4";
 
   return (
     <div
-      className={`bg-background text-foreground min-h-screen relative overflow-hidden font-sans transition-colors duration-500 ease-in-out ${theme === "dark" ? "dark" : ""}`}
+      className={`bg-background text-foreground min-h-screen relative overflow-hidden font-sans transition-colors duration-500 ease-in-out ${
+        theme === "dark" ? "dark" : ""
+      }`}
     >
-      {/* Background Effects */}
       <div className="hhv-about__grain absolute inset-0 pointer-events-none" />
 
       <div className="relative z-10 container mx-auto px-6 sm:px-8 lg:px-12 py-20">
-        {/* --- HEADER --- */}
         <motion.div
-          initial={{ opacity: 0, y: -30 }}
+          initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-20"
+          transition={{ duration: 0.65 }}
+          className="text-center mb-16"
         >
-          {/* --- TITLE LAYOUT --- */}
-          <div className="flex flex-col items-center justify-center gap-2 mb-6">
+          <h2 className="text-5xl md:text-7xl lg:text-8xl font-heading font-black tracking-tighter text-primary">
+            Our Sponsors
+          </h2>
 
-            {/* --- MAIN PAGE TITLE --- */}
-            <h2
-              className="text-7xl md:text-9xl font-heading font-black tracking-tighter text-primary"
-            >
-              Our Sponsors
-            </h2>
-          </div>
-
-          <div className="w-full max-w-md mx-auto h-px mt-3.5 bg-gradient-to-r from-transparent via-primary/80 to-transparent opacity-80 mb-8"></div>
+          <div className="w-full max-w-md mx-auto h-px mt-4 bg-gradient-to-r from-transparent via-primary/80 to-transparent opacity-80 mb-6" />
 
           <motion.blockquote
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="text-xl md:text-2xl font-heading italic mb-4 font-medium tracking-wide text-primary"
+            transition={{ delay: 0.15 }}
+            className="text-lg md:text-xl font-heading italic mb-2 font-medium tracking-wide text-primary"
           >
-            "When the odds are against us, that's when we shine the brightest."
+            When the odds are against us, that&apos;s when we shine the
+            brightest.
           </motion.blockquote>
         </motion.div>
 
-        {/* --- SPONSOR CARDS GRID --- */}
         <LayoutGroup>
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-10 gap-6 max-w-7xl mx-auto items-stretch"
           >
-            {sponsorsData.map((sponsor) => (
-              <motion.div
-                key={sponsor.id}
-                layoutId={`card-${sponsor.id}`}
-                variants={cardVariants}
-                onClick={() => setExpandedTier(sponsor)}
-                transition={spring}
+            {Array.isArray(sponsorsData) &&
+              sponsorsData.map((sponsor) => (
+                <motion.button
+                  key={sponsor.id}
+                  type="button"
+                  layoutId={`card-${sponsor.id}`}
+                  variants={cardVariants}
+                  transition={spring}
+                  onClick={() => setExpanded(sponsor)}
+                  whileHover={{ scale: 1.02, y: -4 }}
+                  className={`text-left border border-border rounded-2xl bg-card/70 backdrop-blur-md p-4 shadow-2xl relative group cursor-pointer flex items-center gap-4 hover:border-primary/50 hover:shadow-primary/20 ${getColSpan(
+                    sponsor,
+                  )} h-32 lg:h-40`}
+                >
+                  <div className="relative z-10 w-full flex items-center gap-4">
+                    {/* Always show logo. Use placeholder if missing. */}
+                    <div className="flex-shrink-0 w-28 h-16 lg:w-32 lg:h-20 flex items-center justify-center overflow-hidden rounded">
+                      <img
+                        src={sponsor.logo || placeholderLogo}
+                        alt={`${sponsor.title} logo`}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
 
-                // HOVER EFFECT
-                whileHover={{
-                  scale: 1.02,
-                  y: -5,
-                }}
+                    <div className="flex-1">
+                      <motion.h3
+                        layoutId={`title-${sponsor.id}`}
+                        className="text-lg md:text-xl font-heading font-black uppercase tracking-wide mb-0 text-primary"
+                      >
+                        {sponsor.title}
+                      </motion.h3>
 
-                className={`border border-border rounded-2xl bg-card/70 backdrop-blur-md p-4 shadow-2xl relative group cursor-pointer flex flex-col justify-center items-center text-center hover:border-primary/50 hover:shadow-primary/20
-                  ${sponsor.size === "large" ? "lg:col-span-2 h-48 lg:h-64" : "lg:col-span-1 h-40 lg:h-48"}
-                `}
-              >
-                {/* Content */}
-                <div className="relative z-10">
-
-                  {/* --- CARD TITLE --- */}
-                  <motion.h3
-                    layoutId={`title-${sponsor.id}`}
-                    className="text-2xl md:text-4xl font-heading font-black uppercase tracking-wide mb-2 text-primary"
-                  >
-                    {sponsor.title}
-                  </motion.h3>
-
-                  {/* Subtle Role Text */}
-                  <motion.p
-                    layoutId={`role-${sponsor.id}`}
-                    className="text-xs md:text-sm font-body uppercase tracking-widest opacity-80 text-primary"
-                  >
-                    {sponsor.role}
-                  </motion.p>
-                </div>
-              </motion.div>
-            ))}
+                      <motion.p
+                        layoutId={`role-${sponsor.id}`}
+                        className="text-xs md:text-sm font-body uppercase tracking-widest opacity-80 text-primary"
+                      >
+                        {sponsor.role}
+                      </motion.p>
+                    </div>
+                  </div>
+                </motion.button>
+              ))}
           </motion.div>
 
-          {/* --- EXPANDED MODAL --- */}
           <AnimatePresence>
-            {expandedTier && (
-              <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            {expanded && (
+              <motion.div className="fixed inset-0 z-50 flex items-center justify-center p-4">
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  onClick={() => setExpandedTier(null)}
-                  className="absolute inset-0 backdrop-blur-md bg-muted/10 dark:bg-background/80"
+                  onClick={() => setExpanded(null)}
+                  className="absolute inset-0 backdrop-blur-md bg-muted/30"
                 />
 
                 <motion.div
-                  layoutId={`card-${expandedTier.id}`}
+                  layoutId={`card-${expanded.id}`}
                   transition={spring}
-                  className="border border-border rounded-2xl bg-card backdrop-blur-md p-4 shadow-2xl w-full max-w-3xl relative z-10 border-primary/50"
+                  className="border border-border rounded-2xl bg-card backdrop-blur-md p-6 md:p-8 shadow-2xl w-full max-w-3xl relative z-10"
                 >
-                  <div className="p-8 md:p-12">
-                    <div className="flex justify-between items-start mb-8">
-                      <div className="flex gap-6 items-center">
-                        <div className="text-4xl">{expandedTier.icon}</div>
-                        <div>
-                          {/* Modal Title */}
-                          <motion.h2
-                            layoutId={`title-${expandedTier.id}`}
-                            className="text-4xl md:text-6xl font-heading font-black uppercase mb-2 tracking-wide text-primary"
-                          >
-                            {expandedTier.title}
-                          </motion.h2>
-                          <motion.p
-                            layoutId={`role-${expandedTier.id}`}
-                            className="text-xl font-heading font-bold tracking-wide text-primary"
-                          >
-                            {expandedTier.role}
-                          </motion.p>
-                        </div>
-                      </div>
-
-                      <button
-                        onClick={() => setExpandedTier(null)}
-                        className="text-xs tracking-wider uppercase px-2 py-1 rounded border border-border bg-muted/50 font-body hover:bg-red-500/20 transition-colors"
-                      >
-                        CLOSE
-                      </button>
+                  <div className="flex flex-col md:flex-row gap-6">
+                    <div className="flex-shrink-0 flex items-center justify-center">
+                      <img
+                        src={expanded.logo || placeholderLogo}
+                        alt={`${expanded.title} logo`}
+                        className="w-32 h-32 object-contain"
+                      />
                     </div>
 
-                    <div className="h-px bg-gradient-to-r from-transparent via-primary/80 to-transparent opacity-80 mb-8"></div>
+                    <div className="flex-1">
+                      <div className="flex justify-between items-start gap-4">
+                        <div>
+                          <motion.h2
+                            layoutId={`title-${expanded.id}`}
+                            className="text-2xl md:text-4xl font-heading font-black uppercase mb-1 tracking-wide text-primary"
+                          >
+                            {expanded.title}
+                          </motion.h2>
 
-                    <div className="grid md:grid-cols-2 gap-8">
-                      <div>
-                        <h4
-                          className="font-heading text-xl mb-4 uppercase tracking-wider text-primary"
-                        >
-                          Perks &amp; Branding
-                        </h4>
-                        <div className="flex flex-wrap gap-2.5">
-                          {expandedTier.rewards.map((reward, i) => (
-                            <span key={i} className="text-xs tracking-wider uppercase px-2 py-1 rounded border border-border bg-muted/50 font-body">
-                              {reward}
-                            </span>
-                          ))}
+                          <motion.p
+                            layoutId={`role-${expanded.id}`}
+                            className="text-base md:text-lg font-heading font-semibold tracking-wide text-primary"
+                          >
+                            {expanded.role}
+                          </motion.p>
+                        </div>
+
+                        <div>
+                          <button
+                            onClick={() => setExpanded(null)}
+                            className="text-xs tracking-wider uppercase px-3 py-1 rounded border border-border bg-muted/50 font-body hover:bg-red-500/20 transition-colors"
+                          >
+                            Close
+                          </button>
                         </div>
                       </div>
 
-                      <div className="p-6 rounded-xl border border-border bg-muted/50">
-                        <h4
-                          className="font-heading text-xl mb-4 uppercase tracking-wider text-foreground"
-                        >
-                          Company Profile
-                        </h4>
-                        <p
-                          className="font-body leading-relaxed opacity-80 text-foreground"
-                        >
-                          {expandedTier.description}
-                        </p>
+                      <div className="h-px bg-gradient-to-r from-transparent via-primary/80 to-transparent opacity-80 my-6" />
+
+                      <div className="grid md:grid-cols-2 gap-6">
+                        {/* <div>
+                          <h4 className="font-heading text-lg mb-3 uppercase tracking-wider text-primary">
+                            Perks &amp; Branding
+                          </h4>
+                          <div className="flex flex-wrap gap-2.5">
+                            {(expanded.rewards || []).length > 0 ? (
+                              (expanded.rewards || []).map((reward, idx) => (
+                                <span
+                                  key={idx}
+                                  className="text-xs tracking-wider uppercase px-2 py-1 rounded border border-border bg-muted/50 font-body"
+                                >
+                                  {reward}
+                                </span>
+                              ))
+                            ) : (
+                              <p className="text-sm opacity-80">
+                                No perks listed.
+                              </p>
+                            )}
+                          </div>
+                        </div>*/}
+
+                        <div className="p-4 rounded-xl ">
+                          {/* <h4 className="font-heading text-lg mb-3 uppercase tracking-wider text-foreground">
+                            Company Profile
+                          </h4>*/}
+                          <p className="font-body leading-relaxed opacity-80 text-foreground">
+                            {expanded.description ||
+                              expanded.about ||
+                              "No description available."}
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </motion.div>
-              </div>
+              </motion.div>
             )}
           </AnimatePresence>
         </LayoutGroup>
