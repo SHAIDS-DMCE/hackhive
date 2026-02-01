@@ -5,6 +5,7 @@ import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/Footer";
 import SmoothScroll from "@/components/providers/SmoothScroll";
 import AppLoadingProvider from "@/components/providers/AppLoadingProvider";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
 // Nord font - for headings
@@ -71,6 +72,7 @@ export default function RootLayout({ children }) {
             </AppLoadingProvider>
           </NextThemesProvider>
         </ThemeProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
