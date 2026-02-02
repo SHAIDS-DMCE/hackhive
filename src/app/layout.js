@@ -8,6 +8,12 @@ import AppLoadingProvider from "@/components/providers/AppLoadingProvider";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
+export const metdata = {
+  icons: {
+    icon: "/favicon.ico",
+  },
+}
+
 // Nord font - for headings
 const nord = localFont({
   src: [

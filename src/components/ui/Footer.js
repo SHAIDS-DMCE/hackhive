@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 
 // Quick Links
 const QUICK_LINKS_1 = [
@@ -32,8 +33,8 @@ export default function Footer() {
           {/* Brand Section */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
-                <HiveIcon className="w-6 h-6 text-primary-foreground" />
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center">
+                <Image src="/logos/hackhive-logo.png" alt="HackHive logo" width={40} height={40} className="object-contain"/>
               </div>
               <h2 className="text-xl font-bold text-foreground">HackHive</h2>
             </div>
@@ -159,15 +160,6 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  );
-}
-
-// Icons
-function HiveIcon({ className }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M12 2L4 6v12l8 4 8-4V6l-8-4zm0 2.18l5.5 2.75v7.64L12 17.32l-5.5-2.75V7.93L12 4.18z" />
-    </svg>
   );
 }
 
