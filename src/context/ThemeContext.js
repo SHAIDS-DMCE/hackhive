@@ -13,28 +13,26 @@ export const useTheme = () => {
 
 export const ThemeProvider = ({ children }) => {
   const [isDark, setIsDark] = useState(() => {
-    // Default to dark if no saved preference
     if (typeof window !== "undefined") {
       const savedTheme = localStorage.getItem("theme");
       if (savedTheme) {
         return savedTheme === "dark";
       }
-      // Default to dark (ignore system preference)
-      return true;
     }
+    // Always default to dark
     return true;
   });
 
   const colors = {
     dark: {
-      primary: "var(--background)", // Background from CSS
-      accent: "var(--primary)", // Primary/accent color
-      text: "var(--foreground)", // Text color
+      primary: "var(--background)",
+      accent: "var(--primary)",
+      text: "var(--foreground)",
     },
     light: {
-      primary: "var(--background)", // Background from CSS
-      accent: "var(--primary)", // Primary/accent color
-      text: "var(--foreground)", // Text color
+      primary: "var(--background)",
+      accent: "var(--primary)",
+      text: "var(--foreground)",
     },
   };
 
@@ -56,22 +54,6 @@ export const ThemeProvider = ({ children }) => {
     }
   }, [isDark]);
 
-  // Listen for system theme changes
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-      const handleChange = (e) => {
-        // Only update if user hasn't manually set a preference
-        if (!localStorage.getItem("theme")) {
-          setIsDark(e.matches);
-        }
-      };
-
-      mediaQuery.addEventListener("change", handleChange);
-      return () => mediaQuery.removeEventListener("change", handleChange);
-    }
-  }, []);
-
   const value = {
     isDark,
     colors: currentColors,
@@ -80,6 +62,8 @@ export const ThemeProvider = ({ children }) => {
   };
 
   return (
-    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
+    <ThemeContext.Provider value={value}>
+      {children}
+    </ThemeContext.Provider>
   );
 };
