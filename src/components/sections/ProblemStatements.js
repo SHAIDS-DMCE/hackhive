@@ -31,7 +31,7 @@ const ProblemStatements = () => {
       description:
         "Improving healthcare access through offline-first tools, digital records, and efficient grassroots health systems.",
       pdfUrl:
-        "https://ik.imagekit.io/igsnxowfs/HackHive%202026/Healthcare%20PS.pdf",
+        "https://ik.imagekit.io/igsnxowfs/HackHive%202026/domain%201-2.pdf",
     },
     Cybersecurity: {
       icon: "🔐",
