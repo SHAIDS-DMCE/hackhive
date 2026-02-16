@@ -84,11 +84,11 @@ export default function Contact() {
               Aayush Thoke:
             </span>
             <a
-              href="tel:+917666812655"
+              href="tel:+917666505602"
               className="hover:text-primary transition-colors font-mono"
             >
               {" "}
-              +91 76668 12655
+              +91 76665 05602
             </a>
           </div>
         </div>
