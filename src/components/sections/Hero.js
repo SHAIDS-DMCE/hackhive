@@ -6,7 +6,7 @@ import AnimatedLetters from '@/components/animations/AnimatedLetters';
 import FallingArtifacts from '@/components/effects/FallingArtifacts';
 import { useLoading } from '@/context/LoadingContext';
 
-const TARGET_DATE = new Date('2026-02-20T11:00:00');
+const TARGET_DATE = new Date('2026-02-22T23:59:00');
 
 export default function Hero() {
   const containerRef = useRef(null);
