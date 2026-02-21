@@ -402,7 +402,7 @@ export default function About() {
 
             </div>
           </div> */}
-  {/*
+  /*
         //   <div className="flex justify-center lg:justify-end">
         //     <div className="border border-border rounded-2xl p-4 bg-card/70 backdrop-blur-md shadow-lg min-w-[300px] min-h-[400px] flex flex-col">
         //       <div className="text-[10px] font-mono tracking-wider opacity-60 mb-4">
@@ -462,7 +462,7 @@ export default function About() {
         //     </div>
         //   </div>
         // </div>
-*/}
+*/
         {/* About Brief Section */}
         <div id="brief" className="mb-20">
           <AnimatedSection>
