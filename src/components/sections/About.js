@@ -379,7 +379,7 @@ export default function About() {
               </div>
             </div>
           </div>
-
+                    </div>
 
         {/* About Brief Section */}
         <div id="brief" className="mb-20">
